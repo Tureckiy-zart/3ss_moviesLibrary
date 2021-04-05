@@ -1,0 +1,18 @@
+import React, { useContext, useState } from "react";
+
+export const DataContext = React.createContext();
+export const useData = () => useContext(DataContext);
+
+export const DataProvider = ({ children }) => {
+  const [state, setState] = useState({
+    isLoading: false,
+    dataMovies: [],
+    error: null,
+  });
+
+  return (
+    <DataContext.Provider value={[state, setState]}>
+      {children}
+    </DataContext.Provider>
+  );
+};
