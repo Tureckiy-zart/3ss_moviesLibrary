@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 function ListItem({ item, location }) {
   //   console.log("location :>> ", location);
+  // console.log('item :>> ', item);
   const { id, title, name, original_title, vote_average, poster_path } = item;
   return (
     <li>
@@ -10,11 +11,11 @@ function ListItem({ item, location }) {
         to={{
           pathname: `/asset/${id}`,
           // search: "?category=adventure",
-          hash: `#${original_title}`,
+          hash: `#${original_title? original_title : name}`,
           state: { from: location },
         }}
       >
-        <h2>{original_title}</h2>
+        <h2>{original_title? original_title : name}</h2>
         <img
           src={
             poster_path

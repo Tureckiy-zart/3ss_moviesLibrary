@@ -1,32 +1,61 @@
-// import React, { Component } from "react";
-// import { getMovieReview } from "../Fetch/fetchTheMovieDB";
-// import ReviewListItem from "../MoviesListItem/ReviewListItem";
-// import MoviesList from "../MoviesList/MoviesList";
-// class ReviewsPage extends Component {
-//   state = {};
-//   componentDidMount() {
-//     this.getCurrentMovieReview();
-//   }
-//   getCurrentMovieReview = async () =>
-//     this.setState({
-//       ...(await getMovieReview(this.props.match.params.movieId)),
-//     });
-//   render() {
-//     return (
-//       <>
-//         {this.state.results && (
-//           <MoviesList data={this.state.results} li={ReviewListItem} />
-//         )}
-//       </>
-//     );
-//   }
-// }
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import useHistoryReturn from "../../../Hooks/useHistoryReturn";
+import { getMovieReview } from "../../services/API/api";
 
-// export default ReviewsPage;
-
-import React from "react";
 const ReviewsPage = () => {
-  return <>ReviewsPage</>;
+  let { id } = useParams();
+  const [goHome, goBack] = useHistoryReturn();
+  const [reviews, setReviews] = useState(null);
+  useEffect(() => getMovieReview(id).then((response) => setReviews(response)),[]);
+
+  return (
+    <>
+      ReviewsPage
+      {reviews && (
+        <ul>
+          {reviews.map(
+            ({
+              url,
+              author,
+              content,
+              updated_at,
+              author_details: { avatar_path, rating },
+            }) => (
+              <li>
+                <div>
+                  <div>
+                    <img
+                      src={
+                        avatar_path
+                          ? `https://image.tmdb.org/t/p/w154${avatar_path}`
+                          : "http://ergo.slv.vic.gov.au/sites/default/files/imagecache/download/ms11553box4.jpg"
+                      }
+                      alt={author}
+                      width="50"
+                    />
+                    <h2>
+                      <a href={`https://www.themoviedb.org/u/${author}`}>
+                        {author}
+                      </a>
+                    </h2>
+                  </div>
+                  <h5>Author rating:{rating}</h5>
+                </div>
+                <p>
+                  <i>{content}</i>
+                </p>
+                <p>Date: {updated_at}</p>
+                <a href={url}>Go to review</a>
+              </li>
+            )
+          )}
+        </ul>
+      )}
+      <button onClick={goBack}>Go Back</button>
+      <button onClick={goHome}>Home</button>
+    </>
+  );
 };
 
 export default ReviewsPage;

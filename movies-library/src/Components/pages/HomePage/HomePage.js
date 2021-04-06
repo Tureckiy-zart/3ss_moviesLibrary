@@ -1,24 +1,17 @@
-import React, { memo, useEffect, useState } from "react";
-import useFetch from "../../../Hooks/useFetch";
+import React, { memo, useEffect } from "react";
+import { getTrendingMovies, getMovieByGenre } from "../../services/API/api";
 import { useData } from "../../services/Contexts/DataContext";
+import useLoading from "../../../Hooks/useLoading";
 import List from "../../structure/List/List";
-import { getTrendingMovies } from "../../services/API/api";
-// useEffect(() => {
-//   doFetch(currentPage);
-// }, [currentPage]);
-// const doFetch = useFetch();
 function HomePage() {
-  const [state, setState] = useData();
-  const [{ dataMovies, error }] = useData();
-  const [currentPage, steCurrentPage] = useState(1);
-  const [isFetching, setisFetching] = useState(false);
-
+  const [{ dataMovies, error }, setState] = useData(); //global state
+  const steCurrentPage = useLoading(getTrendingMovies); //uploadind data on scroll
   useEffect(() => {
+    //write to the state of the loaded data after first render
     setState((prev) => ({ ...prev, isLoading: true }));
 
     try {
       getTrendingMovies().then((response) => {
-        console.log("response :>> ", response);
         setState((prev) => ({
           ...prev,
           isLoading: false,
@@ -32,65 +25,15 @@ function HomePage() {
         error: error.response.data,
       }));
       throw new Error(error.response.data);
+    } finally {
+      steCurrentPage((prev) => prev + 1); //page enlargement
     }
   }, []);
-
-  useEffect(() => {
-    if (!isFetching) return;
-
-    setState((prev) => ({ ...prev, isLoading: true }));
-
-    // try {
-    getTrendingMovies(currentPage)
-      .then((response) => {
-        setState((prev) => ({
-          ...prev,
-          isLoading: false,
-          dataMovies: [...prev.dataMovies, ...response],
-        }));
-        steCurrentPage((prev) => {
-          return prev + 1;
-        });
-      })
-      .catch()
-      .finally(() => setisFetching(false));
-    // } catch (error) {
-    //   setState((prev) => ({
-    //     ...prev,
-    //     isLoading: false,
-    //     error: error.response.data,
-    //   }));
-    //   throw new Error(error.response.data);
-    // }
-  }, [isFetching]);
-
-  useEffect(() => {
-    document.addEventListener("scroll", scrollHandler);
-    return function () {
-      document.removeEventListener("scroll", scrollHandler);
-    };
-  }, []);
-
-  const scrollHandler = ({ target }) => {
-    if (!scrollCalculate({ target })) return;
-    setisFetching(true);
-  };
-  const scrollCalculate = ({ target }) => {
-    const distanceFromBottom =
-      target.documentElement.scrollHeight -
-      (target.documentElement.scrollTop + window.innerHeight);
-
-    if (distanceFromBottom < 200) return true;
-  };
-  console.log("da :>> ", dataMovies);
-  console.log("currentPage 2:>> ", currentPage);
-
   return (
     <>
       <p>Home page</p>
-      {/* <button onClick={goBack}>Next</button> */}
 
-      {dataMovies && (
+      {dataMovies.length && (
         <section>
           <List dataMovies={dataMovies} />
         </section>

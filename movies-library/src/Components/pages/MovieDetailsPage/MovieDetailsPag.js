@@ -1,25 +1,15 @@
 import React, { memo, useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router";
+import { useParams } from "react-router";
 import { getMovieByID } from "../../services/API/api";
 import { useData } from "../../services/Contexts/DataContext";
 import SubNavigation from "../../Navigation/SubNavigation";
+import useHistoryReturn from "../../../Hooks/useHistoryReturn";
 
 const MovieDetailsPage = () => {
   let { id } = useParams();
-  const history = useHistory();
+  const [goHome, goBack] = useHistoryReturn();
   const [response, setResponse] = useState(null);
   const [, setState] = useData();
-  // {
-  //   title,
-  //   poster_path,
-  //   name,
-  //   release_date,
-  //   first_air_date,
-  //   vote_average,
-  //   vote_count,
-  //   overview,
-  //   homepage,
-  // },
   useEffect(() => {
     setState((prev) => ({
       ...prev,
@@ -35,17 +25,17 @@ const MovieDetailsPage = () => {
         }));
       })
       .catch((error) => {
+        console.log("error :>> ", error);
         setState((prev) => ({
           ...prev,
           isLoading: false,
-          error: error.response.data,
+          error: error.response.data ? error.response.data : error,
         }));
-        throw new Error(error.response.data);
+        // throw new Error(error.response.data);
+        throw new Error(error);
       });
   }, [id, setState]);
 
-  const goHome = () => history.push("/");
-  const goBack = () => history.goBack();
   return (
     <section>
       MovieDetailsPage
@@ -89,6 +79,7 @@ const MovieDetailsPage = () => {
         </div>
       )}
     </section>
+    // {}
   );
 };
 
