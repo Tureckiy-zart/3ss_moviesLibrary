@@ -1,7 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 import { useHistory } from "react-router";
 import ListItem from "../ListItem/ListItem";
 const List = ({ dataMovies }) => {
+  // console.log('trendingMovies :>> ', dataMovies);
   const {
     location: { pathname },
   } = useHistory();
@@ -15,4 +16,4 @@ const List = ({ dataMovies }) => {
   );
 };
 
-export default List;
+export default memo(List);

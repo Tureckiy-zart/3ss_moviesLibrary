@@ -4,6 +4,7 @@ import { getMovieByID } from "../../services/API/api";
 import { useData } from "../../services/Contexts/DataContext";
 import SubNavigation from "../../Navigation/SubNavigation";
 import useHistoryReturn from "../../../Hooks/useHistoryReturn";
+import { Button } from "../../structure/Buttons/Button.styled";
 
 const MovieDetailsPage = () => {
   let { id } = useParams();
@@ -39,6 +40,8 @@ const MovieDetailsPage = () => {
   return (
     <section>
       MovieDetailsPage
+      <button onClick={goBack}>Go Back</button>
+      <button onClick={goHome}>Home</button>
       {response && (
         <div>
           <h2>{response.title}</h2>
@@ -55,7 +58,7 @@ const MovieDetailsPage = () => {
           </div>
           <div>
             <div>
-              <span>Release:</span>
+              <span>Release: </span>
               <span>
                 {response.release_date
                   ? response.release_date
@@ -63,19 +66,19 @@ const MovieDetailsPage = () => {
               </span>
             </div>
             <div>
-              <span>Rating IMDB:</span>
+              <span>Rating IMDB: </span>
               <span> {response.vote_average}</span>
             </div>
             <div>
-              <span>Vote count:</span>
+              <span>Vote count: </span>
               <span>{response.vote_count}</span>
             </div>
             <p>{response.overview}</p>
             <a href={response.homepage}>Movie Page</a>
           </div>
-          <button onClick={goBack}>Go Back</button>
-          <button onClick={goHome}>Home</button>
           <SubNavigation response={response} />
+          <Button bgc='blue' onClick={goBack}>Go Back</Button>
+          <Button  bgc='red' onClick={goHome}>Home</Button>
         </div>
       )}
     </section>
