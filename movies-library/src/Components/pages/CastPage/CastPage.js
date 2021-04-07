@@ -12,6 +12,8 @@ const CastPage = () => {
   return (
     <>
       CastPage
+      <button onClick={goBack}>Go Back</button>
+          <button onClick={goHome}>Home</button>
       {cast && (
         <ul>
           {cast.map(({ character, profile_path, name, popularity }) => (

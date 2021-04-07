@@ -7,7 +7,7 @@ export const useData = () => useContext(DataContext);
 export const DataProvider = ({ children }) => {
   const [state, setState] = useState({
     isLoading: false,
-    dataMovies: [],
+    trendingMovies: [],
     error: null,
   });
 

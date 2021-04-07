@@ -22,7 +22,7 @@ export default () => {
           setState((prev) => ({
             ...prev,
             isLoading: false,
-            dataMovies: [...prev.dataMovies, ...response.data.results],
+            trendingMovies: [...prev.trendingMovies, ...response.data.results],
           }));
         });
     } catch (error) {
