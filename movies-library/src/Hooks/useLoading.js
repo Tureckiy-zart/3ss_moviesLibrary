@@ -1,26 +1,28 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useData } from "../Components/services/Contexts/DataContext";
 
 const useLoading = (apiRequest, options) => {
-  const [state, setState] = useData(); //global state
-  const [currentPage, steCurrentPage] = useState(1);
+  const [{ currentPage }, setState] = useData(); //global state
   const [isFetching, setisFetching] = useState(false);
   const [moviesByCategoryeFetched, setMoviesByCategoryeFetched] = useState([]);
+  const [a, b] = useState([]);
+
   console.log("currentPage useLoading :>> ", currentPage);
-  console.log("options :>> ", options);
+
   useEffect(() => {
     if (!isFetching) return;
     setState((prev) => ({ ...prev, isLoading: true }));
 
-    apiRequest({ page: currentPage })
+    apiRequest({ ...options, page: currentPage })
       .then((response) => {
         //write to the state of the loaded data
         setState((prev) => ({
           ...prev,
           isLoading: false,
-          // trendingMovies: [...prev.trendingMovies, ...response],
         }));
-        setMoviesByCategoryeFetched((prev) => [...prev, ...response]);
+        // setMoviesByCategoryeFetched((prev) => [...prev, ...response]);
+        setMoviesByCategoryeFetched(response);
+        // b(p=>[a])
       })
       .catch((error) => {
         setState((prev) => ({
@@ -32,37 +34,49 @@ const useLoading = (apiRequest, options) => {
       })
       .finally(() => {
         setisFetching(false);
-        console.log("currentPage inner:>> ", currentPage);
-        steCurrentPage((prev) => prev + 1); //page enlargement
       });
-    // }, [isFetching]);
-  }, [isFetching, apiRequest]);
-  useEffect(() => {
-    //scroll listener
-    document.addEventListener("scroll", scrollHandler);
-    return function () {
-      document.removeEventListener("scroll", scrollHandler);
-    };
-  }, []);
+  }, [isFetching, apiRequest, currentPage, setState]);
 
-  const scrollHandler = ({ target }) => {
-    //server request permission
-    if (!scrollCalculate({ target })) return;
-    setisFetching(true);
-    return;
-  };
-  const scrollCalculate = ({ target }) => {
+  useEffect(() => {
+    if (moviesByCategoryeFetched) {
+      setState((prev) => {
+        // if(prev)
+        return {
+          ...prev,
+          currentPage: prev.currentPage + 1,
+        };
+      });
+
+      // setMoviesByCategorye((prev) => [...prev, ...moviesByCategoryeFetched]);
+    }
+  }, [moviesByCategoryeFetched]);
+
+  const scrollCalculate = useCallback(({ target }) => {
     //calculate distance from bottom of screen
     const distanceFromBottom =
       target.documentElement.scrollHeight -
       (target.documentElement.scrollTop + window.innerHeight);
 
     if (distanceFromBottom < 150) return true;
-  };
-  // console.log('state :>> ', state);
-  console.log("moviesByCategoryeFetched :>> ", moviesByCategoryeFetched);
-  // return [currentPage,steCurrentPage];
-  return [steCurrentPage, moviesByCategoryeFetched];
+  }, []);
+  const scrollHandler = useCallback(
+    ({ target }) => {
+      //server request permission
+      if (!scrollCalculate({ target })) return;
+      setisFetching(true);
+      return;
+    },
+    [scrollCalculate]
+  );
+  useEffect(() => {
+    //scroll listener
+    document.addEventListener("scroll", scrollHandler);
+    return function () {
+      document.removeEventListener("scroll", scrollHandler);
+    };
+  }, [scrollHandler]);
+
+  return moviesByCategoryeFetched;
 };
 
 export default useLoading;

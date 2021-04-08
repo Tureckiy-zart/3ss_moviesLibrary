@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import useHistoryReturn from "../../../Hooks/useHistoryReturn";
-import { getMovieCast } from "../../services/API/api";
+import useHistoryReturn from "../../Hooks/useHistoryReturn";
+import { getMovieCast } from "../services/API/api";
 
 const CastPage = () => {
   let { id } = useParams();
   const [goHome, goBack] = useHistoryReturn();
   const [cast, setCast] = useState(null);
-  useEffect(() => getMovieCast(id).then((response) => setCast(response)), []);
+  useEffect(() => getMovieCast(id).then((response) => setCast(response)), [id]);
 
   return (
     <>
       CastPage
       <button onClick={goBack}>Go Back</button>
-          <button onClick={goHome}>Home</button>
+      <button onClick={goHome}>Home</button>
       {cast && (
         <ul>
           {cast.map(({ character, profile_path, name, popularity }) => (

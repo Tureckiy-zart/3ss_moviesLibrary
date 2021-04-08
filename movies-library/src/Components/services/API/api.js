@@ -3,7 +3,11 @@ axios.defaults.baseURL = "https://api.themoviedb.org/3";
 const REQUEST_TOKEN = "b10df2c9a5aac390aead1b7030414d18";
 
 // export const getTrendingMovies = async ({ page = 1 }) => {
-export const getTrendingMovies = async ({page=1}) => {
+export const getTrendingMovies = async ({ page = 1 }) => {
+  // const [{ trendingMovies = [], error, canShowTrending }, setState] = useData(
+  //   null
+  // ); //Global state
+  console.log('pageQQQQQQQQQQQ :>> ', page);
   try {
     const { data } = await axios.get(
       `/trending/all/week?api_key=${REQUEST_TOKEN}&page=${page}`
@@ -73,7 +77,7 @@ export const getMovieByTitle = async (searchQuery, page) => {
 // getMovieByGenre();
 
 // (genre = 12), (page = 1), (sortBy = "popularity.desc");
-export const getMovieByGenre2 = async ({
+export const getMovieByGenre = async ({
   genre = 12,
   page = 1,
   sortBy = "popularity.desc",
