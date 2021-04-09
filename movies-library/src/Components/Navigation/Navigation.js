@@ -9,17 +9,17 @@ function Navigation() {
           <NavLink className='NavLink' activeClassName='NavLinkActive' exact to="/">Home</NavLink>
         </li>
         {/* <li>
-          <NavLink className='NavLink' activeClassName='NavLinkActive' to="/asset">Movies</NavLink>
+          <NavLink className='NavLink' activeClassName='NavLinkActive' to="/serach">Serach</NavLink>
         </li> */}
         <li>
           <NavLink className='NavLink' activeClassName='NavLinkActive' to="/categoryes">Categoryes</NavLink>
         </li>
         <li>
-          <NavLink className='NavLink' activeClassName='NavLinkActive' to="/serials">Serials</NavLink>
+          <NavLink className='NavLink' activeClassName='NavLinkActive' to="/collections">Collections</NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink className='NavLink' activeClassName='NavLinkActive' to="/cartoons">Сartoons</NavLink>
-        </li>
+        </li> */}
         <li>
           <NavLink className='NavLink' activeClassName='NavLinkActive' to="/favorites">Favorites</NavLink>
         </li>

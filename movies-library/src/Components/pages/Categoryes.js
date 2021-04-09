@@ -1,89 +1,56 @@
 import React, { memo, useEffect, useState } from "react";
+import { useRouteMatch } from "react-router";
 import useLoading from "../../Hooks/useLoading";
-import { getGenres, getMovieByGenre } from "../services/API/api";
+import { getMovieByGenre } from "../services/API/api";
+import { useCategoryesContext } from "../services/Contexts/CategoryesContext";
 import { useData } from "../services/Contexts/DataContext";
-import { Button } from "../structure/Buttons/Button.styled";
+import CategoryeButtons from "../structure/Buttons/CategoryeButtons";
 import List from "../structure/List/List";
 
 const Categoryes = () => {
-  const [{ moviesByCategorye, currentPage }, setState] = useData(null);
   const [state] = useData(null);
-  const [categoryeId, setCategoryeId] = useState(null);
-  const [categoryes, setCategoryes] = useState([]);
+  const [{ moviesByCategorye, currentCategoryePage }, setState] = useData(null);
+
+  const [categoryes] = useState([]);
+  const [{ categoryeId }] = useCategoryesContext();
+
   const moviesByCategoryeFetched = useLoading(getMovieByGenre, {
     genre: categoryeId,
-    page: currentPage,
+    page: currentCategoryePage,
   }); //Uploading data on scroll
-  useEffect(() => getGenres().then((response) => setCategoryes(response)), []); //set categoryes on mount
+  const { path } = useRouteMatch();
 
   useEffect(() => {
     if (!categoryeId) return;
     setState((prev) => ({ ...prev, isLoading: true }));
 
-    getMovieByGenre({ genre: categoryeId }).then(
-      (response) => {
-        // setMoviesByCategorye(response);
-        setState((prev) => ({
-          ...prev,
-          isLoading: false,
-          canShowTrending: false,
-          moviesByCategorye: response,
-        }));
-      }
-      // setCurrentPage((prev) => prev + 1) //page enlargement
-    );
-  }, [categoryeId, setState]);
-  // }, [categoryeId, setCurrentPage, setState]);
-
-  useEffect(() => {
-    if (moviesByCategoryeFetched) {
+    getMovieByGenre({ genre: categoryeId }).then((response) => {
       setState((prev) => ({
         ...prev,
-        moviesByCategorye: [
-          ...prev.moviesByCategorye,
-          ...moviesByCategoryeFetched,
-        ],
+        isLoading: false,
+        canShowTrending: false,
+        moviesByCategorye: response,
+        currentSection: `${path}`,
+        currentCategoryePage: 2,
       }));
-      // setMoviesByCategorye((prev) => [...prev, ...moviesByCategoryeFetched]);
-    }
+    });
+  }, [categoryeId, setState]);
+  useEffect(() => {
+    if (!moviesByCategoryeFetched.length) return;
+    setState((prev) => ({
+      ...prev,
+      moviesByCategorye: [
+        ...prev.moviesByCategorye,
+        ...moviesByCategoryeFetched,
+      ],
+      currentCategoryePage: prev.currentCategoryePage + 1,
+    }));
   }, [moviesByCategoryeFetched]);
-  // }, [moviesByCategoryeFetched]);
-  //   <Link
-  //   to={{
-  //     pathname: `/categoryes/${name}`,
-  //     // search: "?category=adventure",
-  //     // hash: `#${original_title ? original_title : name}`,
-  //     // state: { from: location },
-  //   }}
-  // >
-  //   {name}
-  // </Link>
   return (
     <>
       {categoryes && (
         <>
-          <ul>
-            {categoryes.map(({ id, name }) => (
-              <Button
-                key={id}
-                onClick={() => {
-                  setCategoryeId(id);
-                }}
-              >
-                {name}
-                {/* <Link
-                  to={{
-                    pathname: `/categoryes/${name}`,
-                    // search: "?category=adventure",
-                    // hash: `#${original_title ? original_title : name}`,
-                    // state: { from: location },
-                  }}
-                >
-                  {name}
-                </Link> */}
-              </Button>
-            ))}
-          </ul>
+          <CategoryeButtons />
           {/* {moviesByCategorye && <List dataMovies={state.categorye} />} */}
           {moviesByCategorye && <List dataMovies={moviesByCategorye} />}
         </>

@@ -7,6 +7,7 @@ const CastPage = () => {
   let { id } = useParams();
   const [goHome, goBack] = useHistoryReturn();
   const [cast, setCast] = useState(null);
+  console.log('cast :>> ', cast);
   useEffect(() => getMovieCast(id).then((response) => setCast(response)), [id]);
 
   return (
@@ -16,8 +17,8 @@ const CastPage = () => {
       <button onClick={goHome}>Home</button>
       {cast && (
         <ul>
-          {cast.map(({ character, profile_path, name, popularity }) => (
-            <li>
+          {cast.map(({id, character, profile_path, name, popularity }) => (
+            <li key={id}>
               <h2>{name}</h2>
               <p>Character: {character}</p>
               <img

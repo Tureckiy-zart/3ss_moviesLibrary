@@ -1,13 +1,14 @@
 import React, { memo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import doubleRight from "../../img/double-right-arrows-angles.svg";
 import doubleLeft from "../../img/double-left-arrows-angles.svg";
 import { useData } from "../services/Contexts/DataContext";
 import "./Carousel.scss";
 export default memo(() => {
   // let arr = [1, 2, 3, 4, 4, 5];
-  const [{ trendingMovies }, ] = useData(null);
+  const [{ trendingMovies }] = useData(null);
   const [x, setX] = useState(null);
+  const { location } = useHistory();
   // useEffect(() => {
   //   // if (!trendingMovies.length) return;
   //   // setCaruselState(trendingMovies.splice(0, 8));
@@ -47,13 +48,12 @@ export default memo(() => {
                 <Link
                   to={{
                     pathname: `/asset/${id}`,
-                    // search: "?category=adventure",
                     hash: `#${original_title ? original_title : name}`,
-                    // state: { from: location },
+                    state: { from: location },
                   }}
                 >
-                  <img 
-                  alt={name}
+                  <img
+                    alt={name}
                     className="Slider__item-img"
                     data-id={id}
                     src={
@@ -67,10 +67,10 @@ export default memo(() => {
             );
           })}
           <button id="NextSlide" onClick={nextSlide}>
-            <img alt='NextSlide' src={doubleLeft} />
+            <img alt="NextSlide" src={doubleLeft} />
           </button>
-          <button  id="PrevSlide" onClick={prevSlide}>
-            <img alt='PrevSlide' src={doubleRight} />
+          <button id="PrevSlide" onClick={prevSlide}>
+            <img alt="PrevSlide" src={doubleRight} />
           </button>
         </div>
       )}

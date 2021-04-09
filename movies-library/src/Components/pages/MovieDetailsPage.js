@@ -36,7 +36,7 @@ const MovieDetailsPage = () => {
         }));
         console.log("error :>> ", error);
 
-        console.log('state :>> ', state);
+        // console.log('state :>> ', state);
         <Redirect to={'/'}/>
         // throw new Error(error.response.data);
         throw new Error(error);
@@ -45,7 +45,7 @@ const MovieDetailsPage = () => {
 
   const addFavorite = () => setLocalStorageValue(response);
   const removeLocalStorage = () => setRemoveLocalStorage(response);
-
+// console.log('response :>> ', response);
   return (
     <section>
       MovieDetailsPage
