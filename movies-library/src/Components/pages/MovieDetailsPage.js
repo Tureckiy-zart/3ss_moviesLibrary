@@ -1,16 +1,18 @@
 import React, { memo, useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { getMovieByID } from "../../services/API/api";
-import { useData } from "../../services/Contexts/DataContext";
-import SubNavigation from "../../Navigation/SubNavigation";
-import useHistoryReturn from "../../../Hooks/useHistoryReturn";
-import { Button } from "../../structure/Buttons/Button.styled";
+import { Redirect, useParams } from "react-router";
+import useHistoryReturn from "../../Hooks/useHistoryReturn";
+import { getMovieByID } from "../services/API/api";
+import { useData } from "../services/Contexts/DataContext";
+import { Button } from "../structure/Buttons/Button.styled";
+import SubNavigation from "../Navigation/SubNavigation";
 
+import useFavorites from "../../Hooks/useFavorites";
 const MovieDetailsPage = () => {
   let { id } = useParams();
   const [goHome, goBack] = useHistoryReturn();
   const [response, setResponse] = useState(null);
-  const [, setState] = useData();
+  const [state, setState] = useData();
+  const [, setLocalStorageValue, setRemoveLocalStorage] = useFavorites();
   useEffect(() => {
     setState((prev) => ({
       ...prev,
@@ -26,17 +28,24 @@ const MovieDetailsPage = () => {
         }));
       })
       .catch((error) => {
-        console.log("error :>> ", error);
         setState((prev) => ({
           ...prev,
           isLoading: false,
-          error: error.response.data ? error.response.data : error,
+          // error: error.response.data ? error.response.data : error,
+          error: error,
         }));
+        console.log("error :>> ", error);
+
+        // console.log('state :>> ', state);
+        <Redirect to={'/'}/>
         // throw new Error(error.response.data);
         throw new Error(error);
       });
   }, [id, setState]);
 
+  const addFavorite = () => setLocalStorageValue(response);
+  const removeLocalStorage = () => setRemoveLocalStorage(response);
+// console.log('response :>> ', response);
   return (
     <section>
       MovieDetailsPage
@@ -55,6 +64,8 @@ const MovieDetailsPage = () => {
               alt={response.title ? response.title : response.name}
               width="250"
             />
+            <Button onClick={addFavorite}>add to favorites</Button>
+            <Button onClick={removeLocalStorage}>remove</Button>
           </div>
           <div>
             <div>
@@ -76,9 +87,13 @@ const MovieDetailsPage = () => {
             <p>{response.overview}</p>
             <a href={response.homepage}>Movie Page</a>
           </div>
-          <SubNavigation response={response} />
-          <Button bgc='blue' onClick={goBack}>Go Back</Button>
-          <Button  bgc='red' onClick={goHome}>Home</Button>
+          <SubNavigation />
+          <Button bgc="blue" onClick={goBack}>
+            Go Back
+          </Button>
+          <Button bgc="red" onClick={goHome}>
+            Home
+          </Button>
         </div>
       )}
     </section>

@@ -4,14 +4,17 @@ import { DataProvider } from "./Components/services/Contexts/DataContext";
 import "./App.css";
 import Loader from "./Components/Loader/Loader";
 import Header from "./Components/Header/Header";
+import { CategoryesContextProvider } from "./Components/services/Contexts/CategoryesContext";
 
 function App() {
   return (
     <DataProvider>
-      <Loader />
-      <BrowserRouter>
+      <CategoryesContextProvider>
+        <Loader />
+        <BrowserRouter>
           <Header />
-      </BrowserRouter>
+        </BrowserRouter>
+      </CategoryesContextProvider>
     </DataProvider>
   );
 }

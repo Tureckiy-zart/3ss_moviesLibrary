@@ -3,7 +3,11 @@ axios.defaults.baseURL = "https://api.themoviedb.org/3";
 const REQUEST_TOKEN = "b10df2c9a5aac390aead1b7030414d18";
 
 // export const getTrendingMovies = async ({ page = 1 }) => {
-export const getTrendingMovies = async ({page=1}) => {
+export const getTrendingMovies = async ({ page = 1 }) => {
+  // const [{ trendingMovies = [], error, canShowTrending }, setState] = useData(
+  //   null
+  // ); //Global state
+  // console.log("pageQQQQQQQQQQQ :>> ", page);
   try {
     const { data } = await axios.get(
       `/trending/all/week?api_key=${REQUEST_TOKEN}&page=${page}`
@@ -53,10 +57,13 @@ export const getGenres = async () => {
   );
   return data.genres;
 };
-export const getMovieByTitle = async (searchQuery, page) => {
+export const getMovieByTitle = async ({ searchQuery, page = 1 }) => {
+  console.log("searchQuery :>> ", searchQuery);
   const { data } = await axios.get(
-    `/search/movie?api_key=${REQUEST_TOKEN}&query=${searchQuery}&page=${page}&language=en-US`
+    `/search/movie?api_key=${REQUEST_TOKEN}&language=en-US&query=${searchQuery}&page=${page}&include_adult=false`
   );
+
+  // https://api.themoviedb.org/3
 
   return data.results;
 };
@@ -73,13 +80,13 @@ export const getMovieByTitle = async (searchQuery, page) => {
 // getMovieByGenre();
 
 // (genre = 12), (page = 1), (sortBy = "popularity.desc");
-export const getMovieByGenre2 = async ({
+export const getMovieByGenre = async ({
   genre = 12,
   page = 1,
   sortBy = "popularity.desc",
 }) => {
   const { data } = await axios.get(
-    `/discover/movie?api_key=${REQUEST_TOKEN}&language=en-US&sort_by=${sortBy}&include_video=false&page=${page}&with_genres=${genre}`
+    `/discover/movie?api_key=${REQUEST_TOKEN}&language=en-US&sort_by=${sortBy}&include_video=true&page=${page}&with_genres=${genre}`
   );
   return data.results;
 };

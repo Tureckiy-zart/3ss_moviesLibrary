@@ -1,27 +1,27 @@
-import React, { memo, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { memo, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import doubleRight from "../../img/double-right-arrows-angles.svg";
 import doubleLeft from "../../img/double-left-arrows-angles.svg";
 import { useData } from "../services/Contexts/DataContext";
 import "./Carousel.scss";
 export default memo(() => {
-  let arr = [1, 2, 3, 4, 4, 5];
-  const [{ trendingMovies }, setState] = useData(null);
-  const [caruselState, setCaruselState] = useState(null);
+  // let arr = [1, 2, 3, 4, 4, 5];
+  const [{ trendingMovies }] = useData(null);
   const [x, setX] = useState(null);
-  useEffect(() => {
-    // if (!trendingMovies.length) return;
-    setCaruselState(trendingMovies.splice(0, 8));
-    // setCaruselState(trendingMovies);
-    // arr = trendingMovies.length-1;
-  }, []);
-  let currentItem = null;
+  const { location } = useHistory();
+  // useEffect(() => {
+  //   // if (!trendingMovies.length) return;
+  //   // setCaruselState(trendingMovies.splice(0, 8));
+  //   setCaruselState(trendingMovies);
+  //   // arr = trendingMovies.length-1;
+  // }, []);
+  // let currentItem = null;
   const nextSlide = () => {
       // setX(x+100)
-      x === 0 ? setX(-100 * (caruselState.length - 1)) : setX(x + 100);
+      x === 0 ? setX(-100 * (trendingMovies.length - 1)) : setX(x + 100);
     },
     prevSlide = () => {
-      x === -100 * (caruselState.length - 1) ? setX(0) : setX(x - 100);
+      x === -100 * (trendingMovies.length - 1) ? setX(0) : setX(x - 100);
     };
   // setInterval(nextSlide, 2000);
 
@@ -34,9 +34,9 @@ export default memo(() => {
 
   return (
     <>
-      {caruselState && (
+      {trendingMovies && (
         <div className="Slider">
-          {caruselState.map(({ id, original_title, name, poster_path }) => {
+          {trendingMovies.map(({ id, original_title, name, poster_path }) => {
             return (
               <div
                 key={id}
@@ -48,12 +48,12 @@ export default memo(() => {
                 <Link
                   to={{
                     pathname: `/asset/${id}`,
-                    // search: "?category=adventure",
                     hash: `#${original_title ? original_title : name}`,
-                    // state: { from: location },
+                    state: { from: location },
                   }}
                 >
                   <img
+                    alt={name}
                     className="Slider__item-img"
                     data-id={id}
                     src={
@@ -67,10 +67,10 @@ export default memo(() => {
             );
           })}
           <button id="NextSlide" onClick={nextSlide}>
-            <img src={doubleLeft} />
+            <img alt="NextSlide" src={doubleLeft} />
           </button>
           <button id="PrevSlide" onClick={prevSlide}>
-            <img src={doubleRight} />
+            <img alt="PrevSlide" src={doubleRight} />
           </button>
         </div>
       )}
