@@ -1,11 +1,12 @@
 import React, { memo } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { Ul__item } from "../stiledComponents";
 
 function ListItem({ item }) {
   //   console.log("location :>> ", location);
   // console.log('item :>> ', item);
   const { location } = useHistory();
-
+  // console.log('location :>> ', location);
   const {
     id,
     title,
@@ -16,7 +17,7 @@ function ListItem({ item }) {
     backdrop_path,
   } = item;
   return (
-    <li>
+    <Ul__item>
       <Link
         to={{
           pathname: `/asset/${id}`,
@@ -39,7 +40,7 @@ function ListItem({ item }) {
         />
         <p> Votes: {vote_average}</p>
       </Link>
-    </li>
+    </Ul__item>
   );
 }
 export default memo(ListItem);

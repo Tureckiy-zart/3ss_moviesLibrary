@@ -1,15 +1,22 @@
 import React from "react";
-import { NavLink, useRouteMatch } from "react-router-dom";
+import { NavLink, useHistory, useRouteMatch } from "react-router-dom";
 
 const SubNavigation = () => {
-  const {url} = useRouteMatch();
+  const { location } = useHistory();
+
+  const { url } = useRouteMatch();
   return (
     <nav>
       <ul>
         <li>
           <NavLink
             // activeStyle={activeStyle}
-            to={`${url}/cast`}
+            // to={`${url}/cast`}
+            to={{
+              pathname: `${url}/cast`,
+              // search: `${name}`,
+              state: { from: location },
+            }}
           >
             Cast
           </NavLink>
@@ -17,7 +24,11 @@ const SubNavigation = () => {
         <li>
           <NavLink
             // activeStyle={activeStyle}
-            to={`${url}/reviews`}
+            to={{
+              pathname: `${url}/reviews`,
+              // search: `${name}`,
+              state: { from: location },
+            }}
           >
             Reviews
           </NavLink>

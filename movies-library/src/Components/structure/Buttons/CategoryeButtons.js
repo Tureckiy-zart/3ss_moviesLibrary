@@ -1,32 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { useCategoryesContext } from "../../services/Contexts/CategoryesContext";
 import { getGenres } from "../../services/API/api";
 import { Button } from "./Button.styled";
 
 const CategoryeButtons = () => {
   const [categoryes, setCategoryes] = useState([]);
-  const [, setCategoryeData] = useCategoryesContext(); //Categoryes global state
-  useEffect(() => getGenres().then((response) => setCategoryes(response)), []); //set categoryes on mount
   const { location } = useHistory();
+  useEffect(() => getGenres().then((response) => setCategoryes(response)), []); //set categoryes on mount
 
   return (
     <ul>
       {categoryes.map(({ id, name }) => (
-        <Button
-          key={id}
-          onClick={() => {
-            setCategoryeData({
-              categoryeId: `${id}`,
-            });
-          }}
-        >
+        <Button key={id}>
           <Link
             to={{
               pathname: `/categoryes/${name}`,
-              // search: `?category=${name}`,
+              categoryeId: Number(`${id}`),
+              // search: `${name}`,
               // hash: `#${original_title ? original_title : name}`,
-              state: { from: location },
+              state: { ...location },
+              // state: { from: location },
             }}
           >
             {name}

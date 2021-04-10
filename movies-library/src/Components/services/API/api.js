@@ -58,8 +58,8 @@ export const getGenres = async () => {
   return data.genres;
 };
 export const getMovieByTitle = async ({ searchQuery, page = 1 }) => {
-  console.log("searchQuery :>> ", searchQuery);
   const { data } = await axios.get(
+    // `/search/keyword?api_key=${REQUEST_TOKEN}&language=en-US&query=${searchQuery}&page=${page}&include_adult=false`
     `/search/movie?api_key=${REQUEST_TOKEN}&language=en-US&query=${searchQuery}&page=${page}&include_adult=false`
   );
 
@@ -67,6 +67,31 @@ export const getMovieByTitle = async ({ searchQuery, page = 1 }) => {
 
   return data.results;
 };
+export const getCollections = async ({ searchQuery = "", page = 1 }) => {
+  // console.log("searchQuery :>> ", searchQuery);
+  // const  data  = await axios.get(
+  //   `/search/collection?api_key=${REQUEST_TOKEN}&language=en-US&page=${page}`
+  //   // ${
+  //   //   searchQuery ? (`&query = { searchQuery }`) : ""
+  //   // }
+ 
+  //   // search/collection?api_key=2222222222222222&language=en-US&page=1
+  // );
+  const  data  = await axios.get(
+    // `/search/collection?api_key=${REQUEST_TOKEN}&language=en-US&page=${page}`
+    `/search/collection?api_key=${REQUEST_TOKEN}&language=en-US&query=batman&page=1`
+    // ${
+    //   searchQuery ? (`&query = { searchQuery }`) : ""
+    // }
+ 
+    // search/collection?api_key=2222222222222222&language=en-US&page=1
+  );
+
+  // console.log("data :>> ", data);
+
+  // return data.results;
+};
+// getCollections({})
 // export const getMovieByGenre = async (
 //   genre = 12,
 //   page = 1,
@@ -83,6 +108,7 @@ export const getMovieByTitle = async ({ searchQuery, page = 1 }) => {
 export const getMovieByGenre = async ({
   genre = 12,
   page = 1,
+  // sortBy = "primary_release_year.asc",
   sortBy = "popularity.desc",
 }) => {
   const { data } = await axios.get(

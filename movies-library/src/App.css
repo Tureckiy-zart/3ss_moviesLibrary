@@ -39,16 +39,8 @@ body {
   }
 }
 
-ul {
-  display: flex;
-  flex-wrap: wrap;
-}
-li {
-  width: 10rem;
-  /* height: 10rem; */
-  padding-bottom: 1rem;
-  list-style: none;
-}
+
+
 a {
   text-decoration: underline;
   color: #282c34;

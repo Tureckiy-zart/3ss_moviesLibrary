@@ -14,6 +14,7 @@ const MovieDetailsPage = () => {
   const [state, setState] = useData();
   const [, setLocalStorageValue, setRemoveLocalStorage] = useFavorites();
   useEffect(() => {
+    if (!id) return;
     setState((prev) => ({
       ...prev,
       isLoading: true,
@@ -37,7 +38,7 @@ const MovieDetailsPage = () => {
         console.log("error :>> ", error);
 
         // console.log('state :>> ', state);
-        <Redirect to={'/'}/>
+        // <Redirect to={'/'}/>
         // throw new Error(error.response.data);
         throw new Error(error);
       });
@@ -45,7 +46,6 @@ const MovieDetailsPage = () => {
 
   const addFavorite = () => setLocalStorageValue(response);
   const removeLocalStorage = () => setRemoveLocalStorage(response);
-// console.log('response :>> ', response);
   return (
     <section>
       MovieDetailsPage
