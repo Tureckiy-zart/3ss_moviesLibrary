@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 import useHistoryReturn from "../../Hooks/useHistoryReturn";
 import { getMovieCast } from "../services/API/api";
+import Form from "../structure/Form/Form";
 
 const CastPage = () => {
   let { id } = useParams();
   const [goHome, goBack] = useHistoryReturn();
   const [cast, setCast] = useState(null);
-  console.log('cast :>> ', cast);
   useEffect(() => getMovieCast(id).then((response) => setCast(response)), [id]);
-
+  // console.log("useLocation() :>> ", useLocation());
   return (
     <>
       CastPage
       <button onClick={goBack}>Go Back</button>
       <button onClick={goHome}>Home</button>
+      <Form />
       {cast && (
         <ul>
-          {cast.map(({id, character, profile_path, name, popularity }) => (
+          {cast.map(({ id, character, profile_path, name, popularity }) => (
             <li key={id}>
               <h2>{name}</h2>
               <p>Character: {character}</p>

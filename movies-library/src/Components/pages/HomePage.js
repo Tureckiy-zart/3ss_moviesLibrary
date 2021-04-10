@@ -5,13 +5,13 @@ import useLoading from "../../Hooks/useLoading";
 import List from "../structure/List/List";
 import Carousel from "../Carousel/Carousel";
 import CategoryeButtons from "../structure/Buttons/CategoryeButtons";
-import { CategoryesContextProvider } from "../services/Contexts/CategoryesContext";
 import { useRouteMatch } from "react-router";
-import SearchMovie from "./SearchMovie";
-import { SearchContextProvider } from "../services/Contexts/SearchContext";
+import { Container } from "../structure/stiledComponents";
+import Form from "../structure/Form/Form";
+
 function HomePage() {
   const [state] = useData(null);
-
+  // getCollections({})
   const [{ trendingMovies, error }, setState] = useData(null); //Global state
   const moviesByCategoryeFetched = useLoading(getTrendingMovies); //Uploading data on scroll
   const { path } = useRouteMatch();
@@ -51,22 +51,15 @@ function HomePage() {
 
   return (
     <>
-      <SearchContextProvider/>    
-       {/* // можно ли так делать, это нормально? */}
-        {/* <SearchMovie />
-      </SearchContextProvider> */}
       {trendingMovies && (
         <section>
-          <div>
+          <Container>
             <p>Home page</p>
+            <Form />
             <Carousel />
-            <CategoryesContextProvider>
-              <CategoryeButtons />
-            </CategoryesContextProvider>
-
-            {/* {canShowTrending && <List dataMovies={trendingMovies} />} */}
+            <CategoryeButtons />
             <List dataMovies={trendingMovies} />
-          </div>
+          </Container>
           {error && <p>${error.status_message}</p>}
         </section>
       )}

@@ -1,30 +1,32 @@
-import React, { memo, useEffect, useState } from "react";
-import { useRouteMatch } from "react-router";
+import React, { memo, useEffect } from "react";
+import { useLocation, useRouteMatch } from "react-router";
+// import queryString from "query-string";
 import useLoading from "../../Hooks/useLoading";
 import { getMovieByGenre } from "../services/API/api";
-import { useCategoryesContext } from "../services/Contexts/CategoryesContext";
 import { useData } from "../services/Contexts/DataContext";
 import CategoryeButtons from "../structure/Buttons/CategoryeButtons";
 import List from "../structure/List/List";
+// const queryString = require("query-string");
+const MoviesByCategoryes = (props) => {
+  // console.log('props :>> ', props);
+  const { categoryeId } = useLocation();
+  const { path } = useRouteMatch();
 
-const Categoryes = () => {
-  const [state] = useData(null);
+  // const [state] = useData(null);
   const [{ moviesByCategorye, currentCategoryePage }, setState] = useData(null);
 
-  const [categoryes] = useState([]);
-  const [{ categoryeId }] = useCategoryesContext();
+  // const [{ categoryeId }] = useCategoryesContext();
 
   const moviesByCategoryeFetched = useLoading(getMovieByGenre, {
     genre: categoryeId,
     page: currentCategoryePage,
   }); //Uploading data on scroll
-  const { path } = useRouteMatch();
+  // console.log("categoryeId :>> ", categoryeId);
 
   useEffect(() => {
     if (!categoryeId) return;
     setState((prev) => ({ ...prev, isLoading: true }));
-
-    getMovieByGenre({ genre: categoryeId }).then((response) => {
+    getMovieByGenre({ genre: Number(categoryeId) }).then((response) => {
       setState((prev) => ({
         ...prev,
         isLoading: false,
@@ -46,17 +48,18 @@ const Categoryes = () => {
       currentCategoryePage: prev.currentCategoryePage + 1,
     }));
   }, [moviesByCategoryeFetched]);
+  {
+    /* {categoryes && ( */
+  }
   return (
     <>
-      {categoryes && (
-        <>
-          <CategoryeButtons />
-          {/* {moviesByCategorye && <List dataMovies={state.categorye} />} */}
-          {moviesByCategorye && <List dataMovies={moviesByCategorye} />}
-        </>
-      )}
+      <>
+        <CategoryeButtons />
+        {moviesByCategorye && <List dataMovies={moviesByCategorye} />}
+      </>
     </>
   );
 };
+// )}
 
-export default memo(Categoryes);
+export default memo(MoviesByCategoryes);
