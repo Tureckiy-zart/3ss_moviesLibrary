@@ -5,7 +5,6 @@ import { Container } from "../structure/stylredComponents/stiledComponents";
 
 function FavoritesPage() {
   const [localStorageValue] = useFavorites();
-  console.log("localStorageValue :>> ", localStorageValue);
   return (
     <Container>
       <p>Favorite page</p>

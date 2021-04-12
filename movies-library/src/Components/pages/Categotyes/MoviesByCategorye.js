@@ -9,18 +9,17 @@ import Gallery from "../../structure/Gallery";
 const MoviesByCategoryes = (props) => {
   // console.log('props :>> ', props);
   const [, setIsLoading] = useLoader(),
-    { categoryeId } = useLocation(),
+    { categoryeId } = useLocation(), //get Id from url (slug)
     { path } = useRouteMatch();
-  const [{ moviesByCategorye, currentCategoryePage }, setState] = useData(null);
+  const [{ moviesByCategorye }, setState] = useData(null);
 
   const moviesByCategoryeFetched = useLoading(getMovieByGenre, {
     genre: categoryeId,
-    page: currentCategoryePage,
-  }); //Uploading data on scroll
+  }); //Uploading data on scroll (hook)
 
   useEffect(() => {
     if (!categoryeId) return;
-    setIsLoading(true);
+    setIsLoading(true);  //spiner on
     getMovieByGenre({ genre: Number(categoryeId) })
       .then((response) => {
         setState((prev) => ({
@@ -29,7 +28,7 @@ const MoviesByCategoryes = (props) => {
           currentSection: `${path}`,
           currentCategoryePage: 2,
         }));
-        setIsLoading(false);
+        setIsLoading(false); //spiner off
       })
       .catch((error) => {
         setState((prev) => ({
@@ -41,15 +40,15 @@ const MoviesByCategoryes = (props) => {
       });
   }, [categoryeId, setState]);
 
-  useEffect(() => {
-    if (!moviesByCategoryeFetched.length) return;
+  useEffect(() => { //if get new data, set it to state and currentPage +1
+    if (!moviesByCategoryeFetched.length) return; 
     setState((prev) => ({
       ...prev,
-      moviesByCategorye: [
+      moviesByCategorye: [ //if get new data, set it to state and currentPage +1
         ...prev.moviesByCategorye,
         ...moviesByCategoryeFetched,
       ],
-      currentCategoryePage: prev.currentCategoryePage + 1,
+      currentCategoryePage: prev.currentCategoryePage + 1, //currentPage +1
     }));
   }, [moviesByCategoryeFetched]);
 

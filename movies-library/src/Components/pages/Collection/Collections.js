@@ -18,24 +18,23 @@ function Collections() {
 
   useEffect(() => {
     if (!searchQuery) return;
-    setIsLoading(true);
-    getCollectionId({ searchQuery })
+    setIsLoading(true); //spiner on
+    getCollectionId({ searchQuery }) //get collections {id, name}
       .then((response) => {
-        setCollectons(response);
-        setState((prev) => ({
-          ...prev,
-          // currentCollectons: 2,
-          // currentSection: `${path}`,
-        }));
-        // setFindedMovies(response);
-        setIsLoading(false);
+        setCollectons(response); //set local stse collections {id, name}
+        setIsLoading(false); //spiner off
+        // setState((prev) => ({
+        //   ...prev,
+        //   // currentCollectons: 2,
+        //   // currentSection: `${path}`,
+        // }));
       })
       .catch((error) => {
         setState((prev) => ({
           ...prev,
           error: error.response.data,
         }));
-        setIsLoading(false);
+        setIsLoading(false); //spiner off
 
         throw new Error(error.response.data);
       });

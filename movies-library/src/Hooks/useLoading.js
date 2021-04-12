@@ -1,11 +1,15 @@
-
 import { useCallback, useEffect, useState } from "react";
 import { useData } from "../Components/services/Contexts/DataContext";
 import { useLoader } from "../Components/services/Contexts/LoaderContext";
 
 const useLoading = (apiRequest, options) => {
   const [
-    { currentSection, currentCategoryePage, currentHomePage },
+    {
+      currentSection,
+      currentCategoryePage,
+      currentSearchMoviePage,
+      currentHomePage,
+    },
     setState,
   ] = useData(); //global state
   const [, setIsLoading] = useLoader();
@@ -13,32 +17,48 @@ const useLoading = (apiRequest, options) => {
   const [isFetching, setisFetching] = useState(false);
   const [moviesByCategoryeFetched, setMoviesByCategoryeFetched] = useState([]);
 
-  const getCurrnetPage = () => {
+  const getCurrnetPage = () => {  //get currentPage by category
     if (currentSection === "/categoryes") return currentCategoryePage;
+    if (currentSection === "/searchMovie") return currentSearchMoviePage;
     return currentHomePage;
+
+    // switch (currentSection) {
+    //   case "/categoryes":
+    //     return currentCategoryePage;
+    //     // break;
+    //   case "/searchMovie":
+    //     return currentSearchMoviePage;
+    //     // break;
+    //   // case "/categoryes":
+    //   //   return currentCategoryePage
+    //   //   break;
+
+    //   default:
+    //   return  currentHomePage;
+    //     // break;
+    // }
   };
-  const currnetPage = getCurrnetPage();
+  const currnetPage = getCurrnetPage(); //currentPage 
 
   useEffect(() => {
     if (!isFetching) return;
-    setIsLoading(true);
+    setIsLoading(true); //Spiner on
+    // console.log("currnetPage :>> ", currnetPage);
 
     apiRequest({ ...options, page: currnetPage })
       .then((response) => {
         //write to the state of the loaded data
         setMoviesByCategoryeFetched(response);
-        setIsLoading(false);
+        setIsLoading(false); //Spiner off
       })
       .catch((error) => {
-        setState((prev) => ({
-          error: error.response.data,
-        }));
-        setIsLoading(false);
+        setState((prev) => ({ ...prev, error: error.response.data })); // if error - set ERROR massage to state
+        setIsLoading(false); //Spiner off
         throw new Error(error.response.data);
       })
-      .finally(() => {
-        setisFetching(false);
-      });
+      .finally(
+        () => setisFetching(false) // dismiss allow api raquest
+      );
   }, [isFetching, apiRequest, currnetPage, setState]);
 
   const scrollCalculate = useCallback(({ target }) => {
@@ -47,8 +67,7 @@ const useLoading = (apiRequest, options) => {
       target.documentElement.scrollHeight -
       (target.documentElement.scrollTop + window.innerHeight);
 
-    // if (distanceFromBottom < 150) return true;
-    if (distanceFromBottom < 150) setisFetching(true);
+    if (distanceFromBottom < 150) setisFetching(true); // allow to make api raquest
   }, []);
 
   useEffect(() => {
@@ -63,8 +82,6 @@ const useLoading = (apiRequest, options) => {
 };
 
 export default useLoading;
-
-
 
 // import { useCallback, useEffect, useState } from "react";
 // import { useData } from "../Components/services/Contexts/DataContext";

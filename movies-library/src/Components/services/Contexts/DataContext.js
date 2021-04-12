@@ -11,6 +11,7 @@ const initialState = {
   searchedMovies: [],
   currentHomePage: 1,
   currentCategoryePage: 1,
+  currentSearchMoviePage: 1,
   error: null,
 };
 

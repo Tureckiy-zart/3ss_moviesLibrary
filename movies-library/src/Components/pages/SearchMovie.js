@@ -8,21 +8,23 @@ import Gallery from "../structure/Gallery";
 import { Container } from "../structure/stylredComponents/stiledComponents";
 
 const SearchMovie = () => {
-  const { search: searchQuery, pathname } = useLocation();
+  const { search: searchQuery } = useLocation();
   const [findedMovies, setFindedMovies] = useState([]);
   const [, setState] = useData();
   const { path } = useRouteMatch();
-  // const moviesByCategoryeFetched = useLoading(getMovieByTitle); //Uploading data on scroll
+  const moviesByCategoryeFetched = useLoading(getMovieByTitle, {
+    searchQuery,
+  }); //Uploading data on scrollPage
   const [, setIsLoading] = useLoader();
 
   useEffect(() => {
     if (!searchQuery) return;
     setIsLoading(true);
-    getMovieByTitle({ searchQuery, page: 1 })
+    getMovieByTitle({ searchQuery })    //api request
       .then((response) => {
         setState((prev) => ({
           ...prev,
-          currentHomePage: 2,
+          currentSearchMoviePage: 2,
           currentSection: `${path}`,
         }));
         setIsLoading(false);
@@ -39,18 +41,15 @@ const SearchMovie = () => {
       });
   }, [searchQuery]);
 
-  // useEffect(() => {
-  //   if (!moviesByCategoryeFetched.length) return;
+  useEffect(() => {
+    if (!moviesByCategoryeFetched.length) return;
+    setFindedMovies((prev) => [...prev, ...moviesByCategoryeFetched]);
 
-  //   setFindedMovies((prev) => [...prev, ...moviesByCategoryeFetched]);
-
-  //   // ste page pridumat`
-  //   // setState((prev) => ({
-  //   // ...prev,
-  //   // trendingMovies: [...prev.trendingMovies, ...moviesByCategoryeFetched],
-  //   // currentHomePage: prev.currentHomePage + 1,
-  //   // }));
-  // }, [moviesByCategoryeFetched]);
+    setState((prev) => ({
+      ...prev,
+      currentSearchMoviePage: prev.currentSearchMoviePage + 1,
+    }));
+  }, [moviesByCategoryeFetched]);
 
   return (
     <Container>

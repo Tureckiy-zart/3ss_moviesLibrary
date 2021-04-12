@@ -8,15 +8,17 @@ import { useLoader } from "../services/Contexts/LoaderContext";
 
 function HomePage() {
   const [{ trendingMovies, error }, setState] = useData(null); //Global state
+  // const [state] = useData(null); //Global state
   const moviesByCategoryeFetched = useLoading(getTrendingMovies); //Uploading data on scroll
   const { path } = useRouteMatch();
   const [, setIsLoading] = useLoader();
 
   useEffect(() => {
-    if (trendingMovies.length > 0) return;
     //write to the state of the loaded data after first render
+    if (trendingMovies.length > 0) return;
+
     setIsLoading(true);
-    getTrendingMovies({ page: 1 })
+    getTrendingMovies({ page: 1 }) //api request
       .then((response) => {
         setState((prev) => ({
           ...prev,
@@ -24,7 +26,7 @@ function HomePage() {
           currentHomePage: 2,
           currentSection: `${path}`,
         }));
-        setIsLoading(false);
+        setIsLoading(false); //spiner off
       })
       .catch((error) => {
         setState((prev) => ({
@@ -37,6 +39,8 @@ function HomePage() {
   }, []);
 
   useEffect(() => {
+    //updating  currentPage
+
     if (!moviesByCategoryeFetched.length) return;
     setState((prev) => ({
       ...prev,
@@ -44,7 +48,6 @@ function HomePage() {
       currentHomePage: prev.currentHomePage + 1,
     }));
   }, [moviesByCategoryeFetched]);
-
   return <>{trendingMovies && <Gallery dataMovies={trendingMovies} />}</>;
 }
 export default HomePage;

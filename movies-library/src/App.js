@@ -7,8 +7,7 @@ import Loader from "./Components/Loader/Loader";
 import Header from "./Components/Header/Header";
 import Routes from "./Components/Routes/Routes";
 import Navigation from "./Components/Navigation/Navigation";
-// import useTrending from "./Hooks/useTrending";
-import { useState } from "react";
+
 
 // const DataContext = React.createContext();
 // export const useData = () => useContext(DataContext);
@@ -35,10 +34,6 @@ import { useState } from "react";
 // };
 
 function App() {
-  // useEffect(() => {
-  //   console.log("99 :>> ", 99);
-  // }, []);
-  ///////////////////
   // kak pri zagruzke App.js polu4ti dastup k DataProvider
   // na kazhdoy stranice svoy currentPage kotoriy pishu v glavniyState kak ispravit`
   // try/cath lu4she delst v funcion api ili v komponente gge zapros delayu 

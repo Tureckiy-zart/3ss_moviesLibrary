@@ -10,7 +10,6 @@ import SearchMovie from "../pages/SearchMovie";
 import Collections from "../pages/Collection/Collections";
 import CurrnetCollection from "../pages/Collection/CurrnetCollection";
 import MoviesByCategorye from "../pages/Categotyes/MoviesByCategorye";
-// import SearchMovie from "../pages/SearchMovie";
 
 function Routes() {
   return (

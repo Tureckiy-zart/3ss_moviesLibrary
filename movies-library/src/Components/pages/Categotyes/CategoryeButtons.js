@@ -11,20 +11,18 @@ const CategoryeButtons = () => {
   return (
     <ul>
       {categoryes.map(({ id, name }) => (
-        <Button key={id}>
-          <Link
-            to={{
-              pathname: `/categoryes/${name}`,
-              categoryeId: Number(`${id}`),
-              // search: `${name}`,
-              // hash: `#${original_title ? original_title : name}`,
-              state: { ...location },
-              // state: { from: location },
-            }}
-          >
-            {name}
-          </Link>
-        </Button>
+        <Link
+          to={{
+            pathname: `/categoryes/${name}`,
+            categoryeId: Number(`${id}`),
+            state: { from: location }, // not used yet
+            // search: `${name}`,
+            // hash: `#${original_title ? original_title : name}`,
+            // state: { ...location },
+          }}
+        >
+          <Button key={id}>{name}</Button>
+        </Link>
       ))}
     </ul>
   );

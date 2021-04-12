@@ -6,17 +6,17 @@ import { useLoader } from "../../services/Contexts/LoaderContext";
 import List from "../../structure/List/List";
 
 const CurrnetCollection = () => {
-  const [, setState] = useData();
-  const { id } = useParams(0);
-  const [collecton, setCollecton] = useState([]);
   const [, setIsLoading] = useLoader();
   const { path } = useRouteMatch();
+  const { id } = useParams(0);  // from url 
+  const [, setState] = useData();
+  const [collecton, setCollecton] = useState([]);
 
   useEffect(() => {
     if (!id) return;
     setIsLoading(true);
     const IdParsed = parseInt(id);
-    getCollection(IdParsed)
+    getCollection(IdParsed)   //get CurrnetCollection by ID
       .then((response) => {
         setCollecton(response);
         setState((prev) => ({
