@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { getGenres } from "../../services/API/api";
-import { Button } from "./Button.styled";
+import { Button } from "../../structure/stylredComponents/Button.styled";
 
 const CategoryeButtons = () => {
   const [categoryes, setCategoryes] = useState([]);
@@ -11,20 +11,18 @@ const CategoryeButtons = () => {
   return (
     <ul>
       {categoryes.map(({ id, name }) => (
-        <Button key={id}>
-          <Link
-            to={{
-              pathname: `/categoryes/${name}`,
-              categoryeId: Number(`${id}`),
-              // search: `${name}`,
-              // hash: `#${original_title ? original_title : name}`,
-              state: { ...location },
-              // state: { from: location },
-            }}
-          >
-            {name}
-          </Link>
-        </Button>
+        <Link
+          to={{
+            pathname: `/categoryes/${name}`,
+            categoryeId: Number(`${id}`),
+            state: { from: location }, // not used yet
+            // search: `${name}`,
+            // hash: `#${original_title ? original_title : name}`,
+            // state: { ...location },
+          }}
+        >
+          <Button key={id}>{name}</Button>
+        </Link>
       ))}
     </ul>
   );

@@ -1,12 +1,11 @@
 import React, { memo } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { Ul__item } from "../stiledComponents";
+import { Ul__item } from "../stylredComponents/stiledComponents";
 
 function ListItem({ item }) {
   //   console.log("location :>> ", location);
   // console.log('item :>> ', item);
   const { location } = useHistory();
-  // console.log('location :>> ', location);
   const {
     id,
     title,
@@ -15,14 +14,13 @@ function ListItem({ item }) {
     vote_average,
     poster_path,
     backdrop_path,
+    overview = "",
   } = item;
   return (
     <Ul__item>
       <Link
         to={{
           pathname: `/asset/${id}`,
-          // pathname: `/asset/${id}`,
-          // search: "?category=adventure",
           hash: `#${original_title ? original_title : name}`,
           state: { from: location },
         }}
@@ -32,13 +30,15 @@ function ListItem({ item }) {
           src={
             poster_path
               ? `https://image.tmdb.org/t/p/w154/${poster_path}`
-              : // ? `https://image.tmdb.org/t/p/w154/${poster_path}`
-                "http://ergo.slv.vic.gov.au/sites/default/files/imagecache/download/ms11553box4.jpg"
+              : "http://ergo.slv.vic.gov.au/sites/default/files/imagecache/download/ms11553box4.jpg"
           }
           alt={title ? title : name}
           width="154"
         />
-        <p> Votes: {vote_average}</p>
+        {vote_average && <p> Votes: {vote_average}</p>}
+        {location.pathname === "/searchCollection/" && overview && (
+          <p> {overview}</p>
+        )}
       </Link>
     </Ul__item>
   );

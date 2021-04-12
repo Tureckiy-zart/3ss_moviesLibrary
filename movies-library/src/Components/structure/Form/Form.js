@@ -3,7 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useHistory, useLocation } from "react-router-dom";
 // import { useSearchContext } from "../../services/Contexts/SearchContext";
 
-const Form = () => {
+const Form = ({queryLocation}) => {
   const { handleSubmit, control, reset } = useForm();
   // [{ searchQuery = '' }, setSearchQuery] = useSearchContext(null);
   const [{ searchQuery }, setSearchQuery] = useState("");
@@ -16,7 +16,8 @@ const Form = () => {
   useEffect(() => {
     if (!searchQuery) return;
     history.push({
-      pathname: "/searchMovie/",
+      pathname: `/search${queryLocation}/`,
+      // pathname: "/searchMovie/",
       search: `?${searchQuery}`,
       state: { from: location },
     });

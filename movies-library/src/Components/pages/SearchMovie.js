@@ -3,58 +3,58 @@ import { useLocation, useRouteMatch } from "react-router";
 import useLoading from "../../Hooks/useLoading";
 import { getMovieByTitle } from "../services/API/api";
 import { useData } from "../services/Contexts/DataContext";
-import Form from "../structure/Form/Form";
+import { useLoader } from "../services/Contexts/LoaderContext";
 import Gallery from "../structure/Gallery";
+import { Container } from "../structure/stylredComponents/stiledComponents";
 
 const SearchMovie = () => {
-  const { search: searchQuery, pathname } = useLocation();
+  const { search: searchQuery } = useLocation();
   const [findedMovies, setFindedMovies] = useState([]);
   const [, setState] = useData();
   const { path } = useRouteMatch();
-  // const moviesByCategoryeFetched = useLoading(getMovieByTitle); //Uploading data on scroll
+  const moviesByCategoryeFetched = useLoading(getMovieByTitle, {
+    searchQuery,
+  }); //Uploading data on scrollPage
+  const [, setIsLoading] = useLoader();
 
   useEffect(() => {
     if (!searchQuery) return;
-
-    setState((prev) => ({ ...prev, isLoading: true }));
-    getMovieByTitle({ searchQuery, page: 1 })
+    setIsLoading(true);
+    getMovieByTitle({ searchQuery })    //api request
       .then((response) => {
         setState((prev) => ({
           ...prev,
-          isLoading: false,
-          currentHomePage: 2,
+          currentSearchMoviePage: 2,
           currentSection: `${path}`,
         }));
+        setIsLoading(false);
         setFindedMovies(response);
       })
       .catch((error) => {
         setState((prev) => ({
           ...prev,
-          isLoading: false,
           error: error.response.data,
         }));
+        setIsLoading(false);
+
         throw new Error(error.response.data);
       });
   }, [searchQuery]);
 
-  // useEffect(() => {
-  //   if (!moviesByCategoryeFetched.length) return;
+  useEffect(() => {
+    if (!moviesByCategoryeFetched.length) return;
+    setFindedMovies((prev) => [...prev, ...moviesByCategoryeFetched]);
 
-  //   setFindedMovies((prev) => [...prev, ...moviesByCategoryeFetched]);
-
-  //   // ste page pridumat`
-  //   // setState((prev) => ({
-  //   // ...prev,
-  //   // trendingMovies: [...prev.trendingMovies, ...moviesByCategoryeFetched],
-  //   // currentHomePage: prev.currentHomePage + 1,
-  //   // }));
-  // }, [moviesByCategoryeFetched]);
+    setState((prev) => ({
+      ...prev,
+      currentSearchMoviePage: prev.currentSearchMoviePage + 1,
+    }));
+  }, [moviesByCategoryeFetched]);
 
   return (
-    <>
-      <Form />
-      <Gallery dataMovies={findedMovies} />
-    </>
+    <Container>
+      {findedMovies && <Gallery dataMovies={findedMovies} />}
+    </Container>
   );
 };
 

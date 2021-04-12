@@ -1,17 +1,17 @@
 import React, { memo, useEffect, useState } from "react";
-import { Redirect, useParams } from "react-router";
-import useHistoryReturn from "../../Hooks/useHistoryReturn";
-import { getMovieByID } from "../services/API/api";
-import { useData } from "../services/Contexts/DataContext";
-import { Button } from "../structure/Buttons/Button.styled";
-import SubNavigation from "../Navigation/SubNavigation";
+import { useParams } from "react-router";
+import useHistoryReturn from "../../structure/Buttons/ButtonsHistoryReturn";
+import { getMovieByID } from "../../services/API/api";
+import { useData } from "../../services/Contexts/DataContext";
+import { Button } from "../../structure/stylredComponents/Button.styled";
+import SubNavigation from "../../Navigation/SubNavigation";
 
-import useFavorites from "../../Hooks/useFavorites";
+import useFavorites from "../../../Hooks/useFavorites";
+import ButtonsHistoryReturn from "../../structure/Buttons/ButtonsHistoryReturn";
 const MovieDetailsPage = () => {
   let { id } = useParams();
-  const [goHome, goBack] = useHistoryReturn();
   const [response, setResponse] = useState(null);
-  const [state, setState] = useData();
+  const [, setState] = useData();
   const [, setLocalStorageValue, setRemoveLocalStorage] = useFavorites();
   useEffect(() => {
     if (!id) return;
@@ -36,10 +36,6 @@ const MovieDetailsPage = () => {
           error: error,
         }));
         console.log("error :>> ", error);
-
-        // console.log('state :>> ', state);
-        // <Redirect to={'/'}/>
-        // throw new Error(error.response.data);
         throw new Error(error);
       });
   }, [id, setState]);
@@ -49,8 +45,7 @@ const MovieDetailsPage = () => {
   return (
     <section>
       MovieDetailsPage
-      <button onClick={goBack}>Go Back</button>
-      <button onClick={goHome}>Home</button>
+      <ButtonsHistoryReturn />
       {response && (
         <div>
           <h2>{response.title}</h2>
@@ -88,16 +83,17 @@ const MovieDetailsPage = () => {
             <a href={response.homepage}>Movie Page</a>
           </div>
           <SubNavigation />
-          <Button bgc="blue" onClick={goBack}>
+          <ButtonsHistoryReturn />
+
+          {/* <Button bgc="blue" onClick={goBack}>
             Go Back
           </Button>
           <Button bgc="red" onClick={goHome}>
             Home
-          </Button>
+          </Button> */}
         </div>
       )}
     </section>
-    // {}
   );
 };
 
