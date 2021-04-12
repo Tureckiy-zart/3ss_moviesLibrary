@@ -1,18 +1,10 @@
 import React from "react";
 import List from "./List/List";
-import { Container } from "./stiledComponents";
+import { Container } from "./stylredComponents/stiledComponents";
 
-const Gallery = ({ dataMovies }) => (
+const Gallery = ({ dataMovies, childern }) => (
   <Container>
-    <List dataMovies={dataMovies} />;
+    {dataMovies ? <List dataMovies={dataMovies} /> : childern};
   </Container>
 );
 export default Gallery;
-
-
-
-
-
-
-
-

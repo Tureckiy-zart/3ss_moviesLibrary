@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import useHistoryReturn from "../../Hooks/useHistoryReturn";
-import { getMovieReview } from "../services/API/api";
+import useHistoryReturn from "../../../Hooks/useHistoryReturn";
+import { getMovieReview } from "../../services/API/api";
 
 const ReviewsPage = () => {
   let { id } = useParams();

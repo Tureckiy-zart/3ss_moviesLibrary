@@ -1,9 +1,9 @@
 import React from "react";
 import Spiner from "react-loader-spinner";
-import { useData } from "../services/Contexts/DataContext";
+import { useLoader } from "../services/Contexts/LoaderContext";
 
 function Loader() {
-  const [{ isLoading }] = useData();
+  const [isLoading] = useLoader();
   if (!isLoading) return null;
   return (
     <Spiner
@@ -17,7 +17,6 @@ function Loader() {
 }
 
 export default Loader;
-
 
 // import React from "react";
 // import Spiner from "react-loader-spinner";

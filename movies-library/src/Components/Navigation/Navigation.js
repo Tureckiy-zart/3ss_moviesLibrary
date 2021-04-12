@@ -1,30 +1,47 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import './Navigation.scss';
+import {
+  Container,
+  Ul,
+  Ul__item,
+} from "../structure/stylredComponents/stiledComponents";
+import "./Navigation.scss";
 function Navigation() {
   return (
-    <nav>
-      <ul>
-        <li>
-          <NavLink className='NavLink' activeClassName='NavLinkActive' exact to="/">Home</NavLink>
-        </li>
-        {/* <li>
-          <NavLink className='NavLink' activeClassName='NavLinkActive' to="/serach">Serach</NavLink>
-        </li> */}
-        <li>
-          <NavLink className='NavLink' activeClassName='NavLinkActive' to="/categoryes">Categoryes</NavLink>
-        </li>
-        <li>
-          <NavLink className='NavLink' activeClassName='NavLinkActive' to="/collections">Collections</NavLink>
-        </li>
-        {/* <li>
-          <NavLink className='NavLink' activeClassName='NavLinkActive' to="/cartoons">Сartoons</NavLink>
-        </li> */}
-        <li>
-          <NavLink className='NavLink' activeClassName='NavLinkActive' to="/favorites">Favorites</NavLink>
-        </li>
-      </ul>
-    </nav>
+    <Container>
+      <nav>
+        <Ul>
+          <Ul__item>
+            <NavLink
+              className="NavLink"
+              activeClassName="NavLinkActive"
+              exact
+              to="/"
+            >
+              Home
+            </NavLink>
+          </Ul__item>
+          <Ul__item>
+            <NavLink
+              className="NavLink"
+              activeClassName="NavLinkActive"
+              to="/searchCollection"
+            >
+              Collections
+            </NavLink>
+          </Ul__item>
+          <Ul__item>
+            <NavLink
+              className="NavLink"
+              activeClassName="NavLinkActive"
+              to="/favorites"
+            >
+              Favorites
+            </NavLink>
+          </Ul__item>
+        </Ul>
+      </nav>
+    </Container>
   );
 }
 export default Navigation;

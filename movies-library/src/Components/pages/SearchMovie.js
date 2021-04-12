@@ -3,8 +3,9 @@ import { useLocation, useRouteMatch } from "react-router";
 import useLoading from "../../Hooks/useLoading";
 import { getMovieByTitle } from "../services/API/api";
 import { useData } from "../services/Contexts/DataContext";
-import Form from "../structure/Form/Form";
+import { useLoader } from "../services/Contexts/LoaderContext";
 import Gallery from "../structure/Gallery";
+import { Container } from "../structure/stylredComponents/stiledComponents";
 
 const SearchMovie = () => {
   const { search: searchQuery, pathname } = useLocation();
@@ -12,27 +13,28 @@ const SearchMovie = () => {
   const [, setState] = useData();
   const { path } = useRouteMatch();
   // const moviesByCategoryeFetched = useLoading(getMovieByTitle); //Uploading data on scroll
+  const [, setIsLoading] = useLoader();
 
   useEffect(() => {
     if (!searchQuery) return;
-
-    setState((prev) => ({ ...prev, isLoading: true }));
+    setIsLoading(true);
     getMovieByTitle({ searchQuery, page: 1 })
       .then((response) => {
         setState((prev) => ({
           ...prev,
-          isLoading: false,
           currentHomePage: 2,
           currentSection: `${path}`,
         }));
+        setIsLoading(false);
         setFindedMovies(response);
       })
       .catch((error) => {
         setState((prev) => ({
           ...prev,
-          isLoading: false,
           error: error.response.data,
         }));
+        setIsLoading(false);
+
         throw new Error(error.response.data);
       });
   }, [searchQuery]);
@@ -51,10 +53,9 @@ const SearchMovie = () => {
   // }, [moviesByCategoryeFetched]);
 
   return (
-    <>
-      <Form />
-      <Gallery dataMovies={findedMovies} />
-    </>
+    <Container>
+      {findedMovies && <Gallery dataMovies={findedMovies} />}
+    </Container>
   );
 };
 

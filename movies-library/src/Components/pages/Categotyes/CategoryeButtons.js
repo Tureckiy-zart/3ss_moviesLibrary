@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { getGenres } from "../../services/API/api";
-import { Button } from "./Button.styled";
+import { Button } from "../../structure/stylredComponents/Button.styled";
 
 const CategoryeButtons = () => {
   const [categoryes, setCategoryes] = useState([]);

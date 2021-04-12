@@ -2,40 +2,36 @@ import React, { useEffect } from "react";
 import { getTrendingMovies } from "../services/API/api";
 import { useData } from "../services/Contexts/DataContext";
 import useLoading from "../../Hooks/useLoading";
-import List from "../structure/List/List";
-import Carousel from "../Carousel/Carousel";
-import CategoryeButtons from "../structure/Buttons/CategoryeButtons";
 import { useRouteMatch } from "react-router";
-import { Container } from "../structure/stiledComponents";
-import Form from "../structure/Form/Form";
+import Gallery from "../structure/Gallery";
+import { useLoader } from "../services/Contexts/LoaderContext";
 
 function HomePage() {
-  const [state] = useData(null);
-  // getCollections({})
   const [{ trendingMovies, error }, setState] = useData(null); //Global state
   const moviesByCategoryeFetched = useLoading(getTrendingMovies); //Uploading data on scroll
   const { path } = useRouteMatch();
+  const [, setIsLoading] = useLoader();
+
   useEffect(() => {
     if (trendingMovies.length > 0) return;
     //write to the state of the loaded data after first render
-    setState((prev) => ({ ...prev, isLoading: true }));
-
+    setIsLoading(true);
     getTrendingMovies({ page: 1 })
       .then((response) => {
         setState((prev) => ({
           ...prev,
-          isLoading: false,
           trendingMovies: response,
           currentHomePage: 2,
           currentSection: `${path}`,
         }));
+        setIsLoading(false);
       })
       .catch((error) => {
         setState((prev) => ({
           ...prev,
-          isLoading: false,
           error: error.response.data,
         }));
+        setIsLoading(false);
         throw new Error(error.response.data);
       });
   }, []);
@@ -49,21 +45,6 @@ function HomePage() {
     }));
   }, [moviesByCategoryeFetched]);
 
-  return (
-    <>
-      {trendingMovies && (
-        <section>
-          <Container>
-            <p>Home page</p>
-            <Form />
-            <Carousel />
-            <CategoryeButtons />
-            <List dataMovies={trendingMovies} />
-          </Container>
-          {error && <p>${error.status_message}</p>}
-        </section>
-      )}
-    </>
-  );
+  return <>{trendingMovies && <Gallery dataMovies={trendingMovies} />}</>;
 }
 export default HomePage;

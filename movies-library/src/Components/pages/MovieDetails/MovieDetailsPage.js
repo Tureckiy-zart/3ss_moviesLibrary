@@ -1,12 +1,12 @@
 import React, { memo, useEffect, useState } from "react";
-import { Redirect, useParams } from "react-router";
-import useHistoryReturn from "../../Hooks/useHistoryReturn";
-import { getMovieByID } from "../services/API/api";
-import { useData } from "../services/Contexts/DataContext";
-import { Button } from "../structure/Buttons/Button.styled";
-import SubNavigation from "../Navigation/SubNavigation";
+import {  useParams } from "react-router";
+import useHistoryReturn from "../../../Hooks/useHistoryReturn";
+import { getMovieByID } from "../../services/API/api";
+import { useData } from "../../services/Contexts/DataContext";
+import { Button } from "../../structure/stylredComponents/Button.styled";
+import SubNavigation from "../../Navigation/SubNavigation";
 
-import useFavorites from "../../Hooks/useFavorites";
+import useFavorites from "../../../Hooks/useFavorites";
 const MovieDetailsPage = () => {
   let { id } = useParams();
   const [goHome, goBack] = useHistoryReturn();
@@ -49,8 +49,8 @@ const MovieDetailsPage = () => {
   return (
     <section>
       MovieDetailsPage
-      <button onClick={goBack}>Go Back</button>
-      <button onClick={goHome}>Home</button>
+      <Button onClick={goBack}>Go Back</Button>
+      <Button onClick={goHome}>Home</Button>
       {response && (
         <div>
           <h2>{response.title}</h2>

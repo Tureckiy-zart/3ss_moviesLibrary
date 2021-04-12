@@ -6,11 +6,9 @@ export const useData = () => useContext(DataContext);
 
 const initialState = {
   currentSection: "home",
-  isLoading: false,
   trendingMovies: [],
   moviesByCategorye: [],
   searchedMovies: [],
-  canShowTrending: true,
   currentHomePage: 1,
   currentCategoryePage: 1,
   error: null,

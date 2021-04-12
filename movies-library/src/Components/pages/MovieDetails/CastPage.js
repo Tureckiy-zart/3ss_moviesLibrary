@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router";
-import useHistoryReturn from "../../Hooks/useHistoryReturn";
-import { getMovieCast } from "../services/API/api";
-import Form from "../structure/Form/Form";
+import { useParams } from "react-router";
+import useHistoryReturn from "../../../Hooks/useHistoryReturn";
+import { getMovieCast } from "../../services/API/api";
+import { Ul, Ul__item } from "../../structure/stylredComponents/stiledComponents";
 
 const CastPage = () => {
   let { id } = useParams();
@@ -15,11 +15,10 @@ const CastPage = () => {
       CastPage
       <button onClick={goBack}>Go Back</button>
       <button onClick={goHome}>Home</button>
-      <Form />
       {cast && (
-        <ul>
+        <Ul>
           {cast.map(({ id, character, profile_path, name, popularity }) => (
-            <li key={id}>
+            <Ul__item key={id}>
               <h2>{name}</h2>
               <p>Character: {character}</p>
               <img
@@ -32,9 +31,9 @@ const CastPage = () => {
                 width="154"
               />
               <p>Popularity: {Number(popularity).toFixed(1)}</p>
-            </li>
+            </Ul__item>
           ))}
-        </ul>
+        </Ul>
       )}
       <button onClick={goBack}>Go Back</button>
       <button onClick={goHome}>Home</button>

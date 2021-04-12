@@ -51,60 +51,19 @@ export const getMovieReview = async (id) => {
     throw new Error(error);
   }
 };
+
+export const getMovieByTitle = async ({ searchQuery, page = 1 }) => {
+  const { data } = await axios.get(
+    `/search/movie?api_key=${REQUEST_TOKEN}&language=en-US&query=${searchQuery}&page=${page}&include_adult=false`
+  );
+  return data.results;
+};
 export const getGenres = async () => {
   const { data } = await axios.get(
     `/genre/movie/list?api_key=${REQUEST_TOKEN}&language=en-US`
   );
   return data.genres;
 };
-export const getMovieByTitle = async ({ searchQuery, page = 1 }) => {
-  const { data } = await axios.get(
-    // `/search/keyword?api_key=${REQUEST_TOKEN}&language=en-US&query=${searchQuery}&page=${page}&include_adult=false`
-    `/search/movie?api_key=${REQUEST_TOKEN}&language=en-US&query=${searchQuery}&page=${page}&include_adult=false`
-  );
-
-  // https://api.themoviedb.org/3
-
-  return data.results;
-};
-export const getCollections = async ({ searchQuery = "", page = 1 }) => {
-  // console.log("searchQuery :>> ", searchQuery);
-  // const  data  = await axios.get(
-  //   `/search/collection?api_key=${REQUEST_TOKEN}&language=en-US&page=${page}`
-  //   // ${
-  //   //   searchQuery ? (`&query = { searchQuery }`) : ""
-  //   // }
- 
-  //   // search/collection?api_key=2222222222222222&language=en-US&page=1
-  // );
-  const  data  = await axios.get(
-    // `/search/collection?api_key=${REQUEST_TOKEN}&language=en-US&page=${page}`
-    `/search/collection?api_key=${REQUEST_TOKEN}&language=en-US&query=batman&page=1`
-    // ${
-    //   searchQuery ? (`&query = { searchQuery }`) : ""
-    // }
- 
-    // search/collection?api_key=2222222222222222&language=en-US&page=1
-  );
-
-  // console.log("data :>> ", data);
-
-  // return data.results;
-};
-// getCollections({})
-// export const getMovieByGenre = async (
-//   genre = 12,
-//   page = 1,
-//   sortBy = "popularity.desc"
-// ) => {
-//   const { data } = await axios.get(
-//     `/discover/movie?api_key=${REQUEST_TOKEN}&language=en-US&sort_by=${sortBy}&include_video=false&page=${page}&with_genres=${genre}`
-//   );
-//   return data.results;
-// };
-// getMovieByGenre();
-
-// (genre = 12), (page = 1), (sortBy = "popularity.desc");
 export const getMovieByGenre = async ({
   genre = 12,
   page = 1,
@@ -116,3 +75,30 @@ export const getMovieByGenre = async ({
   );
   return data.results;
 };
+
+export const getCollectionId = async ({ searchQuery, page = 1 }) => {
+  const { data } = await axios.get(
+    `/search/collection?api_key=${REQUEST_TOKEN}&language=en-US&query=${searchQuery}&page=${page}`
+  );
+  return data.results;
+};
+
+export const getCollection = async (id) => {
+  const { data } = await axios.get(
+    `/collection/${id}?api_key=${REQUEST_TOKEN}&language=en-US`
+  );
+  return data;
+};
+
+// page: 1
+// results: Array(20)
+// 0:
+// adult: false
+// backdrop_path: "/5npQuS3YbczUHz7NONIpfulA1PT.jpg"
+// id: 288235
+// name: "Cat Run Collection"
+// original_language: "en"
+// original_name: "Cat Run Collection"
+// overview: "Cat Run is a 2011 American comedy action film directed by John Stockwell. Paz Vega stars as Catalina "Cat" Rona, a sexy, high-end escort holding the key evidence to a scandalous government cover-up. Two bumbling young detectives then become her unlikely protectors from a ruthless assassin hired to silence her. This was followed by the 2014 sequel Cat Run 2, with Scott Mechlowicz and Alphonso McAuley reprising their roles as Anthony and Julian."
+// poster_path: "/60qNeMnm1WhKYxGOr5VP3mVTnDC.jpg"
+// __proto__: Object
