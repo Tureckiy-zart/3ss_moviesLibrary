@@ -3,6 +3,7 @@ axios.defaults.baseURL = "https://api.themoviedb.org/3";
 const REQUEST_TOKEN = "b10df2c9a5aac390aead1b7030414d18";
 
 export const getTrendingMovies = async ({ page = 1 }) => {
+  console.log(`page`, page)
   try {
     const { data } = await axios.get(
       `/trending/all/week?api_key=${REQUEST_TOKEN}&page=${page}`
@@ -10,6 +11,7 @@ export const getTrendingMovies = async ({ page = 1 }) => {
     return data.results;
   } catch (error) {
     console.warn("error.response.data :>> ", error.response.data);
+    console.log("error.response.data :>> ", error.response.data);
     throw new Error(error);
   }
 };
@@ -64,6 +66,7 @@ export const getMovieByGenre = async ({
   page = 1,
   sortBy = "popularity.desc",
 }) => {
+  console.log(`page`, page)
   const { data } = await axios.get(
     `/discover/movie?api_key=${REQUEST_TOKEN}&language=en-US&sort_by=${sortBy}&include_video=true&page=${page}&with_genres=${genre}`
   );

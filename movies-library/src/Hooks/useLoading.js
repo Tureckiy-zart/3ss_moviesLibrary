@@ -16,35 +16,32 @@ const useLoading = (apiRequest, options) => {
 
   const [isFetching, setisFetching] = useState(false);
   const [moviesByCategoryeFetched, setMoviesByCategoryeFetched] = useState([]);
-
-  const getCurrnetPage = () => {  //get currentPage by category
+  console.log(`currentSection`, currentSection);
+  const getCurrnetPage = () => {
+    // get currentPage by category
     if (currentSection === "/categoryes") return currentCategoryePage;
     if (currentSection === "/searchMovie") return currentSearchMoviePage;
+    // return currentCategoryePage;
     return currentHomePage;
 
     // switch (currentSection) {
     //   case "/categoryes":
-    //     return currentCategoryePage;
-    //     // break;
+    //     currentCategoryePage;
+    //     break;
     //   case "/searchMovie":
-    //     return currentSearchMoviePage;
-    //     // break;
-    //   // case "/categoryes":
-    //   //   return currentCategoryePage
-    //   //   break;
-
+    //     currentSearchMoviePage;
+    //     break;
     //   default:
-    //   return  currentHomePage;
-    //     // break;
+    //     currentHomePage;
+    //     break;
     // }
   };
-  const currnetPage = getCurrnetPage(); //currentPage 
+  const currnetPage = getCurrnetPage(); //currentPage
 
   useEffect(() => {
     if (!isFetching) return;
     setIsLoading(true); //Spiner on
-    // console.log("currnetPage :>> ", currnetPage);
-
+    console.log("currnetPage :>> ", currnetPage);
     apiRequest({ ...options, page: currnetPage })
       .then((response) => {
         //write to the state of the loaded data
@@ -59,7 +56,8 @@ const useLoading = (apiRequest, options) => {
       .finally(
         () => setisFetching(false) // dismiss allow api raquest
       );
-  }, [isFetching, apiRequest, currnetPage, setState]);
+    // }, [isFetching, apiRequest, currnetPage]);
+  }, [isFetching]); //if put here currnetPage page incraasing 2 times each time
 
   const scrollCalculate = useCallback(({ target }) => {
     //calculate distance from bottom of screen
@@ -67,7 +65,8 @@ const useLoading = (apiRequest, options) => {
       target.documentElement.scrollHeight -
       (target.documentElement.scrollTop + window.innerHeight);
 
-    if (distanceFromBottom < 150) setisFetching(true); // allow to make api raquest
+    if (distanceFromBottom < 100) setisFetching(true); // allow to make api raquest
+    return;
   }, []);
 
   useEffect(() => {

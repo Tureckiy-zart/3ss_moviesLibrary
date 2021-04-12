@@ -4,7 +4,7 @@ import { getMovieReview } from "../../services/API/api";
 import ButtonsHistoryReturn from "../../structure/Buttons/ButtonsHistoryReturn";
 import {
   Ul,
-  Ul__item,
+  UlItem,
 } from "../../structure/stylredComponents/stiledComponents";
 
 const ReviewsPage = () => {
@@ -36,7 +36,7 @@ const ReviewsPage = () => {
               if (avatar_path && avatar_path.indexOf(pathToAvatar) !== -1)
                 avatarPathTrimmed = avatar_path.slice(1);
               return (
-                <Ul__item>
+                <UlItem>
                   <div>
                     <img
                       src={
@@ -57,7 +57,7 @@ const ReviewsPage = () => {
                   </p>
                   <p>Date: {updated_at}</p>
                   <a href={url}>Go to review</a>
-                </Ul__item>
+                </UlItem>
               );
             }
           )}

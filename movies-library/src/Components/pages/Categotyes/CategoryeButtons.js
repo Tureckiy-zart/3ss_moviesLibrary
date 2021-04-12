@@ -11,7 +11,7 @@ const CategoryeButtons = () => {
   return (
     <ul>
       {categoryes.map(({ id, name }) => (
-        <Link
+        <Link  key={id}
           to={{
             pathname: `/categoryes/${name}`,
             categoryeId: Number(`${id}`),
@@ -21,7 +21,7 @@ const CategoryeButtons = () => {
             // state: { ...location },
           }}
         >
-          <Button key={id}>{name}</Button>
+          <Button >{name}</Button>
         </Link>
       ))}
     </ul>

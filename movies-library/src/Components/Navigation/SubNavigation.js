@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink, useHistory, useRouteMatch } from "react-router-dom";
-import { Ul, Ul__item } from "../structure/stylredComponents/stiledComponents";
+import { Ul, UlItem } from "../structure/stylredComponents/stiledComponents";
 
 const SubNavigation = () => {
   const { location } = useHistory();
@@ -9,7 +9,7 @@ const SubNavigation = () => {
   return (
     <nav>
       <Ul>
-        <Ul__item>
+        <UlItem>
           <NavLink
             // activeStyle={activeStyle}
             // to={`${url}/cast`}
@@ -21,8 +21,8 @@ const SubNavigation = () => {
           >
             Cast
           </NavLink>
-        </Ul__item>
-        <Ul__item>
+        </UlItem>
+        <UlItem>
           <NavLink
             // activeStyle={activeStyle}
             to={{
@@ -33,7 +33,7 @@ const SubNavigation = () => {
           >
             Reviews
           </NavLink>
-        </Ul__item>
+        </UlItem>
       </Ul>
     </nav>
   );

@@ -12,7 +12,7 @@ export const Ul = styled.ul`
   flex-wrap: wrap;
 `;
 
-export const Ul__item = styled.li`
+export const UlItem = styled.li`
   width: 14rem;
   padding-bottom: 1rem;
   list-style: none;

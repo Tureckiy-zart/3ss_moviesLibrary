@@ -5,6 +5,7 @@ import { useHistory, useLocation } from "react-router-dom";
 
 const Form = ({queryLocation}) => {
   const { handleSubmit, control, reset } = useForm();
+  console.log(`control`, control)
   // [{ searchQuery = '' }, setSearchQuery] = useSearchContext(null);
   const [{ searchQuery }, setSearchQuery] = useState("");
   const history = useHistory();
@@ -27,6 +28,7 @@ const Form = ({queryLocation}) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <Controller
         name="searchQuery"
+        value = {searchQuery}
         control={control}
         defaultValue={searchQuery}
         rules={{ required: true }}

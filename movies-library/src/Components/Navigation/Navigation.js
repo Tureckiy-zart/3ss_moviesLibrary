@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import {
   Container,
   Ul,
-  Ul__item,
+  UlItem,
 } from "../structure/stylredComponents/stiledComponents";
 import "./Navigation.scss";
 function Navigation() {
@@ -11,7 +11,7 @@ function Navigation() {
     <Container>
       <nav>
         <Ul>
-          <Ul__item>
+          <UlItem>
             <NavLink
               className="NavLink"
               activeClassName="NavLinkActive"
@@ -20,8 +20,8 @@ function Navigation() {
             >
               Home
             </NavLink>
-          </Ul__item>
-          <Ul__item>
+          </UlItem>
+          <UlItem>
             <NavLink
               className="NavLink"
               activeClassName="NavLinkActive"
@@ -29,8 +29,8 @@ function Navigation() {
             >
               Collections
             </NavLink>
-          </Ul__item>
-          <Ul__item>
+          </UlItem>
+          <UlItem>
             <NavLink
               className="NavLink"
               activeClassName="NavLinkActive"
@@ -38,7 +38,7 @@ function Navigation() {
             >
               Favorites
             </NavLink>
-          </Ul__item>
+          </UlItem>
         </Ul>
       </nav>
     </Container>

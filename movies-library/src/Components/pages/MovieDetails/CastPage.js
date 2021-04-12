@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import { getMovieCast } from "../../services/API/api";
 import {
   Ul,
-  Ul__item,
+  UlItem,
 } from "../../structure/stylredComponents/stiledComponents";
 import ButtonsHistoryReturn from "../../structure/Buttons/ButtonsHistoryReturn";
 
@@ -17,7 +17,7 @@ const CastPage = () => {
       {cast && (
         <Ul>
           {cast.map(({ id, character, profile_path, name, popularity }) => (
-            <Ul__item key={id}> 
+            <UlItem key={id}> 
               <h2>{name}</h2>
               <p>Character: {character}</p>
               <img
@@ -30,7 +30,7 @@ const CastPage = () => {
                 width="154"
               />
               <p>Popularity: {Number(popularity).toFixed(1)}</p>
-            </Ul__item>
+            </UlItem>
           ))}
         </Ul>
       )}

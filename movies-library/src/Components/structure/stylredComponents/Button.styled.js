@@ -6,7 +6,7 @@ export const Button = styled.button`
   background-color: ${(props) => props.bgc};
   border: none;
   padding: 0.5rem;
-  margin: 0.5rem;
+  margin: 0.2rem;
   cursor: pointer;
   &:hover {
     background-color: coral;
