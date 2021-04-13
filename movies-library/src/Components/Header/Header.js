@@ -1,16 +1,20 @@
-  import Form from "../structure/Form/Form";
 import Carousel from "../Carousel/Carousel";
 import CategoryeButtons from "../pages/Categotyes/CategoryeButtons";
-import { Container } from "../structure/stylredComponents/stiledComponents";
+// import { Container } from "../structure/stylredComponents/stiledComponents";
+import Navigation from "../Navigation/Navigation";
+import HeaderSearch from "./HeaderSearch";
 
 function Header() {
   return (
-    <Container>
-      <Form queryLocation={'Movie'}/>
-      <Carousel />
+    <>
+      <Navigation />
+      <HeaderSearch/>
+      {/* <Carousel /> */}
       <CategoryeButtons />
-    </Container>
+    </>
   );
 }
+{/* <Container> */}
+{/* </Container> */}
 
 export default Header;

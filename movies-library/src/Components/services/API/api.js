@@ -55,7 +55,7 @@ export const getMovieByTitle = async ({ searchQuery, page = 1 }) => {
 };
 export const getGenres = async () => {
   const { data } = await axios.get(
-    `/genre/movie/list?api_key=${REQUEST_TOKEN}&language=en-US`
+    `/genre/movie/StyledList?api_key=${REQUEST_TOKEN}&language=en-US`
   );
   return data.genres;
 };

@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { Ul__item } from "../stylredComponents/stiledComponents";
+import { StyledListItem } from "../stylredComponents/stiledComponents";
 
 function ListItem({ item }) {
   //   console.log("location :>> ", location);
@@ -17,7 +17,7 @@ function ListItem({ item }) {
     overview = "",
   } = item;
   return (
-    <Ul__item>
+    <StyledListItem>
       <Link
         to={{
           pathname: `/asset/${id}`,
@@ -40,7 +40,7 @@ function ListItem({ item }) {
           <p> {overview}</p>
         )}
       </Link>
-    </Ul__item>
+    </StyledListItem>
   );
 }
 export default memo(ListItem);
