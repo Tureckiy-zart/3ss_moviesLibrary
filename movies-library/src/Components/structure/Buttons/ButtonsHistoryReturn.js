@@ -1,18 +1,15 @@
-import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import { useData } from "../../services/Contexts/DataContext";
-import { ReturnBntGroupe } from "../stylredComponents/stiledComponents";
-// import { ReturnBntGroupe } from "../Components/structure/stylredComponents/stiledComponents";
+import { BntGroupe,  ButtonShrink} from "../stylredComponents/Button.styled";
 
 const ButtonsHistoryReturn = () => {
   const history = useHistory();
   const goHome = () => history.push("/");
   const goBack = () => history.goBack();
   return (
-    <ReturnBntGroupe>
-      <button onClick={goBack}>Go Back</button>
-      <button onClick={goHome}>Home</button>
-    </ReturnBntGroupe>
+    <BntGroupe>
+      <ButtonShrink onClick={goBack}>Go Back</ButtonShrink>
+      <ButtonShrink onClick={goHome}>Home</ButtonShrink>
+    </BntGroupe>
   );
   // return [goHome, goBack];
 };

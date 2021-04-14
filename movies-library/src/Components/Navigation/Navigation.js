@@ -1,32 +1,32 @@
 import React from "react";
 import styled from "styled-components";
 import {
-  Container,
-
-  NavWrapper,
-  StyledNavLink,
   StyledList,
   StyledListItem,
-
-} from "../structure/stylredComponents/stiledComponents";
+} from "../structure/stylredComponents/LIst/List.styled";
+import {
+  NavWrapper,
+  Nav,
+  StyledNavLink,
+  StyledNavigationLink,
+} from "../structure/stylredComponents/Navigation/Navigation.styled";
+import { Container } from "../structure/stylredComponents/stiledComponents";
 const Logo = styled.img`
   width: 400px;
 `;
-const Nav = styled.nav`
-  margin: 0 auto;
-`;
+
 function Navigation() {
   return (
     <NavWrapper className="NavWrapper">
       <Container display="flex">
-        <Logo 
+        <Logo
           src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg"
           alt="logo"
         />
         <Nav className="navigation">
           <StyledList className="navigation StyledList">
             <StyledListItem className="navigation list__item">
-              <StyledNavLink
+              <StyledNavigationLink
                 className="navigation link"
                 className="NavLink"
                 activeClassName="NavLinkActive"
@@ -34,31 +34,30 @@ function Navigation() {
                 to="/"
               >
                 Home
-              </StyledNavLink>
+              </StyledNavigationLink>
             </StyledListItem>
             <StyledListItem>
-              <StyledNavLink
+              <StyledNavigationLink
                 className="NavLink"
                 activeClassName="NavLinkActive"
                 to="/searchCollection"
               >
                 Collections
-              </StyledNavLink>
+              </StyledNavigationLink>
             </StyledListItem>
             <StyledListItem>
-              <StyledNavLink
+              <StyledNavigationLink
                 className="NavLink"
                 activeClassName="NavLinkActive"
                 to="/favorites"
               >
                 Favorites
-              </StyledNavLink>
+              </StyledNavigationLink>
             </StyledListItem>
           </StyledList>
         </Nav>
       </Container>
     </NavWrapper>
-
   );
 }
 export default Navigation;

@@ -24,16 +24,16 @@ const FormWrapper = styled.div`
   bottom: 140px;
   /* margin-bottom:4rem; */
 `;
-const MainTitle = styled.h2`
+const MainTitle = styled.h1`
   position: absolute;
-  font-size: 3em;
+  font-size: 8em;
   font-weight: 700;
   line-height: 1;
   bottom: 250px;
 `;
 const SubTitle = styled.h2`
   position: absolute;
-  font-size: 2em;
+  font-size: 4em;
   font-weight: 600;
   bottom: 130px;
 `;

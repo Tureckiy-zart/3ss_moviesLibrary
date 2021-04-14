@@ -53,12 +53,13 @@ export const getMovieByTitle = async ({ searchQuery, page = 1 }) => {
   const { data } = await axios.get(
     `/search/movie?api_key=${REQUEST_TOKEN}&language=en-US&query=${searchQuery}&page=${page}&include_adult=false`
   );
+  console.log('data :>> ', data);
   return data.results;
 };
 export const getGenres = async () => {
   const { data } = await axios.get(
-    `/genre/movie/StyledList?api_key=${REQUEST_TOKEN}&language=en-US`
-  );
+    `/genre/movie/list?api_key=${REQUEST_TOKEN}&language=en-US`
+    );
   return data.genres;
 };
 export const getMovieByGenre = async ({
@@ -66,7 +67,7 @@ export const getMovieByGenre = async ({
   page = 1,
   sortBy = "popularity.desc",
 }) => {
-  console.log(`page`, page)
+  // console.log(`page`, page)
   const { data } = await axios.get(
     `/discover/movie?api_key=${REQUEST_TOKEN}&language=en-US&sort_by=${sortBy}&include_video=true&page=${page}&with_genres=${genre}`
   );

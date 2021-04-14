@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { getMovieCast } from "../../services/API/api";
-import {
-  StyledList,
-  StyledListItem,
-} from "../../structure/stylredComponents/stiledComponents";
+
 import ButtonsHistoryReturn from "../../structure/Buttons/ButtonsHistoryReturn";
+import { StyledList, StyledListItem } from "../../structure/stylredComponents/LIst/List.styled";
 
 const CastPage = () => {
   let { id } = useParams();
