@@ -4,7 +4,6 @@ import { getMovieReview } from "../../services/API/api";
 import ButtonsHistoryReturn from "../../structure/Buttons/ButtonsHistoryReturn";
 import {
   StyledList,
-
   StyledListItem,
 } from "../../structure/stylredComponents/stiledComponents";
 

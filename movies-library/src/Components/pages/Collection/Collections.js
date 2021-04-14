@@ -29,15 +29,15 @@ function Collections() {
         //   // currentSection: `${path}`,
         // }));
       })
-      .catch((error) => {
-        setState((prev) => ({
-          ...prev,
-          error: error.response.data,
-        }));
-        setIsLoading(false); //spiner off
+      // .catch((error) => {
+      //   setState((prev) => ({
+      //     ...prev,
+      //     error: error.response.data,
+      //   }));
+      //   setIsLoading(false); //spiner off
 
-        throw new Error(error.response.data);
-      });
+      //   throw new Error(error.response.data);
+      // });
   }, [searchQuery]);
   return (
     <Container>

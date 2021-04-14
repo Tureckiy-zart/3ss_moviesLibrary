@@ -58,6 +58,7 @@ export const Form = styled.form`
 
 const SearchForm = ({ queryLocation }) => {
   const { handleSubmit, control, reset } = useForm();
+  console.log(`control`, control)
   // [{ searchQuery = '' }, setSearchQuery] = useSearchContext(null);
   const [{ searchQuery }, setSearchQuery] = useState("");
   const history = useHistory();

@@ -2,10 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import {
   Container,
+
   NavWrapper,
   StyledNavLink,
   StyledList,
   StyledListItem,
+
 } from "../structure/stylredComponents/stiledComponents";
 const Logo = styled.img`
   width: 400px;
@@ -56,6 +58,7 @@ function Navigation() {
         </Nav>
       </Container>
     </NavWrapper>
+
   );
 }
 export default Navigation;
