@@ -3,8 +3,8 @@ import { useParams } from "react-router";
 import { getMovieReview } from "../../services/API/api";
 import ButtonsHistoryReturn from "../../structure/Buttons/ButtonsHistoryReturn";
 import {
-  Ul,
-  UlItem,
+  StyledList,
+  StyledListItem,
 } from "../../structure/stylredComponents/stiledComponents";
 
 const ReviewsPage = () => {
@@ -18,7 +18,7 @@ const ReviewsPage = () => {
       ReviewsPage
       <ButtonsHistoryReturn />
       {reviews && (
-        <Ul>
+        <StyledList>
           {reviews.map(
             ({
               url,
@@ -36,7 +36,7 @@ const ReviewsPage = () => {
               if (avatar_path && avatar_path.indexOf(pathToAvatar) !== -1)
                 avatarPathTrimmed = avatar_path.slice(1);
               return (
-                <UlItem>
+                <StyledListItem>
                   <div>
                     <img
                       src={
@@ -57,11 +57,11 @@ const ReviewsPage = () => {
                   </p>
                   <p>Date: {updated_at}</p>
                   <a href={url}>Go to review</a>
-                </UlItem>
+                </StyledListItem>
               );
             }
           )}
-        </Ul>
+        </StyledList>
       )}
       <ButtonsHistoryReturn />
     </>

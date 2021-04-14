@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { getMovieCast } from "../../services/API/api";
 import {
-  Ul,
-  UlItem,
+  StyledList,
+  StyledListItem,
 } from "../../structure/stylredComponents/stiledComponents";
 import ButtonsHistoryReturn from "../../structure/Buttons/ButtonsHistoryReturn";
 
@@ -15,9 +15,9 @@ const CastPage = () => {
     <>
       <ButtonsHistoryReturn />
       {cast && (
-        <Ul>
+        <StyledList>
           {cast.map(({ id, character, profile_path, name, popularity }) => (
-            <UlItem key={id}> 
+            <StyledListItem key={id}> 
               <h2>{name}</h2>
               <p>Character: {character}</p>
               <img
@@ -30,9 +30,9 @@ const CastPage = () => {
                 width="154"
               />
               <p>Popularity: {Number(popularity).toFixed(1)}</p>
-            </UlItem>
+            </StyledListItem>
           ))}
-        </Ul>
+        </StyledList>
       )}
       <ButtonsHistoryReturn />
     </>

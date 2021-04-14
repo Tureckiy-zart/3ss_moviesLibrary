@@ -1,13 +1,14 @@
 import React, { memo } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { UlItem } from "../../structure/stylredComponents/stiledComponents";
+import { StyledListItem } from "../../structure/stylredComponents/stiledComponents";
+
 function CollectionsList({ item }) {
   const { location } = useHistory();
   const { id, title, name, original_title, poster_path, overview } = item;
   return (
     <>
       {item ? (
-        <UlItem>
+        <StyledListItem>
           <Link
             to={{
               pathname: `/${"searchCollection"}/${id}`,
@@ -27,7 +28,7 @@ function CollectionsList({ item }) {
             />
             <p> {overview}</p>
           </Link>
-        </UlItem>
+        </StyledListItem>
       ) : null}
     </>
   );

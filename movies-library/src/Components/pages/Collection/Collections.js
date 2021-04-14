@@ -6,7 +6,7 @@ import { useLoader } from "../../services/Contexts/LoaderContext";
 import Form from "../../structure/Form/Form";
 import {
   Container,
-  Ul,
+  StyledList,
 } from "../../structure/stylredComponents/stiledComponents";
 import CollectionsList from "./CollectionsList";
 
@@ -45,11 +45,11 @@ function Collections() {
       <Form queryLocation={"Collection"} />
 
       {collectons && (
-        <Ul>
+        <StyledList>
           {collectons.map((item) => (
             <CollectionsList item={item} />
           ))}
-        </Ul>
+        </StyledList>
       )}
     </Container>
   );
