@@ -5,8 +5,12 @@ import { useData } from "../../services/Contexts/DataContext";
 import { useLoader } from "../../services/Contexts/LoaderContext";
 import Form from "../../structure/Form/Form";
 import {
-  Container,
   StyledList,
+  StyledListItem,
+} from "../../structure/stylredComponents/LIst/List.styled";
+import {
+  ComponentWrapper,
+  Container,
 } from "../../structure/stylredComponents/stiledComponents";
 import CollectionsList from "./CollectionsList";
 
@@ -25,33 +29,37 @@ function Collections() {
         setIsLoading(false); //spiner off
         // setState((prev) => ({
         //   ...prev,
-        //   // currentCollectons: 2,
+        //   currentCollectons: 2,
         //   // currentSection: `${path}`,
         // }));
-      })
-      // .catch((error) => {
-      //   setState((prev) => ({
-      //     ...prev,
-      //     error: error.response.data,
-      //   }));
-      //   setIsLoading(false); //spiner off
+      });
+    // .catch((error) => {
+    //   setState((prev) => ({
+    //     ...prev,
+    //     error: error.response.data,
+    //   }));
+    //   setIsLoading(false); //spiner off
 
-      //   throw new Error(error.response.data);
-      // });
+    //   throw new Error(error.response.data);
+    // });
   }, [searchQuery]);
   return (
-    <Container>
-      <p>Collections page</p>
-      <Form queryLocation={"Collection"} />
+    // <ComponentWrapper>
+      <Container>
+        <p>Collections page</p>
+        <Form queryLocation={"Collection"} />
 
-      {collectons && (
-        <StyledList>
-          {collectons.map((item) => (
-            <CollectionsList item={item} />
-          ))}
-        </StyledList>
-      )}
-    </Container>
+        {collectons && (
+          <StyledList>
+            {collectons.map((item) => (
+              <StyledListItem>
+                <CollectionsList item={item} />
+              </StyledListItem>
+            ))}
+          </StyledList>
+        )}
+      </Container>
+    // {/* </ComponentWrapper> */}
   );
 }
 export default Collections;

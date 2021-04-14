@@ -21,13 +21,11 @@ const getAsyncData = async (categoryeId, setState, setIsLoading, path) => {
   setIsLoading(false); //spiner off
 };
 
-const MoviesByCategoryes = (props) => {
-  // console.log('props :>> ', props);
+const MoviesByCategoryes = () => {
   const [, setIsLoading] = useLoader(),
     { categoryeId } = useLocation(null), //get Id from url (slug)
     { path } = useRouteMatch();
   const [{ moviesByCategorye }, setState] = useData({});
-  const [state] = useData({});
 
   const moviesByCategoryeFetched = useLoading(getMovieByGenre, {
     genre: categoryeId,
@@ -54,7 +52,6 @@ const MoviesByCategoryes = (props) => {
     }));
   }, [moviesByCategoryeFetched, setState]);
 
-  console.log(`state`, state);
   return (
     <>
       {moviesByCategorye.length > 0 && (

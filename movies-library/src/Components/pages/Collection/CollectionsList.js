@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { StyledListItem } from "../../structure/stylredComponents/stiledComponents";
+import { StyledListItem } from "../../structure/stylredComponents/LIst/List.styled";
 
 function CollectionsList({ item }) {
   const { location } = useHistory();

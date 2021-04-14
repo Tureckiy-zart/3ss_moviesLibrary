@@ -2,7 +2,7 @@ import React, { memo } from "react";
 import { useHistory } from "react-router";
 import ButtonsHistoryReturn from "../Buttons/ButtonsHistoryReturn";
 import ListItem from "../ListItem/ListItem";
-import { StyledList } from "../stylredComponents/stiledComponents";
+import { StyledGalleryList } from "../stylredComponents/LIst/List.styled";
 
 const List = ({ dataMovies }) => {
   const {
@@ -14,13 +14,13 @@ const List = ({ dataMovies }) => {
     <>
       {dataMovies && (
         <>
-          {/* {checkCurrentLocation && <ButtonsHistoryReturn />} */}
-          <StyledList>
+          {checkCurrentLocation && <ButtonsHistoryReturn />}
+          <StyledGalleryList>
             {dataMovies.map((item) => (
               <ListItem key={item.id} item={item} location={pathname} />
             ))}
-          </StyledList>
-          {/* {checkCurrentLocation && <ButtonsHistoryReturn />} */}
+          </StyledGalleryList>
+          {checkCurrentLocation && <ButtonsHistoryReturn />}
         </>
       )}
     </>

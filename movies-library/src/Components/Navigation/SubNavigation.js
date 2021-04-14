@@ -1,8 +1,17 @@
 import React from "react";
-import { NavLink, useHistory, useRouteMatch } from "react-router-dom";
-
-import { StyledList, StyledListItem } from "../structure/stylredComponents/stiledComponents";
-
+import { useHistory, useRouteMatch } from "react-router-dom";
+import {
+  ButtonShrink,
+  BntGroupe,
+} from "../structure/stylredComponents/Button.styled";
+import {
+  StyledList,
+  StyledListItem,
+} from "../structure/stylredComponents/LIst/List.styled";
+import {
+  StyledNavigationLink,
+  StyledNavLink,
+} from "../structure/stylredComponents/Navigation/Navigation.styled";
 
 const SubNavigation = () => {
   const { location } = useHistory();
@@ -10,33 +19,31 @@ const SubNavigation = () => {
 
   return (
     <nav>
-      <StyledList>
-        <StyledListItem>
-
-          <NavLink
-            // activeStyle={activeStyle}
-            // to={`${url}/cast`}
-            to={{
-              pathname: `${url}/cast`,
-              // search: `${name}`,
-              state: { from: location },
-            }}
-          >
-            Cast
-          </NavLink>
-        </StyledListItem>
-        <StyledListItem>
-          <NavLink
-            // activeStyle={activeStyle}
-            to={{
-              pathname: `${url}/reviews`,
-              // search: `${name}`,
-              state: { from: location },
-            }}
-          >
-            Reviews
-          </NavLink>
-        </StyledListItem>
+      <StyledList display="block">
+        <BntGroupe>
+          <StyledListItem>
+            <StyledNavLink
+              color="black"
+              to={{
+                pathname: `${url}/cast`,
+                state: { from: location },
+              }}
+            >
+              <ButtonShrink>Cast</ButtonShrink>
+            </StyledNavLink>
+          </StyledListItem>
+          <StyledListItem>
+            <StyledNavLink
+              color="black"
+              to={{
+                pathname: `${url}/reviews`,
+                state: { from: location },
+              }}
+            >
+              <ButtonShrink>Reviews</ButtonShrink>
+            </StyledNavLink>
+          </StyledListItem>
+        </BntGroupe>
       </StyledList>
     </nav>
   );

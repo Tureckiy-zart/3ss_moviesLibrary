@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { getMovieReview } from "../../services/API/api";
 import ButtonsHistoryReturn from "../../structure/Buttons/ButtonsHistoryReturn";
-import {
-  StyledList,
-  StyledListItem,
-} from "../../structure/stylredComponents/stiledComponents";
+import { StyledList, StyledListItem } from "../../structure/stylredComponents/LIst/List.styled";
+
 
 const ReviewsPage = () => {
   let { id } = useParams();
