@@ -31,13 +31,6 @@ box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 `;
 
-export const BntGroupe = styled.div`
-  position: ${(props) => props.position || "initial"};
-  bottom: ${(props) => props.bottom || "0"};
-  left: ${(props) => props.left || "0"};
-  display:flex;
-  margin-bottom: 1rem;
-`;
 
 export const StyledButton = styled.button`
   margin: ${(props) => props.margin};
@@ -69,8 +62,17 @@ export const StyledButton = styled.button`
 `;
 
 export const Button = (props) => {
-  // console.log("props sssss:>> ", props);
   return <StyledButton {...props} />;
 };
 
 // position: ${(props) => props.position || "absolute"};
+
+
+export const BntGroupe = styled.div`
+  position: ${(props) => props.position || "initial"};
+  bottom: ${(props) => props.bottom || "0"};
+  left: ${(props) => props.left || "0"};
+  display:flex;
+  margin-bottom: 1rem;
+`;
+
