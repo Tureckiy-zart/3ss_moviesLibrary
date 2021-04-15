@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { getGenres } from "../../services/API/api";
 import { Button } from "../../structure/stylredComponents/Button.styled";
-import { StyledList, StyledListItem } from "../../structure/stylredComponents/LIst/List.styled";
+import { StyledList, ListItem } from "../../structure/stylredComponents/LIst/List.styled";
 import {
   ComponentWrapper,
   Container,
@@ -19,7 +19,7 @@ const CategoryeButtons = () => {
         {categoryes && (
           <StyledList justifyContent="center">
             {categoryes.map(({ id, name }) => (
-              <StyledListItem>
+              <ListItem>
                 <Link
                   key={id}
                   to={{
@@ -33,7 +33,7 @@ const CategoryeButtons = () => {
                 >
                   <Button margin="0 0.5rem 0.5rem 0">{name}</Button>{" "}
                 </Link>
-              </StyledListItem>
+              </ListItem>
             ))}
           </StyledList>
         )}

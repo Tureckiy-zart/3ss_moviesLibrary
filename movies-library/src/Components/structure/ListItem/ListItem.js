@@ -1,7 +1,6 @@
 import React, { memo } from "react";
-import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import { StyledGalleryListItem } from "../stylredComponents/LIst/List.styled";
+import { Image, ImageWrapper, InfoWrapper, StyledGalleryListItem } from "../stylredComponents/LIst/List.styled";
 import Title, {
   MovieTittle,
   AdditionText,
@@ -9,23 +8,9 @@ import Title, {
 import { StyledNavLink } from "../stylredComponents/Navigation/Navigation.styled";
 import { getDate } from "../../heplers/heplers";
 
-const ImageWrapper = styled.div`
-  width: 100%;
-  overflow: hidden;
-`;
-const Image = styled.img`
-  width: 16rem;
-  height: 60%;
-  border-radius: 30px 30px 0 0;
-  margin-bottom: 1rem;
-  overflow: hidden;
-  min-height: 24rem;
-`;
-const InfoWrapper = styled.div`
-  padding: 0 0.5rem;
-`;
 
 function ListItem({ item }) {
+  console.log('item :>> ', item);
   //   console.log("location :>> ", location);
   const { location } = useHistory();
   const {
@@ -38,6 +23,7 @@ function ListItem({ item }) {
     backdrop_path,
     release_date,
     overview = "",
+    popularity,
   } = item;
   const releaseDate = getDate(release_date);
   return (
@@ -63,14 +49,14 @@ function ListItem({ item }) {
         <InfoWrapper>
           <Title color="black">
             <MovieTittle>{original_title ? original_title : name}.</MovieTittle>
-            {vote_average && <AdditionText>Votes: {vote_average}</AdditionText>}
+            {vote_average && vote_average !== 0 && <AdditionText>Votes: {vote_average}</AdditionText>}
             {release_date && (
               <AdditionText>Release Date: {releaseDate}</AdditionText>
             )}
+            {popularity && (
+              <AdditionText>Popularity: {parseInt( popularity)}</AdditionText>
+            )}
           </Title>
-          {location.pathname === "/searchCollection/" && overview && (
-            <p> {overview}</p>
-          )}
         </InfoWrapper>
       </StyledNavLink>
     </StyledGalleryListItem>

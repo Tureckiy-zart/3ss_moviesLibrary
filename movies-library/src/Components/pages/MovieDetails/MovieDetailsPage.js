@@ -61,7 +61,6 @@ const MovieDetailsPage = () => {
 
   return (
     <Container>
-      MovieDetailsPage
       {response && (
         <PageWrapper>
           <MovieTittle>{response.title}</MovieTittle>

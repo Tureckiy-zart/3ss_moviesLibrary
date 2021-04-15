@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 // $colors: {
@@ -9,6 +10,8 @@ import styled from "styled-components";
 // }
 // const DarkBlue = "227, 227, 227, 1";
 export const ComponentWrapper = styled.div`
+  margin-top: ${(props) => props.marginTop};
+  width: ${(props) => props.width};
   margin-bottom: 2rem;
 `;
 const StyledContainer = styled.div`
@@ -26,6 +29,10 @@ export const Container = (props) => {
 // };
 
 export const ExternalLink = styled.a`
+  text-decoration: none;
+  color: black;
+`;
+export const InnerLink = styled(Link)`
   text-decoration: none;
   color: black;
 `;

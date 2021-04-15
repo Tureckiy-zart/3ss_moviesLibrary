@@ -13,6 +13,7 @@ export const MovieTittle = styled.h2`
 export const AdditionText = styled.h4`
   font-size: 1.2rem;
   font-weight: 400;
+  line-height:2rem;
   margin-bottom: ${(props) => props.marginBottom || "0.5rem"};
 `;
 export const SenondaryText = styled(AdditionText)`

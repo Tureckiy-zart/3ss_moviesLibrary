@@ -9,14 +9,16 @@ export const StyledList = styled.ul`
 
 export const StyledGalleryList = styled.ul`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: ${(props) =>
+    props.gridTemplatCcolumns || "1fr 1fr 1fr 1fr 1fr"};
   grid-gap: 2vw;
 `;
 
-export const StyledListItem = styled.li`
+export const ListItem = styled.li`
   list-style: none;
 `;
 export const StyledGalleryListItem = styled.li`
+  margin: ${(props) => props.margin};
   width: 16rem;
   min-height: 35rem;
   background: transparent;
@@ -28,4 +30,33 @@ export const StyledGalleryListItem = styled.li`
     transform: scale(1.05);
     transition: 0.5s;
   }
+`;
+
+export const ImageWrapper = styled.div`
+  width: 100%;
+  overflow: hidden;
+`;
+export const Image = styled.img`
+  width: 16rem;
+  /* height: 60%; */
+  border-radius: 30px 30px 0 0;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  min-height: 24rem;
+`;
+
+export const InfoWrapper = styled.div`
+  display: ${(props) => props.display};
+  grid-template-columns: 15% 1fr;
+  grid-gap: 2vw;
+  padding: ${(props) => props.padding || "0 0.5rem"};
+`;
+export const Avatar = styled.img`
+  max-width: 8rem;
+  /* width: 16rem; */
+  /* height: 60%; */
+  /* border-radius: 30px 30px 0 0;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  min-height: 24rem; */
 `;
