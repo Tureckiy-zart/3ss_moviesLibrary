@@ -5,7 +5,6 @@ import { useData } from "../../services/Contexts/DataContext";
 import SubNavigation from "../../Navigation/SubNavigation";
 import ButtonsHistoryReturn from "../../structure/Buttons/ButtonsHistoryReturn";
 import {
-  ComponentWrapper,
   Container,
   ExternalLink,
 } from "../../structure/stylredComponents/stiledComponents";
@@ -78,12 +77,19 @@ const MovieDetailsPage = () => {
                   alt={response.title ? response.title : response.name}
                   width="250"
                 />
-                <FavoritesBtns position="absolute" bottom="20px" left="30px" />
+                <FavoritesBtns
+                  response={response}
+                  position="absolute"
+                  bottom="20px"
+                  left="30px"
+                />
               </ImgWrapper>
             </div>
             <div>
-              <AdditionText marginBottom='1rem'>{response.overview}</AdditionText>
-         
+              <AdditionText marginBottom="1rem">
+                {response.overview}
+              </AdditionText>
+
               <SenondaryText>
                 Rating IMDB: {response.vote_average}
               </SenondaryText>
@@ -96,7 +102,9 @@ const MovieDetailsPage = () => {
               )}
               <SubNavigation />
 
-              <ExternalLink href={response.homepage}>Visit movie page</ExternalLink>
+              <ExternalLink href={response.homepage}>
+                Visit movie page
+              </ExternalLink>
             </div>
           </StyledDiv>
 
