@@ -6,8 +6,8 @@ export const NavWrapper = styled.div`
   place-items: center;
   height: 100px;
   background-color: rgba(3, 37, 65, 1);
-  /* background-color: hsla(207, 91%, 13%, 0.60); */
   width: 100%;
+  /* position: sticky; */
   position: fixed;
   top: 0;
   z-index: 999;

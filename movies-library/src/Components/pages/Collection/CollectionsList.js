@@ -5,7 +5,7 @@ import {
   ImageWrapper,
   InfoWrapper,
   StyledGalleryListItem,
-} from "../../structure/stylredComponents/LIst/List.styled";
+} from "../../structure/stylredComponents/List.styled";
 import {
   Container,
   InnerLink,
@@ -13,16 +13,17 @@ import {
 import {
   AdditionText,
   MovieTittle,
-} from "../../structure/stylredComponents/Title/Title";
+} from "../../structure/stylredComponents/Title.styled";
 import { trimmedString } from "../../heplers/heplers";
 
 function CollectionsList({ item }) {
   const { location } = useHistory();
   const { id, title, name, original_title, poster_path, overview } = item;
   const trimmedOverview = trimmedString(overview);
+
   return (
     <>
-      {item && (
+      {item ? (
         <StyledGalleryListItem margin="6rem 0 0 0">
           <InnerLink
             to={{
@@ -48,6 +49,10 @@ function CollectionsList({ item }) {
             </InfoWrapper>
           </InnerLink>
         </StyledGalleryListItem>
+      ) : (  // FIX
+        <Container>
+          <MovieTittle marginBottom="2rem">Nothing found.</MovieTittle>
+        </Container>
       )}
     </>
   );

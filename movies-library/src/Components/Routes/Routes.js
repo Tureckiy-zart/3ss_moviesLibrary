@@ -9,7 +9,7 @@ import CastPage from "../pages/MovieDetails/CastPage";
 import SearchMovie from "../pages/SearchMovie";
 import Collections from "../pages/Collection/Collections";
 import CurrnetCollection from "../pages/Collection/CurrnetCollection";
-import MoviesByCategorye from "../pages/Categotyes/MoviesByCategorye";
+import MoviesByGenre from "../pages/Genres/MoviesByGenre";
 
 function Routes() {
   return (
@@ -19,10 +19,11 @@ function Routes() {
       <Route path="/asset/:id/cast" component={CastPage} />
       <Route path="/asset/:id/reviews" component={ReviewsPage} />
       <Route path="/asset/:id/" component={MovieDetailsPage} />
-      <Route path="/categoryes" component={MoviesByCategorye} />
+      <Route path="/categoryes" component={MoviesByGenre} />
       <Route path="/searchCollection/:id" component={CurrnetCollection} />
       <Route path="/searchCollection" component={Collections} />
       <Route path="/favorites" component={FavoritesPage} />
+      <Route path="/errorPage" component={ErrorPage} />
       <Route component={ErrorPage} />
     </Switch>
   );

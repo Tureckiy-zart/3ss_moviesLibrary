@@ -1,7 +1,5 @@
 import React, { memo, useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { getMovieByID } from "../../services/API/api";
-import { useData } from "../../services/Contexts/DataContext";
 import SubNavigation from "../../Navigation/SubNavigation";
 import ButtonsHistoryReturn from "../../structure/Buttons/ButtonsHistoryReturn";
 import {
@@ -12,15 +10,14 @@ import {
   MovieTittle,
   AdditionText,
   SenondaryText,
-} from "../../structure/stylredComponents/Title/Title";
+} from "../../structure/stylredComponents/Title.styled";
 import { getDate } from "../../heplers/heplers";
-import {
-  ImgWrapper,
-  PageWrapper,
-} from "../../structure/stylredComponents/MovieDetailsPage.styled";
 import FavoritesBtns from "../../structure/Buttons/FavoritesBtns";
 
 import styled from "styled-components";
+import { getMovieDataByID } from "../../services/API/getData";
+import { useLoader } from "../../services/Contexts/LoaderContext";
+import { ImgWrapper, PageWrapper } from "../../structure/stylredComponents/MovieDetailsPage.styled";
 
 const StyledDiv = styled.div`
   display: grid;
@@ -30,54 +27,30 @@ const StyledDiv = styled.div`
 
 const MovieDetailsPage = () => {
   let { id } = useParams();
-  const [response, setResponse] = useState(null);
-  const [, setState] = useData();
-  useEffect(() => {
-    if (!id) return;
-    setState((prev) => ({
-      ...prev,
-      isLoading: true,
-    }));
+  const [movieDetails, setMovieDetails] = useState(null);
+  const [, setIsLoading] = useLoader();
 
-    getMovieByID(id)
-      .then((response) => {
-        setResponse(response);
-        setState((prev) => ({
-          ...prev,
-          isLoading: false,
-        }));
-      })
-      .catch((error) => {
-        setState((prev) => ({
-          ...prev,
-          isLoading: false,
-          // error: error.response.data ? error.response.data : error,
-          error: error,
-        }));
-        console.log("error :>> ", error);
-        throw new Error(error);
-      });
-  }, [id, setState]);
+  useEffect(() => getMovieDataByID(id, setMovieDetails, setIsLoading), [id]);
 
-  return (
+   return (
     <Container>
-      {response && (
+      {movieDetails && (
         <PageWrapper>
-          <MovieTittle>{response.title}</MovieTittle>
+          <MovieTittle>{movieDetails.title}</MovieTittle>
           <StyledDiv>
             <div>
               <ImgWrapper>
                 <img
                   src={
-                    response.poster_path
-                      ? `https://image.tmdb.org/t/p/w154/${response.poster_path}`
+                    movieDetails.poster_path
+                      ? `https://image.tmdb.org/t/p/w154/${movieDetails.poster_path}`
                       : "http://ergo.slv.vic.gov.au/sites/default/files/imagecache/download/ms11553box4.jpg"
                   }
-                  alt={response.title ? response.title : response.name}
+                  alt={movieDetails.title ? movieDetails.title : movieDetails.name}
                   width="250"
                 />
                 <FavoritesBtns
-                  response={response}
+                  movieDetails={movieDetails}
                   position="absolute"
                   bottom="20px"
                   left="30px"
@@ -86,22 +59,22 @@ const MovieDetailsPage = () => {
             </div>
             <div>
               <AdditionText marginBottom="1rem">
-                {response.overview}
+                {movieDetails.overview}
               </AdditionText>
 
               <SenondaryText>
-                Rating IMDB: {response.vote_average}
+                Rating IMDB: {movieDetails.vote_average}
               </SenondaryText>
-              <SenondaryText>Vote count: {response.vote_count}</SenondaryText>
+              <SenondaryText>Vote count: {movieDetails.vote_count}</SenondaryText>
 
-              {response.release_date && (
+              {movieDetails.release_date && (
                 <SenondaryText>
-                  Release: {getDate(response.release_date)}
+                  Release: {getDate(movieDetails.release_date)}
                 </SenondaryText>
               )}
               <SubNavigation />
 
-              <ExternalLink href={response.homepage}>
+              <ExternalLink href={movieDetails.homepage}>
                 Visit movie page
               </ExternalLink>
             </div>
