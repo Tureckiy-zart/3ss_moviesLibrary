@@ -1,5 +1,5 @@
 import React from "react";
-import SerchForm from "../structure/Form/Form";
+import SerchForm, { FormWrapper } from "../structure/Form/Form";
 import headerImg_01 from "../../img/headerImg/headerImg_01.jpg";
 import headerImg_02 from "../../img/headerImg/headerImg_02.jpg";
 import headerImg_03 from "../../img/headerImg/headerImg_03.jpg";
@@ -19,23 +19,19 @@ import Title from "../structure/stylredComponents/Title/Title";
 const ImageVrapper = styled.div`
   text-align: center;
 `;
-const FormWrapper = styled.div`
-  position: relative;
-  bottom: 140px;
-  /* margin-bottom:4rem; */
+
+const TitileWrapper = styled.div`
+  position: absolute;
+  top: 210px;
 `;
 const MainTitle = styled.h1`
-  position: absolute;
   font-size: 8em;
   font-weight: 700;
   line-height: 1;
-  bottom: 250px;
 `;
 const SubTitle = styled.h2`
-  position: absolute;
   font-size: 4em;
   font-weight: 600;
-  bottom: 130px;
 `;
 
 const images = [
@@ -53,20 +49,40 @@ const randomImageIndex = (min = 0, max = images.length - 1) =>
 
 const HeaderSearch = () => {
   return (
-    <ComponentWrapper>
+    <ComponentWrapper marginTop="100px">
       <ImageVrapper>
         <img alt={nanoid(5)} src={images[randomImageIndex()]} />
       </ImageVrapper>
       <Container>
-        <FormWrapper>
+        <FormWrapper bottom='9rem'>
           <SerchForm queryLocation={"Movie"} />
+        </FormWrapper>
+        <TitileWrapper>
           <Title>
             <MainTitle>Welcome.</MainTitle>
             <SubTitle>Millions of movies. Explore now.</SubTitle>
           </Title>
-        </FormWrapper>
+        </TitileWrapper>
       </Container>
     </ComponentWrapper>
   );
 };
+// const HeaderSearch = () => {
+//   return (
+//     <ComponentWrapper marginTop="100px">
+//       <ImageVrapper>
+//         <img alt={nanoid(5)} src={images[randomImageIndex()]} />
+//       </ImageVrapper>
+//       <Container>
+//         <FormWrapper>
+//           <SerchForm queryLocation={"Movie"} />
+//           <Title>
+//             <MainTitle>Welcome.</MainTitle>
+//             <SubTitle>Millions of movies. Explore now.</SubTitle>
+//           </Title>
+//         </FormWrapper>
+//       </Container>
+//     </ComponentWrapper>
+//   );
+// };
 export default HeaderSearch;

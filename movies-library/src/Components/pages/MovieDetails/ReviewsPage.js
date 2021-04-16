@@ -1,9 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { getAvatar, getDate } from "../../heplers/heplers";
 import { getMovieReview } from "../../services/API/api";
 import ButtonsHistoryReturn from "../../structure/Buttons/ButtonsHistoryReturn";
-import { StyledList, StyledListItem } from "../../structure/stylredComponents/LIst/List.styled";
-
+import {
+  InfoWrapper, Avatar,
+  StyledList,
+} from "../../structure/stylredComponents/LIst/List.styled";
+import {
+  Container,
+  ExternalLink,
+} from "../../structure/stylredComponents/stiledComponents";
+import {
+  AdditionText,
+  MovieTittle,
+  SenondaryText,
+} from "../../structure/stylredComponents/Title/Title";
 
 const ReviewsPage = () => {
   let { id } = useParams();
@@ -12,8 +24,8 @@ const ReviewsPage = () => {
     id,
   ]);
   return (
-    <>
-      ReviewsPage
+    <Container>
+      <MovieTittle>ReviewsPage</MovieTittle>
       <ButtonsHistoryReturn />
       {reviews && (
         <StyledList>
@@ -25,44 +37,34 @@ const ReviewsPage = () => {
               updated_at,
               author_details: { avatar_path, rating },
             }) => {
-              const pathToAvatar = "/https://secure.gravatar.com/avatar",
-                defaultAvatar =
-                  "http://ergo.slv.vic.gov.au/sites/default/files/imagecache/download/ms11553box4.jpg";
-              let avatarPathTrimmed = `https://image.tmdb.org/t/p/w154${avatar_path}`;
-
-              if (avatar_path === null) avatarPathTrimmed = defaultAvatar;
-              if (avatar_path && avatar_path.indexOf(pathToAvatar) !== -1)
-                avatarPathTrimmed = avatar_path.slice(1);
+              const date = getDate(updated_at.slice(0, 10));
+              const avatarImg = getAvatar(avatar_path);
               return (
-                <StyledListItem>
-                  <div>
-                    <img
-                      src={
-                        avatarPathTrimmed ? avatarPathTrimmed : defaultAvatar
-                      }
-                      alt={author}
-                      width="50"
-                    />
-                    <h2>
-                      <a href={`https://www.themoviedb.org/u/${author}`}>
-                        {author}
-                      </a>
-                    </h2>
-                    <h5>Author rating: {rating}</h5>
-                  </div>
-                  <p>
-                    <i>{content}</i>
-                  </p>
-                  <p>Date: {updated_at}</p>
-                  <a href={url}>Go to review</a>
-                </StyledListItem>
+                  <InfoWrapper padding="1rem" display="grid">
+                    <InfoWrapper padding="1rem">
+                      <ExternalLink
+                        href={`https://www.themoviedb.org/u/${author}`}
+                      >
+                        <Avatar src={avatarImg} alt={author} />
+                        <MovieTittle>{author}</MovieTittle>
+                      </ExternalLink>
+                      <SenondaryText>Author rating: {rating}</SenondaryText>
+                    </InfoWrapper>
+                    <InfoWrapper padding="1rem">
+                      <AdditionText>
+                        <i>{content}</i>
+                      </AdditionText>
+                      <SenondaryText>Date: {date}</SenondaryText>
+                      <ExternalLink href={url}>Go to review</ExternalLink>
+                    </InfoWrapper>
+                  </InfoWrapper>
               );
             }
           )}
         </StyledList>
       )}
       <ButtonsHistoryReturn />
-    </>
+    </Container>
   );
 };
 

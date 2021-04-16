@@ -6,7 +6,7 @@ import {
 } from "../structure/stylredComponents/Button.styled";
 import {
   StyledList,
-  StyledListItem,
+  ListItem,
 } from "../structure/stylredComponents/LIst/List.styled";
 import {
   StyledNavigationLink,
@@ -21,7 +21,7 @@ const SubNavigation = () => {
     <nav>
       <StyledList display="block">
         <BntGroupe>
-          <StyledListItem>
+          <ListItem>
             <StyledNavLink
               color="black"
               to={{
@@ -31,8 +31,8 @@ const SubNavigation = () => {
             >
               <ButtonShrink>Cast</ButtonShrink>
             </StyledNavLink>
-          </StyledListItem>
-          <StyledListItem>
+          </ListItem>
+          <ListItem>
             <StyledNavLink
               color="black"
               to={{
@@ -42,7 +42,7 @@ const SubNavigation = () => {
             >
               <ButtonShrink>Reviews</ButtonShrink>
             </StyledNavLink>
-          </StyledListItem>
+          </ListItem>
         </BntGroupe>
       </StyledList>
     </nav>

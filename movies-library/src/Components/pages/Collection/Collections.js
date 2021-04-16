@@ -3,20 +3,16 @@ import { useLocation } from "react-router";
 import { getCollectionId } from "../../services/API/api";
 import { useData } from "../../services/Contexts/DataContext";
 import { useLoader } from "../../services/Contexts/LoaderContext";
-import Form from "../../structure/Form/Form";
-import {
-  StyledList,
-  StyledListItem,
-} from "../../structure/stylredComponents/LIst/List.styled";
+import { StyledGalleryList } from "../../structure/stylredComponents/LIst/List.styled";
 import {
   ComponentWrapper,
   Container,
 } from "../../structure/stylredComponents/stiledComponents";
 import CollectionsList from "./CollectionsList";
+import SearchForm, { FormWrapper } from "../../structure/Form/Form";
 
 function Collections() {
   const { search: searchQuery } = useLocation();
-  const [, setState] = useData(null);
   const [collectons, setCollectons] = useState(null);
   const [, setIsLoading] = useLoader(false);
 
@@ -44,22 +40,23 @@ function Collections() {
     // });
   }, [searchQuery]);
   return (
-    // <ComponentWrapper>
-      <Container>
-        <p>Collections page</p>
-        <Form queryLocation={"Collection"} />
+    <Container>
+      <ComponentWrapper marginTop="50px">
+        <FormWrapper width='32rem'>
+          <SearchForm queryLocation={"Collection"} />
+        </FormWrapper>
+      </ComponentWrapper>
 
+      <StyledGalleryList>
         {collectons && (
-          <StyledList>
+          <>
             {collectons.map((item) => (
-              <StyledListItem>
-                <CollectionsList item={item} />
-              </StyledListItem>
+              <CollectionsList item={item} />
             ))}
-          </StyledList>
+          </>
         )}
-      </Container>
-    // {/* </ComponentWrapper> */}
+      </StyledGalleryList>
+    </Container>
   );
 }
 export default Collections;

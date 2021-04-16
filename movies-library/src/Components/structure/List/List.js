@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import ButtonsHistoryReturn from "../Buttons/ButtonsHistoryReturn";
 import ListItem from "../ListItem/ListItem";
 import { StyledGalleryList } from "../stylredComponents/LIst/List.styled";
+import { Container } from "../stylredComponents/stiledComponents";
 
 const List = ({ dataMovies }) => {
   const {
@@ -11,7 +12,7 @@ const List = ({ dataMovies }) => {
 
   const checkCurrentLocation = pathname.includes("/searchCollection");
   return (
-    <>
+    <Container>
       {dataMovies && (
         <>
           {checkCurrentLocation && <ButtonsHistoryReturn />}
@@ -20,10 +21,9 @@ const List = ({ dataMovies }) => {
               <ListItem key={item.id} item={item} location={pathname} />
             ))}
           </StyledGalleryList>
-          {checkCurrentLocation && <ButtonsHistoryReturn />}
         </>
       )}
-    </>
+    </Container>
   );
 };
 

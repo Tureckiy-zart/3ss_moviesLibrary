@@ -1,35 +1,54 @@
 import React, { memo } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { StyledListItem } from "../../structure/stylredComponents/LIst/List.styled";
+import { useHistory } from "react-router-dom";
+import {
+  Image,
+  ImageWrapper,
+  InfoWrapper,
+  StyledGalleryListItem,
+} from "../../structure/stylredComponents/LIst/List.styled";
+import {
+  Container,
+  InnerLink,
+} from "../../structure/stylredComponents/stiledComponents";
+import {
+  AdditionText,
+  MovieTittle,
+} from "../../structure/stylredComponents/Title/Title";
+import { trimmedString } from "../../heplers/heplers";
 
 function CollectionsList({ item }) {
   const { location } = useHistory();
   const { id, title, name, original_title, poster_path, overview } = item;
+  const trimmedOverview = trimmedString(overview);
   return (
     <>
-      {item ? (
-        <StyledListItem>
-          <Link
+      {item && (
+        <StyledGalleryListItem margin="6rem 0 0 0">
+          <InnerLink
             to={{
               pathname: `/${"searchCollection"}/${id}`,
               hash: `#${original_title ? original_title : name}`,
               state: { from: location },
             }}
           >
-            <h2>{original_title ? original_title : name}</h2>
-            <img
-              src={
-                poster_path
-                  ? `https://image.tmdb.org/t/p/w154/${poster_path}`
-                  : "http://ergo.slv.vic.gov.au/sites/default/files/imagecache/download/ms11553box4.jpg"
-              }
-              alt={title ? title : name}
-              width="154"
-            />
-            <p> {overview}</p>
-          </Link>
-        </StyledListItem>
-      ) : null}
+            <ImageWrapper>
+              <Image
+                src={
+                  poster_path
+                    ? `https://image.tmdb.org/t/p/w154/${poster_path}`
+                    : "http://ergo.slv.vic.gov.au/sites/default/files/imagecache/download/ms11553box4.jpg"
+                }
+                alt={title ? title : name}
+              />
+            </ImageWrapper>
+
+            <InfoWrapper>
+              <MovieTittle>{original_title ? original_title : name}</MovieTittle>
+              <AdditionText> {trimmedOverview}</AdditionText>
+            </InfoWrapper>
+          </InnerLink>
+        </StyledGalleryListItem>
+      )}
     </>
   );
 }

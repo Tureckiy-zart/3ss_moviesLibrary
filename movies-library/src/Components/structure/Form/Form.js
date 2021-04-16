@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useHistory, useLocation } from "react-router-dom";
-// import { useSearchContext } from "../../services/Contexts/SearchContext";
 import styled from "styled-components";
-import { Container } from "../stylredComponents/stiledComponents";
 
-// const Form = styled.section`
-//   outline: solid 1px red;
-//   margin: 0 auto;
-//   padding: 10px;
-//   width: 1440px;
-//   /* width: maxWidth; */
-// `;
-
+export const FormWrapper = styled.div`
+  width:  ${(props) => props.width};
+  bottom:  ${(props) => props.bottom};
+  position: relative;
+`;
 const Input = styled.input`
   position: absolute;
   width: 100%;
@@ -52,25 +47,18 @@ export const FormButton = styled.input`
   }
 `;
 
-export const Form = styled.form`
-  text-align: center;
-`;
-
 const SearchForm = ({ queryLocation }) => {
   const { handleSubmit, control, reset } = useForm();
-  // [{ searchQuery = '' }, setSearchQuery] = useSearchContext(null);
   const [{ searchQuery }, setSearchQuery] = useState("");
   const history = useHistory();
   const location = useLocation();
   const onSubmit = (query) => {
     return setSearchQuery(query);
   };
-  // console.log('searchQuery :>> ', searchQuery);
   useEffect(() => {
     if (!searchQuery) return;
     history.push({
       pathname: `/search${queryLocation}/`,
-      // pathname: "/searchMovie/",
       search: `?${searchQuery}`,
       state: { from: location },
     });
@@ -79,7 +67,7 @@ const SearchForm = ({ queryLocation }) => {
 
   return (
     <label htmlFor="searchForm">
-      <Form className="searchForm" onSubmit={handleSubmit(onSubmit)}>
+      <form className="searchForm" onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name="searchQuery"
           control={control}
@@ -88,7 +76,7 @@ const SearchForm = ({ queryLocation }) => {
           render={({ field }) => <Input placeholder="Search..." {...field} />}
         />
         <FormButton type="submit" className="searchInput" />
-      </Form>
+      </form>
     </label>
   );
 };
