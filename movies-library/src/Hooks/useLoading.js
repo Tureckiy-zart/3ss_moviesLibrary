@@ -6,7 +6,7 @@ import useCurrentPage from "./useCurrentPage";
 const useLoading = (apiRequest, options) => {
   const [, setIsLoading] = useLoader(false);
   const [isFetching, setisFetching] = useState(false);
-  
+
   const [moviesByCategoryeFetched, setMoviesByCategoryeFetched] = useState([]);
 
   const loadingOptins = {
@@ -17,6 +17,7 @@ const useLoading = (apiRequest, options) => {
     currnetPage: useCurrentPage(),
     setMoviesByCategoryeFetched,
   };
+  console.log('obcurrnetPageject :>> ', loadingOptins.currnetPage);
   useEffect(() => getDataOnLoad(loadingOptins), [isFetching]); //if put here currnetPage page incraasing 2 times each time
 
   const scrollCalculate = useCallback(({ target }) => {

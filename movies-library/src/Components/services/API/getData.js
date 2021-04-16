@@ -163,6 +163,15 @@ export const getDataOnLoad = async ({
     const response = await apiRequest({ ...options, page: currnetPage });
     console.log("response :>> ", response);
     setMoviesByCategoryeFetched(response);
+
+
+
+
+
+
+
+
+    
   } catch (error) {
     console.log("error :>> ", error);
   } finally {
