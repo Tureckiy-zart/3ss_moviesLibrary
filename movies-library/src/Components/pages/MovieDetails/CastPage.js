@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { getMovieCast } from "../../services/API/api";
+import { getCastData } from "../../services/API/getData";
+import { useLoader } from "../../services/Contexts/LoaderContext";
 import ButtonsHistoryReturn from "../../structure/Buttons/ButtonsHistoryReturn";
 import {
   Image,
@@ -8,17 +10,20 @@ import {
   InfoWrapper,
   StyledGalleryList,
   StyledGalleryListItem,
-} from "../../structure/stylredComponents/LIst/List.styled";
+} from "../../structure/stylredComponents/List.styled";
 import { Container } from "../../structure/stylredComponents/stiledComponents";
 import {
   AdditionText,
   MovieTittle,
-} from "../../structure/stylredComponents/Title/Title";
+} from "../../structure/stylredComponents/Title.styled";
 
 const CastPage = () => {
   let { id } = useParams();
+  const [, setIsLoading] = useLoader();
+
   const [cast, setCast] = useState(null);
-  useEffect(() => getMovieCast(id).then((response) => setCast(response)), [id]);
+
+  useEffect(() => getCastData(id, setCast, setIsLoading), [id]);
   return (
     <Container>
       <ButtonsHistoryReturn />

@@ -1,21 +1,14 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+
 import {
-  BntGroupe,
-  ButtonShrink,
-  StyledButton,
-} from "../structure/stylredComponents/Button.styled";
-import {
-  StyledList,
   ListItem,
-} from "../structure/stylredComponents/LIst/List.styled";
+} from "../structure/stylredComponents/List.styled";
 import {
   NavWrapper,
   Nav,
-  NavigationLink,
   StyledNavigationLink,
-} from "../structure/stylredComponents/Navigation/Navigation.styled";
+} from "../structure/stylredComponents/Navigation.styled";
 import { Container } from "../structure/stylredComponents/stiledComponents";
 const Logo = styled.img`
   width: 400px;

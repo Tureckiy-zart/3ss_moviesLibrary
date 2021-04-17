@@ -14,7 +14,7 @@ import {
   Container,
 } from "../structure/stylredComponents/stiledComponents";
 import { nanoid } from "nanoid";
-import Title from "../structure/stylredComponents/Title/Title";
+import Title from "../structure/stylredComponents/Title.styled";
 
 const ImageVrapper = styled.div`
   text-align: center;
@@ -49,7 +49,7 @@ const randomImageIndex = (min = 0, max = images.length - 1) =>
 
 const HeaderSearch = () => {
   return (
-    <ComponentWrapper marginTop="100px">
+    <ComponentWrapper>
       <ImageVrapper>
         <img alt={nanoid(5)} src={images[randomImageIndex()]} />
       </ImageVrapper>

@@ -7,11 +7,11 @@ import {
 import {
   StyledList,
   ListItem,
-} from "../structure/stylredComponents/LIst/List.styled";
+} from "../structure/stylredComponents/List.styled";
 import {
   StyledNavigationLink,
   StyledNavLink,
-} from "../structure/stylredComponents/Navigation/Navigation.styled";
+} from "../structure/stylredComponents/Navigation.styled";
 
 const SubNavigation = () => {
   const { location } = useHistory();
