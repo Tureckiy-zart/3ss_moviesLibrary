@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const HeaderWrapper = styled.div`
-margin-top:100px
+margin-top:100px;
+/* width:1440px; */
 /* margin-top:100px */
 `
 // $colors: {

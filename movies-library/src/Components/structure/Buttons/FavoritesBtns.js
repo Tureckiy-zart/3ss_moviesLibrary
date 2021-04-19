@@ -9,7 +9,6 @@ const FavoritesBtns = (props) => {
   ] = useFavoritesLocalStorage();
   const addFavorite = () => setLocalStorageValue(props.movieDetails);
   const removeLocalStorage = () => setRemoveLocalStorage(props.movieDetails);
- console.log('8787 :>> ', 8787);
   return (
     <>
       {props.movieDetails && (

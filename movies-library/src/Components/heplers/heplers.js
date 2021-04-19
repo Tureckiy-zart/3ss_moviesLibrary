@@ -1,11 +1,12 @@
+export const defaultFunc = () => {};
+
 export const getDate = (date) => {
   if (date) return date.split("-").reverse().join("/");
 };
 
 export const getAvatar = (avatar_path) => {
   const pathToAvatar = "/https://secure.gravatar.com/avatar",
-    defaultAvatar =
-      null;
+    defaultAvatar = null;
   let avatarPathTrimmed = `https://image.tmdb.org/t/p/w154${avatar_path}`;
   if (avatar_path === null) avatarPathTrimmed = defaultAvatar;
   if (avatar_path && avatar_path.indexOf(pathToAvatar) !== -1)
@@ -18,7 +19,6 @@ export const trimmedString = (string) => {
   return string;
 };
 
-export const goToErrorPage = (props) => {
-console.log('props :>> ', props);
+export const errorPageRedirect = (props) => {
+  window.location = "/errorPage";
 };
-

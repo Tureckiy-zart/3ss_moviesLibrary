@@ -1,26 +1,25 @@
 import React from "react";
 import { useData } from "../services/Contexts/DataContext";
-import ButtonsHistoryReturn from "../structure/Buttons/ButtonsHistoryReturn";
-import Gallery from "../structure/Gallery";
-import { Container } from "../structure/stylredComponents/stiledComponents";
+import { GoHomeBtn } from "../structure/Buttons/ButtonsHistoryReturn";
 import {
-  AdditionText,
-  MovieTittle,
-} from "../structure/stylredComponents/Title.styled";
+  CenteredImg,
+  ImageWrapper,
+} from "../structure/stylredComponents/List.styled";
+import { Container } from "../structure/stylredComponents/stiledComponents";
+import MostPopular from "./MostPopular";
 
 function ErrorPage() {
   const [{ trendingMovies }] = useData(null); //Global state
   // if (trendingMovies) console.log("object :>> ", trendingMovies);
   return (
     <Container>
-      <ButtonsHistoryReturn />
-      <MovieTittle marginBottom="3rem">404 Page not found</MovieTittle>
       <>
-        <AdditionText marginBottom="2rem">Most popular: </AdditionText>
+        <ImageWrapper>
+          <GoHomeBtn />
+          <CenteredImg src="https://ic.pics.livejournal.com/v_ellena/58458294/211746/211746_900.jpg" />
+        </ImageWrapper>
 
-        {trendingMovies.length > 0 && (
-          <Gallery dataMovies={trendingMovies.slice(0, 5)} />
-        )}
+        <MostPopular />
       </>
     </Container>
   );

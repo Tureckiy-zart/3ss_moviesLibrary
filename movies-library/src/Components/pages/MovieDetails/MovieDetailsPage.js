@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import SubNavigation from "../../Navigation/SubNavigation";
-import ButtonsHistoryReturn from "../../structure/Buttons/ButtonsHistoryReturn";
+import {ButtonsHistoryReturn} from "../../structure/Buttons/ButtonsHistoryReturn";
 import {
   Container,
   ExternalLink,

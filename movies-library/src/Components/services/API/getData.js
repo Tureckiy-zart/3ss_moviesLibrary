@@ -1,3 +1,4 @@
+import { errorPageRedirect, defaultFunc } from "../../heplers/heplers";
 import {
   getCollection,
   getCollectionId,
@@ -9,10 +10,17 @@ import {
   getTrendingMovies,
 } from "./api";
 
+const errorHandler = (error = null, setState = defaultFunc) => {
+  console.warn("error.response.data :>> ", error.response.data);
+  setState((prev) => ({ ...prev, error }));
+  errorPageRedirect();
+  throw new Error(error);
+};
+
 export const getTrendingData = async (
-  trendingMovies,
-  setState,
-  setIsLoading
+  trendingMovies = [],
+  setState = defaultFunc,
+  setIsLoading = defaultFunc
 ) => {
   if (trendingMovies.length > 0) return;
   setIsLoading(true);
@@ -24,29 +32,34 @@ export const getTrendingData = async (
       currentHomePage: 2,
     }));
   } catch (error) {
-    console.warn("error.response.data :>> ", error.response.data);
-    throw new Error(error);
+    errorHandler(error, setState);
   } finally {
     setIsLoading(false); //spiner off
   }
 };
 
-export const getMovieDataByID = async (id, setMovieDetails, setIsLoading) => {
+export const getMovieDataByID = async (
+  id = null,
+  setMovieDetails = defaultFunc,
+  setIsLoading = defaultFunc
+) => {
   if (!id) return;
   setIsLoading(true);
-  const IdParsed = parseInt(id);
-
-  const response = await getMovieByID(IdParsed);
-
-  setMovieDetails(response);
-
-  setIsLoading(false);
+  try {
+    const IdParsed = parseInt(id);
+    const response = await getMovieByID(IdParsed);
+    setMovieDetails(response);
+  } catch (error) {
+    errorHandler(error);
+  } finally {
+    setIsLoading(false); //spiner off
+  }
 };
 export const getCollectionsData = async (
-  searchQuery,
-  setIsLoading,
-  setCollectons,
-  setState
+  searchQuery = "",
+  setIsLoading = defaultFunc,
+  setCollectons = defaultFunc,
+  setState = defaultFunc
 ) => {
   if (!searchQuery) return;
   setIsLoading(true); //spiner on
@@ -54,56 +67,63 @@ export const getCollectionsData = async (
     const response = await getCollectionId({ searchQuery }); //get collections {id, name}
     setCollectons(response); //set local stse collections {id, name}
   } catch (error) {
-    console.log("error :>> ", error);
-    setState((prev) => ({ ...prev, error }));
-    window.location = "/errorPage";
+    errorHandler(error, setState);
   } finally {
     setIsLoading(false); //spiner off
   }
 };
 
 export const getCurrnetCollection = async (
-  id,
-  setCollecton,
-  setState,
-  setIsLoading
+  id = null,
+  setCollecton = defaultFunc,
+  setState = defaultFunc,
+  setIsLoading = defaultFunc
 ) => {
   if (!id) return;
   setIsLoading(true);
-  const IdParsed = parseInt(id);
-
-  const response = await getCollection(IdParsed);
-
-  setCollecton(response);
-  setState((prev) => ({
-    ...prev,
-    currentCollectonPage: 2,
-  }));
-  setIsLoading(false);
+  try {
+    const IdParsed = parseInt(id);
+    const response = await getCollection(IdParsed);
+    setCollecton(response);
+    setState((prev) => ({
+      ...prev,
+      currentCollectonPage: 2,
+    }));
+  } catch (error) {
+    errorHandler(error, setState);
+  } finally {
+    setIsLoading(false); //spiner off
+  }
 };
 
-export const getGenreData = async (categoryeId, setState, setIsLoading) => {
+export const getGenreData = async (
+  categoryeId = null,
+  setState = defaultFunc,
+  setIsLoading = defaultFunc
+) => {
   if (!categoryeId) return;
 
   try {
     const response = await getMovieByGenre({
       genre: Number(categoryeId),
     });
-
     setState((prev) => ({
       ...prev,
       moviesByCategorye: response,
       currentCategoryePage: 2,
     }));
   } catch (error) {
-    console.warn("error.response.data :>> ", error.response.data);
-    throw new Error(error);
+    errorHandler(error, setState);
   } finally {
     setIsLoading(false); //spiner off
   }
 };
 
-export const getSearchData = async (searchQuery, setState, setIsLoading) => {
+export const getSearchData = async (
+  searchQuery = "",
+  setState = defaultFunc,
+  setIsLoading = defaultFunc
+) => {
   if (!searchQuery) return;
   setIsLoading(true);
   try {
@@ -114,54 +134,60 @@ export const getSearchData = async (searchQuery, setState, setIsLoading) => {
       currentSearchMoviePage: 2,
     }));
   } catch (error) {
-    console.log("error :>> ", error);
+    errorHandler(error, setState);
   } finally {
     setIsLoading(false); //spiner off
   }
 };
-
-export const getCastData = async (id, setCast, setIsLoading) => {
+export const getCastData = async (
+  id = null,
+  setCast = defaultFunc,
+  setIsLoading = defaultFunc
+) => {
   if (!id) return;
   setIsLoading(true); //spiner on
   try {
     const response = await getMovieCast(id);
     setCast(response);
   } catch (error) {
-    console.log("error :>> ", error);
+    errorHandler(error);
   } finally {
     setIsLoading(false); //spiner off
   }
 };
-export const getReviewsData = async (id, setReviews, setIsLoading) => {
+export const getReviewsData = async (
+  id = null,
+  setReviews = defaultFunc,
+  setIsLoading = defaultFunc
+) => {
   if (!id) return;
   setIsLoading(true); //spiner on
   try {
     const response = await getMovieReview(id);
     setReviews(response);
   } catch (error) {
-    console.log("error :>> ", error);
+    errorHandler(error);
   } finally {
     setIsLoading(false); //spiner off
   }
 };
 
 export const getDataOnLoad = async ({
-  apiRequest,
-  options,
-  isFetching,
-  setIsLoading,
-  currnetPage,
-  setMoviesByCategoryeFetched,
-  setisFetching,
+  apiRequest = defaultFunc,
+  options = {},
+  isFetching = false,
+  setIsLoading = defaultFunc,
+  currnetPage = 1,
+  setMoviesByCategoryeFetched = defaultFunc,
+  setisFetching = defaultFunc,
 }) => {
   if (!isFetching) return;
   setIsLoading(true); //Spiner on
   try {
     const response = await apiRequest({ ...options, page: currnetPage });
-    console.log("response :>> ", response);
     setMoviesByCategoryeFetched(response);
   } catch (error) {
-    console.log("error :>> ", error);
+    errorPageRedirect(error);
   } finally {
     setIsLoading(false); //spiner off
     setisFetching(false);
