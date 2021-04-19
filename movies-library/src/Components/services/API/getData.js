@@ -31,21 +31,17 @@ export const getTrendingData = async (
   }
 };
 
-export const getMovieDataByID = async (
-    id,
-    setMovieDetails,
-    setIsLoading
-  ) => {
-    if (!id) return;
-    setIsLoading(true);
-    const IdParsed = parseInt(id);
-  
-    const response = await getMovieByID(IdParsed);
-  
-    setMovieDetails(response);
- 
-    setIsLoading(false);
-  };
+export const getMovieDataByID = async (id, setMovieDetails, setIsLoading) => {
+  if (!id) return;
+  setIsLoading(true);
+  const IdParsed = parseInt(id);
+
+  const response = await getMovieByID(IdParsed);
+
+  setMovieDetails(response);
+
+  setIsLoading(false);
+};
 export const getCollectionsData = async (
   searchQuery,
   setIsLoading,
@@ -156,6 +152,7 @@ export const getDataOnLoad = async ({
   setIsLoading,
   currnetPage,
   setMoviesByCategoryeFetched,
+  setisFetching,
 }) => {
   if (!isFetching) return;
   setIsLoading(true); //Spiner on
@@ -163,18 +160,10 @@ export const getDataOnLoad = async ({
     const response = await apiRequest({ ...options, page: currnetPage });
     console.log("response :>> ", response);
     setMoviesByCategoryeFetched(response);
-
-
-
-
-
-
-
-
-    
   } catch (error) {
     console.log("error :>> ", error);
   } finally {
     setIsLoading(false); //spiner off
+    setisFetching(false);
   }
 };

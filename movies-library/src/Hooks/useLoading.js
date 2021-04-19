@@ -16,8 +16,8 @@ const useLoading = (apiRequest, options) => {
     setIsLoading,
     currnetPage: useCurrentPage(),
     setMoviesByCategoryeFetched,
+    setisFetching
   };
-  console.log('obcurrnetPageject :>> ', loadingOptins.currnetPage);
   useEffect(() => getDataOnLoad(loadingOptins), [isFetching]); //if put here currnetPage page incraasing 2 times each time
 
   const scrollCalculate = useCallback(({ target }) => {
