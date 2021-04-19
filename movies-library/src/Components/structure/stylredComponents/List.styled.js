@@ -10,8 +10,9 @@ export const StyledList = styled.ul`
 export const StyledGalleryList = styled.ul`
   display: grid;
   grid-template-columns: ${(props) =>
-    props.gridTemplatCcolumns || "1fr 1fr 1fr 1fr 1fr"};
+    props.gridTemplatCcolumns || "1fr 1fr 1fr 1fr"};
   grid-gap: 2vw;
+  position: relative;
 `;
 
 export const ListItem = styled.li`
@@ -35,6 +36,8 @@ export const StyledGalleryListItem = styled.li`
 export const ImageWrapper = styled.div`
   width: 100%;
   overflow: hidden;
+  display: grid;
+  place-items: center;
 `;
 export const Image = styled.img`
   width: 16rem;
@@ -59,4 +62,10 @@ export const Avatar = styled.img`
   margin-bottom: 1rem;
   overflow: hidden;
   min-height: 24rem; */
+`;
+
+export const CenteredImg = styled.img`
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
 `;

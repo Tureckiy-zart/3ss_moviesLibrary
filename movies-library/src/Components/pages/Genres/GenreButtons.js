@@ -26,9 +26,6 @@ const CategoryeButtons = () => {
                     pathname: `/categoryes/${name}`,
                     categoryeId: Number(`${id}`),
                     state: { from: location }, // not used yet
-                    // search: `${name}`,
-                    // hash: `#${original_title ? original_title : name}`,
-                    // state: { ...location },
                   }}
                 >
                   <Button margin="0 0.5rem 0.5rem 0">{name}</Button>{" "}

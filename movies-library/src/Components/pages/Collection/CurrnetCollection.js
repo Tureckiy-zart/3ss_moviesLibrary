@@ -20,26 +20,3 @@ const CurrnetCollection = () => {
 };
 
 export default CurrnetCollection;
-
-// useEffect(() => {
-//   if (!id) return;
-//   setIsLoading(true);
-//   const IdParsed = parseInt(id);
-//   getCollection(IdParsed) //get CurrnetCollection by ID
-//     .then((response) => {
-//       setCollecton(response);
-//       setState((prev) => ({
-//         ...prev,
-//         currentCollectonPage: 2,
-//       }));
-//       setIsLoading(false);
-//     })
-//     .catch((error) => {
-//       setState((prev) => ({
-//         ...prev,
-//         error: error.response.data,
-//       }));
-//       setIsLoading(false);
-//       throw new Error(error.response.data);
-//     });
-// }, [id]);

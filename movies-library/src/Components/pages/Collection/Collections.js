@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { useLoader } from "../../services/Contexts/LoaderContext";
-import { StyledGalleryList } from "../../structure/stylredComponents/List.styled";
-import {
-  ComponentWrapper,
-  Container,
-} from "../../structure/stylredComponents/stiledComponents";
-import CollectionsList from "./CollectionsList";
-import SearchForm, { FormWrapper } from "../../structure/Form/Form";
+import { Container } from "../../structure/stylredComponents/stiledComponents";
 import { getCollectionsData } from "../../services/API/getData";
-import { MovieTittle } from "../../structure/stylredComponents/Title.styled";
 import { useData } from "../../services/Contexts/DataContext";
-import Gallery from "../../structure/Gallery";
+import CollectionsForm from "../../structure/Form/CollectionsForm";
+import CollectionsGallery from "./CollectionsGallery";
 
 function Collections() {
   const [, setState] = useData(null);
@@ -19,7 +13,6 @@ function Collections() {
   const { search: searchQuery } = useLocation();
   const [collections, setCollectons] = useState([]);
   const [, setIsLoading] = useLoader(false);
-  const [{ trendingMovies }] = useData(null); //Global state
 
   useEffect(
     () =>
@@ -28,26 +21,8 @@ function Collections() {
   );
   return (
     <Container>
-      <ComponentWrapper marginTop="4rem">
-        <FormWrapper width="32rem">
-          <SearchForm queryLocation={"Collection"} />
-        </FormWrapper>
-      </ComponentWrapper>
-
-      {collections.length > 0 ? (
-        <StyledGalleryList>
-          {collections.map((item) => (
-            <CollectionsList item={item} />
-          ))}
-        </StyledGalleryList>
-      ) : (
-        <>
-          <MovieTittle marginBottom="2rem">Most popular: </MovieTittle>
-          {trendingMovies.length > 0 && (
-            <Gallery dataMovies={trendingMovies.slice(0, 5)} />
-          )}
-        </>
-      )}
+      <CollectionsForm />
+      <CollectionsGallery collections={collections} />
     </Container>
   );
 }

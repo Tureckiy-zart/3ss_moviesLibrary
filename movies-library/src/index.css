@@ -22,11 +22,7 @@ textarea {
   margin: 0;
 }
 
-button,
-:focus,
-input:focus {
-  outline: none;
-}
+
 
 * {
   /* outline: solid 1px red; */

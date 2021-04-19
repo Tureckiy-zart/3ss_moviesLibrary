@@ -11,12 +11,3 @@ function HomePage() {
   );
 }
 export default HomePage;
-// const moviesByCategoryeFetched = useLoading(getTrendingMovies); //Uploading data on scroll
-// useEffect(() => {
-//   //updating  currentPage
-//   setState((prev) => ({
-//     ...prev,
-//     trendingMovies: [...prev.trendingMovies, ...moviesByCategoryeFetched],
-//     currentHomePage: prev.currentHomePage + 1,
-//   }));
-// }, [moviesByCategoryeFetched]);

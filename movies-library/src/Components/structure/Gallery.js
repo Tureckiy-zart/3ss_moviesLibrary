@@ -4,7 +4,7 @@ import { Container } from "./stylredComponents/stiledComponents";
 
 const Gallery = ({ dataMovies, childern }) => (
   <Container>
-    {dataMovies ? <List dataMovies={dataMovies} /> : childern};
+    {dataMovies ? <List dataMovies={dataMovies} /> : childern}
   </Container>
 );
 export default Gallery;

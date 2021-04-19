@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import { getMovieCast } from "../../services/API/api";
 import { getCastData } from "../../services/API/getData";
 import { useLoader } from "../../services/Contexts/LoaderContext";
-import ButtonsHistoryReturn from "../../structure/Buttons/ButtonsHistoryReturn";
+import {ButtonsHistoryReturn }from "../../structure/Buttons/ButtonsHistoryReturn";
 import {
   Image,
   ImageWrapper,

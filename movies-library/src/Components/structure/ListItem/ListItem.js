@@ -17,15 +17,14 @@ function ListItem({ item }) {
   // console.log('item :>> ', item);
   const { location } = useHistory();
   const {
-    id,
-    title,
-    name,
-    original_title,
-    vote_average,
-    poster_path,
-    backdrop_path,
-    release_date,
-    popularity,
+    id = null,
+    title = "",
+    name = "",
+    original_title = "",
+    vote_average = 0,
+    poster_path = "",
+    release_date = "",
+    popularity = 0,
   } = item;
   const releaseDate = getDate(release_date);
   return (
@@ -67,8 +66,3 @@ function ListItem({ item }) {
   );
 }
 export default memo(ListItem);
-{
-  /* <h2>{original_title ? original_title : name}</h2>}
-            {vote_average && <h4> Votes: {vote_average}</h4>}
-            {release_date && <h5>{releaseDate}</h5>} */
-}

@@ -7,20 +7,6 @@ export const getTrendingMovies = async ({ page = 1 }) => {
     `/trending/all/week?api_key=${REQUEST_TOKEN}&page=${page}`
   );
   return data.results;
-  // } catch (error) {
-  //   // if (error.response) {
-  //   //   console.log("error.response :>> ", error.response);
-  //   //   // client received an error response (5xx, 4xx)
-  //   // } else if (error.request) {
-  //   //   console.log("error.request :>> ", error.request);
-  //   //   // client never received a response, or request never left
-  //   // } else {
-  //   //   // anything else
-  //   // }
-  //   console.warn("error.response.data :>> ", error.response.data);
-  //   console.log("error.response.data :>> ", error.response.data);
-  //   throw new Error(error);
-  // }
 };
 export const getMovieByID = async (id) => {
   const { data } = await axios.get(`/movie/${id}?api_key=${REQUEST_TOKEN}`);
@@ -68,7 +54,6 @@ export const getCollection = async (id) => {
   );
   return data;
 };
-
 
 export const getCollectionId = async ({ searchQuery, page = 1 }) => {
   const { data } = await axios.get(
