@@ -1,0 +1,154 @@
+.container {
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.slider {
+  display: flex;
+  flex: 1 1 500px;
+  list-style: none;
+  padding: 0;
+  margin: 0 10px;
+}
+
+.item {
+  flex: 0 0 150px;
+  height: 215px;
+  margin-left: 10px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  
+  $numBoxes: 20;
+  $step: 360 / $numBoxes;
+  
+  &:first-child {
+    margin-left: 0;
+  }
+
+  @for $i from 1 through $numBoxes {
+    &:nth-child(#{$i}) {
+      background: hsla($i * $step, 90%, 60%, 1);
+      z-index: $numBoxes - $i + 1;
+    }
+  }
+  
+  a {
+    flex: 1;
+  }
+}
+
+.controls {
+  margin-top: 20px;
+  flex: 1 1 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  button {
+    border: none;
+    border-radius: 25px;
+    background: hsla(0, 90%, 65%, 1);
+    padding: 12px 15px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 18px;
+    -webkit-appearance: none;
+    cursor: pointer;
+  }
+}
+
+.progress-bar {
+  flex: 0 0 200px;
+  height: 4px;
+  border-radius: 4px;
+  margin: 0 20px;
+  background: hsla(0, 90%, 65%, 1);
+  transform: scaleX(0);
+  transform-origin: 0% 50%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // .slider {
+// //   position: relative;
+// //   width: 80%;
+// //   height: 500px;
+// //   margin: auto;
+// //   box-sizing: border-box;
+// //   display: flex;
+// //   align-items: center;
+// //   overflow: hidden;
+// //   // transform: translateX(-100%);
+// //   &-img {
+// //     position: absolute;
+// //     width: 100%;
+// //     height: 500px;
+// //     transition: all 0.2s;
+// //     &-prev {
+// //       transform: translateX(-100%);
+// //     }
+// //     &-next {
+// //       transform: translateX(100%);
+// //     }
+// //   }
+// // }
+
+// // .slider .slider-img-prev {
+// //   transform: translateX(-100%);
+// // }
+
+// // .slider-img-next {
+// //   transform: translateX(100%);
+// // }
+
+
+// .slider {
+//   position: relative;
+//   width: 60%;
+//   // height: 500px;
+//   margin: auto;
+//   box-sizing: border-box;
+//   display: flex;
+//   align-items: center;
+//   overflow: hidden;
+// }
+
+// .slider-img {
+//   position: absolute;
+//   width: 100%;
+//   height: 500px;
+//   transition: all 0.2s;
+// }
+
+// .slider-img-prev {
+//   transform: translateX(-100%);
+// }
+
+// .slider-img-next {
+//   transform: translateX(100%);
+// }

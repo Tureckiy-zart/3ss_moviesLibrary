@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import SubNavigation from "../../Navigation/SubNavigation";
-import {ButtonsHistoryReturn} from "../../structure/Buttons/ButtonsHistoryReturn";
+import { ButtonsHistoryReturn } from "../../structure/Buttons/ButtonsHistoryReturn";
 import {
   Container,
   ExternalLink,
@@ -17,7 +17,10 @@ import FavoritesBtns from "../../structure/Buttons/FavoritesBtns";
 import styled from "styled-components";
 import { getMovieDataByID } from "../../services/API/getData";
 import { useLoader } from "../../services/Contexts/LoaderContext";
-import { ImgWrapper, PageWrapper } from "../../structure/stylredComponents/MovieDetailsPage.styled";
+import {
+  ImgWrapper,
+  PageWrapper,
+} from "../../structure/stylredComponents/MovieDetailsPage.styled";
 
 const StyledDiv = styled.div`
   display: grid;
@@ -29,10 +32,14 @@ const MovieDetailsPage = () => {
   let { id } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
   const [, setIsLoading] = useLoader();
+//   const history = useHistory();
+// console.log('history :>> ', history);
+  useEffect(
+    () => getMovieDataByID(id, setMovieDetails, setIsLoading),
+    [id]
+  );
 
-  useEffect(() => getMovieDataByID(id, setMovieDetails, setIsLoading), [id]);
-
-   return (
+  return (
     <Container>
       {movieDetails && (
         <PageWrapper>
@@ -46,7 +53,9 @@ const MovieDetailsPage = () => {
                       ? `https://image.tmdb.org/t/p/w154/${movieDetails.poster_path}`
                       : "http://ergo.slv.vic.gov.au/sites/default/files/imagecache/download/ms11553box4.jpg"
                   }
-                  alt={movieDetails.title ? movieDetails.title : movieDetails.name}
+                  alt={
+                    movieDetails.title ? movieDetails.title : movieDetails.name
+                  }
                   width="250"
                 />
                 <FavoritesBtns
@@ -65,7 +74,9 @@ const MovieDetailsPage = () => {
               <SenondaryText>
                 Rating IMDB: {movieDetails.vote_average}
               </SenondaryText>
-              <SenondaryText>Vote count: {movieDetails.vote_count}</SenondaryText>
+              <SenondaryText>
+                Vote count: {movieDetails.vote_count}
+              </SenondaryText>
 
               {movieDetails.release_date && (
                 <SenondaryText>

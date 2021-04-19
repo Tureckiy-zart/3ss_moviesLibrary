@@ -1,4 +1,5 @@
 import { errorPageRedirect, defaultFunc } from "../../heplers/heplers";
+// import { errorPageRedirect, defaultFunc } from "../../heplers/heplers";
 import {
   getCollection,
   getCollectionId,
@@ -12,9 +13,11 @@ import {
 
 const errorHandler = (error = null, setState = defaultFunc) => {
   console.warn("error.response.data :>> ", error.response.data);
-  setState((prev) => ({ ...prev, error }));
+  // if (setState) {
+  //   setState((prev) => ({ ...prev, error }));
+  // }
   errorPageRedirect();
-  throw new Error(error);
+  // throw new Error(error);
 };
 
 export const getTrendingData = async (
@@ -180,8 +183,10 @@ export const getDataOnLoad = async ({
   currnetPage = 1,
   setMoviesByCategoryeFetched = defaultFunc,
   setisFetching = defaultFunc,
+  history,
 }) => {
   if (!isFetching) return;
+  console.log("history :>> ", history);
   setIsLoading(true); //Spiner on
   try {
     const response = await apiRequest({ ...options, page: currnetPage });

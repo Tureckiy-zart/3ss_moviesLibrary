@@ -1,3 +1,6 @@
+import { Route, Redirect, Switch } from "react-router";
+import ErrorPage from "../pages/ErrorPage";
+
 export const defaultFunc = () => {};
 
 export const getDate = (date) => {
@@ -20,5 +23,9 @@ export const trimmedString = (string) => {
 };
 
 export const errorPageRedirect = (props) => {
+  // console.log("window.history :>> ", window.history);
+  // console.log("props :>> ", props);
   window.location = "/errorPage";
+  // if (!history) window.location = "/errorPage";
+  // window.history.pushState(null, null, "/errorPage");
 };
