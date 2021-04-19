@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const HeaderWrapper = styled.div`
-margin-top:100px;
-/* width:1440px; */
-/* margin-top:100px */
-`
+// export const HeaderWrapper = styled.div`
+//   /* position: relative; */
+//   /* top:100px;
+// margin-top:100px; */
+//   /* width:1440px; */
+//   /* margin-top:100px */
+// `;
 // $colors: {
 //   lightGrey: 227, 227, 227;
 //   White: 255, 255, 255, 1;
@@ -18,6 +20,8 @@ export const ComponentWrapper = styled.div`
   margin-top: ${(props) => props.marginTop};
   width: ${(props) => props.width};
   margin-bottom: 3rem;
+  position: ${(props) => props.position};
+  top: ${(props) => props.top};
 `;
 const StyledContainer = styled.div`
   margin: 0 auto;

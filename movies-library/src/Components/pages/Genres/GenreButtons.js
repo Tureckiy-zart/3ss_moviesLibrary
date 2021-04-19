@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { getGenres } from "../../services/API/api";
 import { Button } from "../../structure/stylredComponents/Button.styled";
-import { StyledList, ListItem } from "../../structure/stylredComponents/List.styled";
+import {
+  StyledList,
+  ListItem,
+} from "../../structure/stylredComponents/List.styled";
 import {
   ComponentWrapper,
   Container,
@@ -14,7 +17,7 @@ const CategoryeButtons = () => {
   useEffect(() => getGenres().then((response) => setCategoryes(response)), []); //set categoryes on mount
 
   return (
-    <ComponentWrapper>
+    <ComponentWrapper position="relative" top="720px">
       <Container>
         {categoryes && (
           <StyledList justifyContent="center">

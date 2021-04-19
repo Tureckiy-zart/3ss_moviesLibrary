@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
@@ -23,8 +23,8 @@ ReactDOM.render(
     <BrowserRouter>
       <DataProvider>
         <LoaderProvider>
-          <Loader />
-          <Global />
+          {/* <Loader /> */}
+          {/* <Global /> */}
           <App />
           <Routes />
         </LoaderProvider>

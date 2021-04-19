@@ -7,15 +7,17 @@ import ScrollUpBtn from "../structure/Buttons/ScrollUpBtn";
 
 function Header() {
   return (
-    <HeaderWrapper>
-      <Navigation />
+    <>
+      {/* <HeaderWrapper> */}
+        <Navigation />
+      {/* </HeaderWrapper> */}
+
       <HeaderSearch /> {/*// prigaet pri reload */}
       {/* <Carousel /> */}
       <CategoryeButtons />
-      <ScrollUpBtn />
-    </HeaderWrapper>
+      {/* <ScrollUpBtn /> */}
+    </>
   );
 }
-
 
 export default Header;

@@ -3,6 +3,8 @@ export const defaultFunc = () => {};
 export const getDate = (date) => {
   if (date) return date.split("-").reverse().join("/");
 };
+export const randomInRange = (min = 0, max) =>
+  Math.round(Math.random() * (max - min) + min);
 
 export const getAvatar = (avatar_path) => {
   const pathToAvatar = "/https://secure.gravatar.com/avatar",

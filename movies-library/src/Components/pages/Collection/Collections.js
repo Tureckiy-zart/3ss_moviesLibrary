@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { useLoader } from "../../services/Contexts/LoaderContext";
-import { Container } from "../../structure/stylredComponents/stiledComponents";
+import { ComponentWrapper, Container } from "../../structure/stylredComponents/stiledComponents";
 import { getCollectionsData } from "../../services/API/getData";
 import { useData } from "../../services/Contexts/DataContext";
 import CollectionsForm from "../../structure/Form/CollectionsForm";
@@ -20,10 +20,12 @@ function Collections() {
     [searchQuery]
   );
   return (
-    <Container>
-      <CollectionsForm />
-      <CollectionsGallery collections={collections} />
-    </Container>
+    <ComponentWrapper position="relative" top="830px">
+      <Container>
+        <CollectionsForm />
+        <CollectionsGallery collections={collections} />
+      </Container>
+    </ComponentWrapper>
   );
 }
 export default Collections;

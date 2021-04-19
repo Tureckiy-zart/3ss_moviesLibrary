@@ -13,7 +13,6 @@ const ScrollUpBtn = () => {
   var bodyRect = document.body.getBoundingClientRect();
   // elemRect = element.getBoundingClientRect(),
   // offset = elemRect.top - bodyRect.top;
-  console.log("bodyRect :>> ", bodyRect);
 
   //   var rect = element.getBoundingClientRect();
   //   console.log(rect.top, rect.right, rect.bottom, rect.left);

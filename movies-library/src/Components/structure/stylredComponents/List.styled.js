@@ -22,7 +22,8 @@ export const StyledGalleryListItem = styled.li`
   margin: ${(props) => props.margin};
   width: 16rem;
   min-height: 35rem;
-  background: transparent;
+  background: #fff;
+  /* background: transparent; */
   border-radius: 30px 30px 0 0;
   border: none;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;

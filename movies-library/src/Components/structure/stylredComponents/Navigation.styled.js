@@ -7,10 +7,8 @@ export const NavWrapper = styled.div`
   height: 100px;
   background-color: rgba(3, 37, 65, 1);
   width: 100%;
-  /* position: sticky; */
   position: fixed;
-  top: 0;
-  z-index: 999;
+  z-index: 12;
 `;
 export const Nav = styled.nav`
   margin: 0 auto;
