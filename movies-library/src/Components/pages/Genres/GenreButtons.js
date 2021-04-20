@@ -7,6 +7,7 @@ import {
   ListItem,
 } from "../../structure/stylredComponents/List.styled";
 import {
+  BackgroundColorWrapper,
   ComponentWrapper,
   Container,
 } from "../../structure/stylredComponents/stiledComponents";
@@ -17,28 +18,30 @@ const CategoryeButtons = () => {
   useEffect(() => getGenres().then((response) => setCategoryes(response)), []); //set categoryes on mount
 
   return (
-    <ComponentWrapper position="relative" top="720px">
-      <Container>
-        {categoryes && (
-          <StyledList justifyContent="center">
-            {categoryes.map(({ id, name }) => (
-              <ListItem>
-                <Link
-                  key={id}
-                  to={{
-                    pathname: `/categoryes/${name}`,
-                    categoryeId: Number(`${id}`),
-                    state: { from: location }, // not used yet
-                  }}
-                >
-                  <Button margin="0 0.5rem 0.5rem 0">{name}</Button>{" "}
-                </Link>
-              </ListItem>
-            ))}
-          </StyledList>
-        )}
-      </Container>
-    </ComponentWrapper>
+    <BackgroundColorWrapper>
+      <ComponentWrapper position="relative" top="668px" padding='10px'>
+        <Container>
+          {categoryes && (
+            <StyledList justifyContent="center">
+              {categoryes.map(({ id, name }) => (
+                <ListItem>
+                  <Link
+                    key={id}
+                    to={{
+                      pathname: `/categoryes/${name}`,
+                      categoryeId: Number(`${id}`),
+                      state: { from: location }, // not used yet
+                    }}
+                  >
+                    <Button margin="0 0.5rem 0.5rem 0">{name}</Button>{" "}
+                  </Link>
+                </ListItem>
+              ))}
+            </StyledList>
+          )}
+        </Container>
+      </ComponentWrapper>
+    </BackgroundColorWrapper>
   );
 };
 

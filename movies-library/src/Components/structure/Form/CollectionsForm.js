@@ -3,17 +3,23 @@ import {
   ComponentWrapper,
   Container,
 } from "../stylredComponents/stiledComponents";
-import SearchForm, { FormWrapper } from "./Form";
+import SearchForm, { Form } from "./Form";
 
-function CollectionsForm() {
-  return (
-    <Container>
-      <ComponentWrapper marginTop="4rem">
-        <FormWrapper width="32rem">
-          <SearchForm queryLocation={"Collection"} />
-        </FormWrapper>
-      </ComponentWrapper>
-    </Container>
-  );
+// <ComponentWrapper  >
+{
+  /* <Container> */
 }
+{
+  /* <Form width="32rem"> */
+}
+function CollectionsForm() {
+  return <SearchForm queryLocation={"Collection"} />;
+}
+{
+  /* </Form> */
+}
+{
+  /* </Container> */
+}
+// </ComponentWrapper>
 export default CollectionsForm;

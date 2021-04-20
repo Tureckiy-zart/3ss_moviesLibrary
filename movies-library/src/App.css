@@ -11,12 +11,9 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-} */
-/* body {
-  background-color: rgb(180, 180, 180);
-  background-color: hsla(207, 91%, 13%, 0.60);
-} */
-/* .App-header {
+}
+
+.App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;

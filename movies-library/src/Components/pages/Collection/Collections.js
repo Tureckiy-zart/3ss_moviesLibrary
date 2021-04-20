@@ -20,7 +20,8 @@ function Collections() {
     [searchQuery]
   );
   return (
-    <ComponentWrapper position="relative" top="830px">
+    // <ComponentWrapper position="relative" top="830px">
+    <ComponentWrapper position="relative" top="30px">
       <Container>
         <CollectionsForm />
         <CollectionsGallery collections={collections} />

@@ -39,13 +39,13 @@ function currentPageOptions(searchQuery, categoryeId, path) {
 const useScrollPage = () => {
   const { search: searchQuery, categoryeId } = useLocation(), //get Id & searchQuery from url (slug)
     { path } = useRouteMatch();
-    
+
   const [, setState] = useData();
 
   const {
     currnentPage,
-    apiRequest,
     moviesCategory,
+    apiRequest,
     params,
   } = currentPageOptions(searchQuery, categoryeId, path);
 
@@ -65,7 +65,6 @@ const useScrollPage = () => {
       };
     });
   }, [moviesByCategoryeFetched]);
-
 };
 export default useScrollPage;
 

@@ -1,71 +1,91 @@
-// import React, { memo, useEffect, useState } from "react";
-// import { Link, useHistory } from "react-router-dom";
-// import doubleRight from "../../img/double-right-arrows-angles.svg";
-// import doubleLeft from "../../img/double-left-arrows-angles.svg";
-// import { useData } from "../services/Contexts/DataContext";
-// import "./Carousel.scss";
-// export default memo(() => {
-//   const [{ trendingMovies }] = useData(null);
-//   const { location } = useHistory();
-//   const [sliderImages, setSliderImages] = useState([]);
-//   const [activeIndex, setActiveIndex] = useState(0);
+import React, { memo, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import doubleRight from "../../img/double-right-arrows-angles.svg";
+import doubleLeft from "../../img/double-left-arrows-angles.svg";
+import { useData } from "../services/Contexts/DataContext";
+import "./Carousel.scss";
+import {
+  ComponentWrapper,
+  Container,
+} from "../structure/stylredComponents/stiledComponents";
+import { nanoid } from "nanoid";
 
-//   useEffect(() => {
-//     if (!trendingMovies.length) return;
-//     const sliderImagesTrimmed = trendingMovies.slice(0, 8);
-//     setSliderImages(trendingMovies.slice(0, 8));
-//     // }, []);
-//   }, [trendingMovies.length]);
-//   // console.log('trendingMoviesdfsdfsdffdss :>> ', trendingMovies);
+export default memo(() => {
+  const [{ trendingMovies }] = useData(null),
+    [items, setItems] = useState([]),
+    [shownItems, setShownItems] = useState([]);
+  const [trimedItem, setTrimedItem] = useState({});
+  const [curentIdx, setСurentIdx] = useState(0);
+  const [direction, setDirection] = useState("left");
+  useEffect(() => setItems(trendingMovies.slice(0, 15)), [trendingMovies]);
+  useEffect(() => setShownItems(items), [items]);
 
-//   useEffect(() => {
-//     // Запускаем интервал
-//     const interval = setInterval(() => {
-//       // Меняем состояние
-//       setActiveIndex((current) => {
-//         // Вычисляем индекс следующего слайда, который должен вывестись
-//         const res = current === sliderImages.length - 1 ? 0 : current + 1;
-//         // Возвращаем индекс
-//         return res;
-//       });
-//     }, 2000);
-//     // Выключаем интервал
-//     return () => clearInterval();
-//   }, []);
+  const nextSlide = () => {
+    setСurentIdx((prev) => {
+      if (curentIdx === items.length) return 0;
+      return prev + 1;
+    });
+    setDirection("left");
+    setTrimedItem(shownItems.pop());
+  };
+  const prevSlide = () => {
+    setСurentIdx((prev) => {
+      if (curentIdx === items.length) return 0;
+      return prev - 1;
+    });
+    setDirection("right");
+    setTrimedItem(shownItems.shift());
+  };
 
-//   const prevImgIndex = activeIndex ? activeIndex - 1 : sliderImages.length - 1;
-//   // Вычисляем индекс следующего слайда
-//   const nextImgIndex =
-//     activeIndex === sliderImages.length - 1 ? 0 : activeIndex + 1;
+  useEffect(() => {
+    if (!shownItems.length) return;
+    if (direction === "left") setShownItems([trimedItem, ...shownItems]);
+    if (direction === "right") setShownItems([...shownItems, trimedItem]);
+  }, [trimedItem, direction]);
 
-//   console.log("sliderImages :>> ", sliderImages);
-//   console.log("prevImgIndex :>> ", prevImgIndex);
-//   console.log("nextImgIndex :>> ", nextImgIndex);
-//   return (
-//     <>
-//       {sliderImages && (
-//         <div className="slider">
-//           <div className="slider-img slider-img-prev" key={prevImgIndex}>
-//             {/* {sliderImages[prevImgIndex]} */}
-//           </div>
-//           <div className="slider-img" key={activeIndex}>
-//             <img
-//               alt={name}
-//               className="Slider__item-img"
-//               data-id={id}
-//               src={
-//                 poster_path
-//                   ? `https://image.tmdb.org/t/p/w154/${poster_path}`
-//                   : "http://ergo.slv.vic.gov.au/sites/default/files/imagecache/download/ms11553box4.jpg"
-//               }
-//             />
-//             {/* {sliderImages[activeIndex]} */}
-//           </div>
-//           <div className="slider-img slider-img-next" key={nextImgIndex}>
-//             {/* {sliderImages[nextImgIndex]} */}
-//           </div>
-//         </div>
-//       )}
-//     </>
-//   );
-// });
+  // setInterval(nextSlide, 2000);
+
+  return (
+    // <ComponentWrapper backgroundColor='white'>
+     <ComponentWrapper position='relative' top='715px'> 
+      <Container>
+        {items && (
+          <div className="Slider">
+            {(shownItems.length ? shownItems : items).map(
+              ({ id, original_title, name, poster_path }) => {
+                return (
+                  <div key={nanoid(5)} className="Slider__item">
+                    <Link
+                      to={{
+                        pathname: `/asset/${id}`,
+                        hash: `#${original_title ? original_title : name}`,
+                        // state: { from: location },
+                      }}
+                    >
+                      <img
+                        alt={name}
+                        className="Slider__item-img"
+                        data-id={id}
+                        src={
+                          poster_path
+                            ? `https://image.tmdb.org/t/p/w154/${poster_path}`
+                            : "http://ergo.slv.vic.gov.au/sites/default/files/imagecache/download/ms11553box4.jpg"
+                        }
+                      />
+                    </Link>
+                  </div>
+                );
+              }
+            )}
+            <button id="NextSlide" onClick={nextSlide}>
+              <img alt="NextSlide" src={doubleLeft} />
+            </button>
+            <button id="PrevSlide" onClick={prevSlide}>
+              <img alt="PrevSlide" src={doubleRight} />
+            </button>
+          </div>
+        )}
+      </Container>
+    </ComponentWrapper>
+  );
+});

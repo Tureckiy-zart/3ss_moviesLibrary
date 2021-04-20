@@ -12,7 +12,11 @@ export const StyledGalleryList = styled.ul`
   grid-template-columns: ${(props) =>
     props.gridTemplatCcolumns || "1fr 1fr 1fr 1fr"};
   grid-gap: 2vw;
-  position: relative;
+  /* position: relative; */
+  background-color: white;
+  /* background-color: rgba(3, 36, 63, 0.6); */
+
+  
 `;
 
 export const ListItem = styled.li`

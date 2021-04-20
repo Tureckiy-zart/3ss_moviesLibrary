@@ -16,17 +16,28 @@ import styled from "styled-components";
 //   LightBlue: 1, 180, 228, 1;
 // }
 // const DarkBlue = "227, 227, 227, 1";
-export const ComponentWrapper = styled.div`
-  margin-top: ${(props) => props.marginTop};
+export const BackgroundColorWrapper = styled.div`
+  width: 100%;
+  background-color: ${(props) => props.backgroundColor || "white"};
+  /* margin-top: ${(props) => props.marginTop};
   width: ${(props) => props.width};
   margin-bottom: 3rem;
-  position: ${(props) => props.position};
+  position: ${(props) => props.position || "static"};
+  top: ${(props) => props.top}; */
+`;
+export const ComponentWrapper = styled.div`
+  margin-top: ${(props) => props.marginTop};
+  padding: ${(props) => props.padding};
+  width: ${(props) => props.width};
+  margin-bottom: 3rem;
+  position: ${(props) => props.position || "static"};
   top: ${(props) => props.top};
+  background-color: ${(props) => props.backgroundColor || "white"};
 `;
 const StyledContainer = styled.div`
   margin: 0 auto;
   padding: 0;
-  width: 1440px;
+  width: 1200px;
   display: ${(props) => props.display};
   align-items: center;
 `;
