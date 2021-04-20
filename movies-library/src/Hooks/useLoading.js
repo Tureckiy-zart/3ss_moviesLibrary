@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import { getDataOnLoad } from "../Components/services/API/getData";
 import { useLoader } from "../Components/services/Contexts/LoaderContext";
 import useCurrentPage from "./useCurrentPage";
@@ -6,6 +7,8 @@ import useCurrentPage from "./useCurrentPage";
 const useLoading = (apiRequest, options) => {
   const [, setIsLoading] = useLoader(false);
   const [isFetching, setisFetching] = useState(false);
+  // const history = useHistory();
+  // console.log('history :>> ', history);
 
   const [moviesByCategoryeFetched, setMoviesByCategoryeFetched] = useState([]);
 
@@ -17,6 +20,7 @@ const useLoading = (apiRequest, options) => {
     currnetPage: useCurrentPage(),
     setMoviesByCategoryeFetched,
     setisFetching,
+    // history,
   };
   useEffect(() => getDataOnLoad(loadingOptins), [isFetching]); //if put here currnetPage page incraasing 2 times each time
 

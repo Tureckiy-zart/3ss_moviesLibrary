@@ -9,8 +9,8 @@ function Header() {
   return (
     <HeaderWrapper>
       <Navigation />
-      <HeaderSearch /> {/*// prigaet pri reload */}
-      {/* <Carousel /> */}
+      <HeaderSearch />  {/*// prigaet pri reload */}
+      <Carousel />
       <CategoryeButtons />
       <ScrollUpBtn />
     </HeaderWrapper>
