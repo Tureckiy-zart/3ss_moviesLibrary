@@ -2,6 +2,7 @@
   position: relative;
   // width: 100vw;
   width: 100%;
+  // margin: 0 auto;
   height: 25vh;
   box-sizing: border-box;
   margin: 0;
@@ -11,8 +12,9 @@
   overflow: hidden;
   outline: none;
   border: 1px solid red;
+  // transition: 1s;
   &__item {
-    // min-width: 100%;
+    // min-width: 125px;
     height: 100%;
     transition: 0.5s;
     outline: none;

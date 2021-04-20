@@ -1,62 +1,55 @@
 import React, { memo, useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import doubleRight from "../../img/double-right-arrows-angles.svg";
 import doubleLeft from "../../img/double-left-arrows-angles.svg";
 import { useData } from "../services/Contexts/DataContext";
 import "./Carousel.scss";
 import { Container } from "../structure/stylredComponents/stiledComponents";
+import { nanoid } from "nanoid";
+
 export default memo(() => {
-  // let arr = [1, 2, 3, 4, 4, 5];
-  const [{ trendingMovies }] = useData(null);
-  const [x, setX] = useState(null);
-  // const { location } = useHistory();
+  const [{ trendingMovies }] = useData(null),
+    [items, setItems] = useState([]),
+    [shownItems, setShownItems] = useState([]);
+  const [trimedItem, setTrimedItem] = useState({});
+  const [curentIdx, setСurentIdx] = useState(0);
+  const [direction, setDirection] = useState("left");
+  useEffect(() => setItems(trendingMovies.slice(0, 15)), [trendingMovies]);
+  useEffect(() => setShownItems(items), [items]);
+
   const nextSlide = () => {
-      x === 0 ? setX(-100 * (trendingMovies.length - 1)) : setX(x + 100);
-    },
-    prevSlide = () => {
-      x === -100 * (trendingMovies.length - 1) ? setX(0) : setX(x - 100);
-    };
+    setСurentIdx((prev) => {
+      if (curentIdx === items.length) return 0;
+      return prev + 1;
+    });
+    setDirection("left");
+    setTrimedItem(shownItems.pop());
+  };
+  const prevSlide = () => {
+    setСurentIdx((prev) => {
+      if (curentIdx === items.length) return 0;
+      return prev - 1;
+    });
+    setDirection("right");
+    setTrimedItem(shownItems.shift());
+  };
+
+  useEffect(() => {
+    if (!shownItems.length) return;
+    if (direction === "left") setShownItems([trimedItem, ...shownItems]);
+    if (direction === "right") setShownItems([...shownItems, trimedItem]);
+  }, [trimedItem, direction]);
+
   // setInterval(nextSlide, 2000);
 
-  // function getTotalItemsWidth(items) {
-  //   const { left } = items[0].getBoundingClientRect();
-  //   const { right } = items[items.length - 1].getBoundingClientRect();
-  //   return right - left;
-  // }
-  useEffect(() => {
-    console.log("x :>> ", x);
-    const slider = document.querySelector(".Slider");
-    if (!slider) return;
-    const sliderVisibleWidth = slider.offsetWidth;
-    console.log("sliderVisibleWidth :>> ", sliderVisibleWidth);
-    const items = document.querySelectorAll(".Slider__item");
-    // console.log("sliderVisibleWidth :>> ", sliderVisibleWidth);
-    // console.log("items :>> ", items);
-    // const sliderVisibleWidth = slider.offsetWidth;
-    // // const totalItemsWidth = getTotalItemsWidth(items);
-
-    // console.log("items :>> ", items[0].offsetWidth);
-    const imgWidth = Math.ceil(100 / items.length);
-    console.log("imgWidth :>> ", imgWidth);
-    // const sliderWidth = items.length * 100;
-    // console.log("sliderWidth :>> ", sliderWidth);
-    // console.log("sliderWidth :>> ", sliderWidth);
-    // slider.style.width = sliderWidth + "%";
-    // console.log("object :>> ", imgWidth);
-  }, []);
   return (
     <Container>
-      {trendingMovies && (
+      {items && (
         <div className="Slider">
-          {trendingMovies
-            .slice(0, 15)
-            .map(({ id, original_title, name, poster_path }) => {
+          {(shownItems.length ? shownItems : items).map(
+            ({ id, original_title, name, poster_path }) => {
               return (
-                <div
-                  key={id}
-                  className="Slider__item"
-                  style={{ transform: `translate(${x}%)` }}
-                >
+                <div key={nanoid(5)} className="Slider__item">
                   <Link
                     to={{
                       pathname: `/asset/${id}`,
@@ -77,7 +70,8 @@ export default memo(() => {
                   </Link>
                 </div>
               );
-            })}
+            }
+          )}
           <button id="NextSlide" onClick={nextSlide}>
             <img alt="NextSlide" src={doubleLeft} />
           </button>

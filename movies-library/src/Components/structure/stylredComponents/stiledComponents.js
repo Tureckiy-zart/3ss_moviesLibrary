@@ -22,7 +22,7 @@ export const ComponentWrapper = styled.div`
 const StyledContainer = styled.div`
   margin: 0 auto;
   padding: 0;
-  width: 1440px;
+  width: 1200px;
   display: ${(props) => props.display};
   align-items: center;
 `;
