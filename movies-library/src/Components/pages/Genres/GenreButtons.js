@@ -7,7 +7,7 @@ import {
   ListItem,
 } from "../../structure/stylredComponents/List.styled";
 import {
-  BackgroundColorWrapper,
+  // BackgroundColorWrapper,
   ComponentWrapper,
   Container,
 } from "../../structure/stylredComponents/stiledComponents";
@@ -16,10 +16,10 @@ const CategoryeButtons = () => {
   const [categoryes, setCategoryes] = useState([]);
   const { location } = useHistory();
   useEffect(() => getGenres().then((response) => setCategoryes(response)), []); //set categoryes on mount
+  // <BackgroundColorWrapper>
 
   return (
-    <BackgroundColorWrapper>
-      <ComponentWrapper position="relative" top="668px" padding='10px'>
+      <ComponentWrapper >
         <Container>
           {categoryes && (
             <StyledList justifyContent="center">
@@ -41,8 +41,8 @@ const CategoryeButtons = () => {
           )}
         </Container>
       </ComponentWrapper>
-    </BackgroundColorWrapper>
   );
 };
 
+{/* </BackgroundColorWrapper> */}
 export default CategoryeButtons;

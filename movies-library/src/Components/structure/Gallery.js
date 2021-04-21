@@ -1,19 +1,19 @@
 import React from "react";
+import ScrollUpBtn from "./Buttons/ScrollUpBtn";
 import List from "./List/List";
 import {
-  BackgroundColorWrapper,
   ComponentWrapper,
   Container,
 } from "./stylredComponents/stiledComponents";
 
 const Gallery = ({ dataMovies, childern }) => (
-  <BackgroundColorWrapper>
-    <ComponentWrapper position="relative" top="620px" pdaiing='10px'>
-      {/* <ComponentWrapper backgroundColor='white'> */}
-      <Container>
-        {dataMovies ? <List dataMovies={dataMovies} /> : childern}
-      </Container>
-    </ComponentWrapper>
-  </BackgroundColorWrapper>
+  <ComponentWrapper>
+    <Container>
+      {/* {childern} */}
+      {dataMovies ? <List dataMovies={dataMovies} /> : childern}
+      <ScrollUpBtn />
+
+    </Container>
+  </ComponentWrapper>
 );
 export default Gallery;

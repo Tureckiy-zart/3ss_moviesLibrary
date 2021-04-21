@@ -23,8 +23,8 @@ ReactDOM.render(
     <BrowserRouter>
       <DataProvider>
         <LoaderProvider>
-          {/* <Loader /> */}
-          {/* <Global /> */}
+          <Global />
+          <Loader />
           <App />
           <Routes />
         </LoaderProvider>

@@ -4,10 +4,15 @@ import useScrollPage from "../../Hooks/useScrollPage";
 import { getSearchData } from "../services/API/getData";
 import { useData } from "../services/Contexts/DataContext";
 import { useLoader } from "../services/Contexts/LoaderContext";
+import Banner from "../structure/Baner/Banner";
 import Gallery from "../structure/Gallery";
-import { Container } from "../structure/stylredComponents/stiledComponents";
+import {
+  ComponentWrapper,
+  Container,
+} from "../structure/stylredComponents/stiledComponents";
 import { MovieTittle } from "../structure/stylredComponents/Title.styled";
 import MostPopular from "./MostPopular";
+import SearchForm from "../structure/Form/Form";
 
 const SearchMovie = () => {
   const { search: searchQuery } = useLocation();
@@ -22,12 +27,21 @@ const SearchMovie = () => {
   return (
     <>
       {searchMovies.length > 0 ? (
-        <Gallery dataMovies={searchMovies} />
+        <ComponentWrapper grid="grid" position="relative" top="125px">
+          <Container display="flex" marginBottom="2rem">
+            <SearchForm queryLocation={"Movie"} />
+          </Container>
+          <Gallery dataMovies={searchMovies} />
+        </ComponentWrapper>
       ) : (
-        <Container>
-          <MovieTittle marginBottom="2rem">Nothing found.</MovieTittle>
+        <ComponentWrapper grid="grid" position="relative" top="125px">
+          <Container display="flex" marginBottom="2rem" flexDirection='column'>
+            <SearchForm queryLocation={"Movie"} />
+            <MovieTittle margin="2rem">Nothing found.</MovieTittle>
+          </Container>
+
           <MostPopular />
-        </Container>
+        </ComponentWrapper>
       )}
     </>
   );

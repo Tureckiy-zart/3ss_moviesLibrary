@@ -4,13 +4,14 @@ import { useHistory, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 export const Form = styled.form`
-  width: ${(props) => props.width || "60%"};
+  /* width: ${(props) => props.width || "60%"}; */
   bottom: ${(props) => props.bottom};
   border: none;
-  position: relative;
+  /* position: relative; */
 `;
 const Input = styled.input`
-  width: 100%;
+  /* width: 100%; */
+  width: 32rem;
   line-height: 46px;
   font-size: 1.5em;
   color: rgba(0, 0, 0, 0.5);
