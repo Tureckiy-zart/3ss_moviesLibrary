@@ -1,11 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { useLoader } from "../../services/Contexts/LoaderContext";
-import { Container } from "../../structure/stylredComponents/stiledComponents";
+import {
+  ComponentWrapper,
+  Container,
+} from "../../structure/stylredComponents/stiledComponents";
 import { getCollectionsData } from "../../services/API/getData";
 import { useData } from "../../services/Contexts/DataContext";
 import CollectionsForm from "../../structure/Form/CollectionsForm";
 import CollectionsGallery from "./CollectionsGallery";
+import { MovieTittle } from "../../structure/stylredComponents/Title.styled";
+import MostPopular from "../MostPopular";
+import Gallery from "../../structure/Gallery";
+import { StyledGalleryList } from "../../structure/stylredComponents/List.styled";
+import CollectionsList from "./CollectionsList";
+import ScrollUpBtn from "../../structure/Buttons/ScrollUpBtn";
 
 function Collections() {
   const [, setState] = useData(null);
@@ -20,10 +29,27 @@ function Collections() {
     [searchQuery]
   );
   return (
-    <Container>
-      <CollectionsForm />
-      <CollectionsGallery collections={collections} />
-    </Container>
+    <>
+      {collections.length > 0 ? (
+        <ComponentWrapper grid="grid" position="relative" top="125px">
+          <Container display="flex" marginBottom="2rem" flexDirection='column'>
+            <CollectionsForm />
+            <CollectionsGallery collections={collections} />
+      <ScrollUpBtn />
+
+          </Container>
+        </ComponentWrapper>
+      ) : (
+        <ComponentWrapper grid="grid" position="relative" top="125px">
+          <Container display="flex" marginBottom="2rem" flexDirection="column">
+            <CollectionsForm />
+            <MovieTittle margin="2rem">Nothing found.</MovieTittle>
+          </Container>
+
+          <MostPopular />
+        </ComponentWrapper>
+      )}
+    </>
   );
 }
 export default Collections;

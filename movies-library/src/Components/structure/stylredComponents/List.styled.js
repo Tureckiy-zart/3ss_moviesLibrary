@@ -9,11 +9,12 @@ export const StyledList = styled.ul`
 
 export const StyledGalleryList = styled.ul`
   display: grid;
+  /* place-items:center; */
   grid-template-columns: ${(props) =>
     props.gridTemplatCcolumns || "1fr 1fr 1fr 1fr"};
   grid-gap: 2vw;
   /* position: relative; */
-  background-color: white;
+  /* background-color: white; */
   /* background-color: rgba(3, 36, 63, 0.6); */
 
   
@@ -26,7 +27,8 @@ export const StyledGalleryListItem = styled.li`
   margin: ${(props) => props.margin};
   width: 16rem;
   min-height: 35rem;
-  background: transparent;
+  background: #fff;
+  /* background: transparent; */
   border-radius: 30px 30px 0 0;
   border: none;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;

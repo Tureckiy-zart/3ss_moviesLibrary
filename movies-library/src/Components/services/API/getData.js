@@ -1,5 +1,4 @@
 import { errorPageRedirect, defaultFunc } from "../../heplers/heplers";
-// import { errorPageRedirect, defaultFunc } from "../../heplers/heplers";
 import {
   getCollection,
   getCollectionId,
@@ -12,7 +11,7 @@ import {
 } from "./api";
 
 const errorHandler = (error = null, setState = defaultFunc) => {
-  console.warn("error.response.data :>> ", error.response.data);
+  console.warn("error :>> ", error);
   // if (setState) {
   //   setState((prev) => ({ ...prev, error }));
   // }

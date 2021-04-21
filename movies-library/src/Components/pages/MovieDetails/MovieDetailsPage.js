@@ -1,8 +1,9 @@
 import React, { memo, useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router";
+import {useParams } from "react-router";
 import SubNavigation from "../../Navigation/SubNavigation";
 import { ButtonsHistoryReturn } from "../../structure/Buttons/ButtonsHistoryReturn";
 import {
+  ComponentWrapper,
   Container,
   ExternalLink,
 } from "../../structure/stylredComponents/stiledComponents";
@@ -32,69 +33,68 @@ const MovieDetailsPage = () => {
   let { id } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
   const [, setIsLoading] = useLoader();
-//   const history = useHistory();
-// console.log('history :>> ', history);
-  useEffect(
-    () => getMovieDataByID(id, setMovieDetails, setIsLoading),
-    [id]
-  );
+  useEffect(() => getMovieDataByID(id, setMovieDetails, setIsLoading), [id]);
 
   return (
-    <Container>
-      {movieDetails && (
-        <PageWrapper>
-          <MovieTittle>{movieDetails.title}</MovieTittle>
-          <StyledDiv>
-            <div>
-              <ImgWrapper>
-                <img
-                  src={
-                    movieDetails.poster_path
-                      ? `https://image.tmdb.org/t/p/w154/${movieDetails.poster_path}`
-                      : "http://ergo.slv.vic.gov.au/sites/default/files/imagecache/download/ms11553box4.jpg"
-                  }
-                  alt={
-                    movieDetails.title ? movieDetails.title : movieDetails.name
-                  }
-                  width="250"
-                />
-                <FavoritesBtns
-                  movieDetails={movieDetails}
-                  position="absolute"
-                  bottom="20px"
-                  left="30px"
-                />
-              </ImgWrapper>
-            </div>
-            <div>
-              <AdditionText marginBottom="1rem">
-                {movieDetails.overview}
-              </AdditionText>
+    <ComponentWrapper position="relative" top="125px">
+      <Container>
+        {movieDetails && (
+          <PageWrapper>
+            <MovieTittle>{movieDetails.title}</MovieTittle>
+            <StyledDiv>
+              <div>
+                <ImgWrapper>
+                  <img
+                    src={
+                      movieDetails.poster_path
+                        ? `https://image.tmdb.org/t/p/w154/${movieDetails.poster_path}`
+                        : "http://ergo.slv.vic.gov.au/sites/default/files/imagecache/download/ms11553box4.jpg"
+                    }
+                    alt={
+                      movieDetails.title
+                        ? movieDetails.title
+                        : movieDetails.name
+                    }
+                    width="250"
+                  />
+                  <FavoritesBtns
+                    movieDetails={movieDetails}
+                    position="absolute"
+                    bottom="20px"
+                    left="30px"
+                  />
+                </ImgWrapper>
+              </div>
+              <div>
+                <AdditionText marginBottom="1rem">
+                  {movieDetails.overview}
+                </AdditionText>
 
-              <SenondaryText>
-                Rating IMDB: {movieDetails.vote_average}
-              </SenondaryText>
-              <SenondaryText>
-                Vote count: {movieDetails.vote_count}
-              </SenondaryText>
-
-              {movieDetails.release_date && (
                 <SenondaryText>
-                  Release: {getDate(movieDetails.release_date)}
+                  Rating IMDB: {movieDetails.vote_average}
                 </SenondaryText>
-              )}
-              <SubNavigation />
+                <SenondaryText>
+                  Vote count: {movieDetails.vote_count}
+                </SenondaryText>
 
-              <ExternalLink href={movieDetails.homepage}>
-                Visit movie page
-              </ExternalLink>
-            </div>
-          </StyledDiv>
+                {movieDetails.release_date && (
+                  <SenondaryText>
+                    Release: {getDate(movieDetails.release_date)}
+                  </SenondaryText>
+                )}
+                <SubNavigation />
 
-          <ButtonsHistoryReturn />
-        </PageWrapper>
-      )}
-    </Container>
+                <ExternalLink href={movieDetails.homepage}>
+                  Visit movie page
+                </ExternalLink>
+              </div>
+            </StyledDiv>
+
+            <ButtonsHistoryReturn />
+          </PageWrapper>
+        )}
+      </Container>
+    </ComponentWrapper>
   );
 };
 

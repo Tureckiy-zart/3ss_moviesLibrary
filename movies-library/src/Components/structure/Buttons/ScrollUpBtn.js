@@ -6,11 +6,10 @@ export const ScrollUpBtnStyled = styled(StyledButton)`
   position: fixed;
   bottom: 50px;
   right: 50px;
-  outline: 2px solid red;
 `;
 
 const ScrollUpBtn = () => {
-  var bodyRect = document.body.getBoundingClientRect();
+  // var bodyRect = document.body.getBoundingClientRect();
   // elemRect = element.getBoundingClientRect(),
   // offset = elemRect.top - bodyRect.top;
 

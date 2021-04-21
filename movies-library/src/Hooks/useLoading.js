@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-import { useHistory } from "react-router";
 import { getDataOnLoad } from "../Components/services/API/getData";
 import { useLoader } from "../Components/services/Contexts/LoaderContext";
 import useCurrentPage from "./useCurrentPage";

@@ -1,0 +1,12 @@
+.mainState {
+  /* display: flex;
+  justify-content: center; */
+}
+
+.prewiev {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background-color: rgb(163, 163, 163);
+}

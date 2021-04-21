@@ -7,7 +7,6 @@ import {
   StyledGalleryListItem,
 } from "../../structure/stylredComponents/List.styled";
 import {
-  Container,
   InnerLink,
 } from "../../structure/stylredComponents/stiledComponents";
 import {
@@ -22,38 +21,40 @@ function CollectionsList({ item }) {
   const trimmedOverview = trimmedString(overview);
 
   return (
-    <>
-      {item ? (
-        <StyledGalleryListItem margin="6rem 0 0 0">
-          <InnerLink
-            to={{
-              pathname: `/${"searchCollection"}/${id}`,
-              hash: `#${original_title ? original_title : name}`,
-              state: { from: location },
-            }}
-          >
-            <ImageWrapper>
-              <Image
-                src={
-                  poster_path
-                    ? `https://image.tmdb.org/t/p/w154/${poster_path}`
-                    : "http://ergo.slv.vic.gov.au/sites/default/files/imagecache/download/ms11553box4.jpg"
-                }
-                alt={title ? title : name}
-              />
-            </ImageWrapper>
+    < >
+        {item ? (
+          <StyledGalleryListItem margin="6rem 0 0 0">
+            <InnerLink
+              to={{
+                pathname: `/${"searchCollection"}/${id}`,
+                hash: `#${original_title ? original_title : name}`,
+                state: { from: location },
+              }}
+            >
+              <ImageWrapper>
+                <Image
+                  src={
+                    poster_path
+                      ? `https://image.tmdb.org/t/p/w154/${poster_path}`
+                      : "http://ergo.slv.vic.gov.au/sites/default/files/imagecache/download/ms11553box4.jpg"
+                  }
+                  alt={title ? title : name}
+                />
+              </ImageWrapper>
 
-            <InfoWrapper>
-              <MovieTittle>{original_title ? original_title : name}</MovieTittle>
-              <AdditionText> {trimmedOverview}</AdditionText>
-            </InfoWrapper>
-          </InnerLink>
-        </StyledGalleryListItem>
-      ) : (  // FIX
-        <Container>
+              <InfoWrapper>
+                <MovieTittle>
+                  {original_title ? original_title : name}
+                </MovieTittle>
+                <AdditionText> {trimmedOverview}</AdditionText>
+              </InfoWrapper>
+            </InnerLink>
+
+          </StyledGalleryListItem>
+        ) : (
+          // FIX
           <MovieTittle marginBottom="2rem">Nothing found.</MovieTittle>
-        </Container>
-      )}
+        )}
     </>
   );
 }

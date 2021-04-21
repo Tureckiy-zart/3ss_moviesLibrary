@@ -4,6 +4,7 @@ import { useRouteMatch } from "react-router";
 import "./App.css";
 
 import Header from "./Components/Header/Header";
+import Navigation from "./Components/Navigation/Navigation";
 import { getTrendingData } from "./Components/services/API/getData";
 import { useData } from "./Components/services/Contexts/DataContext";
 import { useLoader } from "./Components/services/Contexts/LoaderContext";
@@ -20,7 +21,8 @@ function App() {
   // try/cath lu4she delst v funcion api ili v komponente gge zapros delayu
   // rendery componentov
   ////////////////////
-  return <Header />;
+  
+  return <Navigation />;
 }
 
 export default App;

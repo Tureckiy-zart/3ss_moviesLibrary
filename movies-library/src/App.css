@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -12,11 +12,7 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-body {
-  /* background-color: rgb(180, 180, 180); */
-  background-color: white;
-  /* background-color: rgba(3, 36, 63, 0.6); */
-}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -26,9 +22,9 @@ body {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
-.App-link {
+/* .App-link {
   color: #61dafb;
 }
 
@@ -39,7 +35,7 @@ body {
   to {
     transform: rotate(360deg);
   }
-}
+} */
 
 
 

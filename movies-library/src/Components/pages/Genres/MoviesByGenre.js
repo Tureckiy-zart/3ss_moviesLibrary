@@ -5,7 +5,9 @@ import { getGenreData } from "../../services/API/getData";
 import { useData } from "../../services/Contexts/DataContext";
 import { useLoader } from "../../services/Contexts/LoaderContext";
 import Gallery from "../../structure/Gallery";
+import { ComponentWrapper } from "../../structure/stylredComponents/stiledComponents";
 import MostPopular from "../MostPopular";
+import CategoryeButtons from "./GenreButtons";
 
 const MoviesByGenre = () => {
   const [, setIsLoading] = useLoader(),
@@ -23,13 +25,16 @@ const MoviesByGenre = () => {
   useScrollPage();
 
   return (
-    <>
-      {moviesByCategorye.length > 0 ? (
-        <Gallery dataMovies={moviesByCategorye} />
-      ) : (
-        <MostPopular />
-      )}
-    </>
+    <ComponentWrapper position="relative" top="125px">
+        <CategoryeButtons />
+      <>
+        {moviesByCategorye.length > 0 ? (
+          <Gallery dataMovies={moviesByCategorye} />
+        ) : (
+          <MostPopular />
+        )}
+      </>
+    </ComponentWrapper>
   );
 };
 
