@@ -44,6 +44,7 @@ export const ImageWrapper = styled.div`
   overflow: hidden;
   display: grid;
   place-items: center;
+  position: relative
 `;
 export const Image = styled.img`
   width: 16rem;

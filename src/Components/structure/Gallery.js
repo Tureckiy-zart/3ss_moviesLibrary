@@ -9,10 +9,8 @@ import {
 const Gallery = ({ dataMovies, childern }) => (
   <ComponentWrapper>
     <Container>
-      {/* {childern} */}
       {dataMovies ? <List dataMovies={dataMovies} /> : childern}
       <ScrollUpBtn />
-
     </Container>
   </ComponentWrapper>
 );

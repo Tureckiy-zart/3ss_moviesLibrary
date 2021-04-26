@@ -31,6 +31,20 @@ export const trimmedString = (string) => {
   if (string.length > 165) return string.substring(0, 150) + `...Read more`;
   return string;
 };
+
+export const getFavoritesFromLocalStorage = () =>
+  JSON.parse(localStorage.getItem("favorites")) || [];
+
+export const isExistInFavorites = (id) => {
+  const parsedLocalStorage = getFavoritesFromLocalStorage();
+  if (!parsedLocalStorage.length) return false;
+  return parsedLocalStorage.some((storageItem) => storageItem.id === id);
+};
+
+export const deleteFavorite = (id) => {
+  const parsedLocalStorage = getFavoritesFromLocalStorage();
+  return parsedLocalStorage.filter((storageItem) => storageItem.id !== id);
+};
 export const isExistItemInArray = (array, item) => {
   if (!array.length) return false;
   return array.some((arrItem) => arrItem.id === item.id);
@@ -45,6 +59,7 @@ export const errorPageRedirect = (props) => {
   // if (!history) window.location = "/errorPage";
   // window.history.pushState(null, null, "/errorPage");
 };
+
 
 // export const scrollFunction = () => {
 //   // left: 37, up: 38, right: 39, down: 40,

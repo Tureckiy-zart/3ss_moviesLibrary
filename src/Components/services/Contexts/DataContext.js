@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { getFavoritesFromLocalStorage } from "../../heplers/heplers";
 
 const DataContext = React.createContext();
 
@@ -8,6 +9,7 @@ const initialState = {
   trendingMovies: [],
   moviesByCategorye: [],
   searchMovies: [],
+  favorites: getFavoritesFromLocalStorage(),
   currentHomePage: 1,
   currentCategoryePage: 1,
   currentSearchMoviePage: 1,

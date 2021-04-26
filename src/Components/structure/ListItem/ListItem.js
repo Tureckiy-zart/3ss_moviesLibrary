@@ -12,9 +12,9 @@ import Title, {
 } from "../stylredComponents/Title.styled";
 import { StyledNavLink } from "../stylredComponents/Navigation.styled";
 import { getDate } from "../../heplers/heplers";
+import FavoritesBtns from "../../pages/Favorites/FavoritesBtns";
 
 function ListItem({ item }) {
-  // console.log('item :>> ', item);
   const { location } = useHistory();
   const {
     id = null,
@@ -26,17 +26,18 @@ function ListItem({ item }) {
     release_date = "",
     popularity = 0,
   } = item;
+  // console.log('item :>> ', item);
   const releaseDate = getDate(release_date);
   return (
     <StyledGalleryListItem>
-      <StyledNavLink
-        to={{
-          pathname: `/asset/${id}`,
-          hash: `#${original_title ? original_title : name}`,
-          state: { from: location },
-        }}
-      >
-        <ImageWrapper>
+      <ImageWrapper>
+        <StyledNavLink
+          to={{
+            pathname: `/asset/${id}`,
+            hash: `#${original_title ? original_title : name}`,
+            state: { from: location },
+          }}
+        >
           <Image
             src={
               poster_path
@@ -46,22 +47,30 @@ function ListItem({ item }) {
             alt={title ? title : name}
             // width="154"
           />
-        </ImageWrapper>
-        <InfoWrapper>
-          <Title color="black">
-            <MovieTittle>{original_title ? original_title : name}.</MovieTittle>
-            {vote_average && vote_average !== 0 && (
-              <AdditionText>Votes: {vote_average}</AdditionText>
-            )}
-            {release_date && (
-              <AdditionText>Release Date: {releaseDate}</AdditionText>
-            )}
-            {popularity && (
-              <AdditionText>Popularity: {parseInt(popularity)}</AdditionText>
-            )}
-          </Title>
-        </InfoWrapper>
-      </StyledNavLink>
+        </StyledNavLink>
+
+        <FavoritesBtns
+          position="absolute"
+          top="30px"
+          right="40px"
+          item={item}
+        />
+      </ImageWrapper>
+
+      <InfoWrapper>
+        <Title color="black">
+          <MovieTittle>{original_title ? original_title : name}.</MovieTittle>
+          {vote_average && vote_average !== 0 && (
+            <AdditionText>Votes: {vote_average}</AdditionText>
+          )}
+          {release_date && (
+            <AdditionText>Release Date: {releaseDate}</AdditionText>
+          )}
+          {popularity && (
+            <AdditionText>Popularity: {parseInt(popularity)}</AdditionText>
+          )}
+        </Title>
+      </InfoWrapper>
     </StyledGalleryListItem>
   );
 }

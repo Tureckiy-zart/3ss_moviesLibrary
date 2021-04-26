@@ -67,8 +67,10 @@ export const Button = (props) => {
 
 export const BntGroupe = styled.div`
   position: ${(props) => props.position || "initial"};
-  bottom: ${(props) => props.bottom || "0"};
-  left: ${(props) => props.left || "0"};
+  top: ${(props) => props.top || "0"};
+  /* bottom: ${(props) => props.bottom || "0"}; */
+  right: ${(props) => props.right || "0"};
+  /* left: ${(props) => props.left || "0"}; */
   display: flex;
   margin-bottom: 1rem;
 `;

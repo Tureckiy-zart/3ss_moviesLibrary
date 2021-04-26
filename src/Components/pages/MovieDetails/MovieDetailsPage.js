@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useState } from "react";
-import {useParams } from "react-router";
+import { useParams } from "react-router";
 import SubNavigation from "../../Navigation/SubNavigation";
 import { ButtonsHistoryReturn } from "../../structure/Buttons/ButtonsHistoryReturn";
 import {
@@ -13,7 +13,7 @@ import {
   SenondaryText,
 } from "../../structure/stylredComponents/Title.styled";
 import { getDate } from "../../heplers/heplers";
-import FavoritesBtns from "../../structure/Buttons/FavoritesBtns";
+// import FavoritesBtns from "../../structure/Buttons/FavoritesBtns";
 
 import styled from "styled-components";
 import { getMovieDataByID } from "../../services/API/getData";
@@ -22,6 +22,8 @@ import {
   ImgWrapper,
   PageWrapper,
 } from "../../structure/stylredComponents/MovieDetailsPage.styled";
+import FavoritesBtns from "../Favorites/FavoritesBtns";
+import { Image } from "../../structure/stylredComponents/List.styled";
 
 const StyledDiv = styled.div`
   display: grid;
@@ -33,7 +35,10 @@ const MovieDetailsPage = () => {
   let { id } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
   const [, setIsLoading] = useLoader();
-  useEffect(() => getMovieDataByID(id, setMovieDetails, setIsLoading), [id, setIsLoading]);
+  useEffect(() => getMovieDataByID(id, setMovieDetails, setIsLoading), [
+    id,
+    setIsLoading,
+  ]);
 
   return (
     <ComponentWrapper position="relative" top="125px">
@@ -44,7 +49,7 @@ const MovieDetailsPage = () => {
             <StyledDiv>
               <div>
                 <ImgWrapper>
-                  <img
+                  <Image
                     src={
                       movieDetails.poster_path
                         ? `https://image.tmdb.org/t/p/w154/${movieDetails.poster_path}`
@@ -55,13 +60,13 @@ const MovieDetailsPage = () => {
                         ? movieDetails.title
                         : movieDetails.name
                     }
-                    width="250"
+                    // width="250"
                   />
                   <FavoritesBtns
-                    movieDetails={movieDetails}
+                    item={movieDetails}
                     position="absolute"
-                    bottom="20px"
-                    left="30px"
+                    top="35px"
+                    right="60px"
                   />
                 </ImgWrapper>
               </div>

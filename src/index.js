@@ -15,8 +15,8 @@ ReactDOM.render(
       <DataProvider>
         <LoaderProvider>
           <Loader />
-          <App />
-          <Routes />
+            <App />
+            <Routes />
         </LoaderProvider>
       </DataProvider>
     </BrowserRouter>

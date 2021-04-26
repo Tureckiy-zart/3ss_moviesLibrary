@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useRouteMatch } from "react-router";
 import Navigation from "./Components/Navigation/Navigation";
 import { getTrendingData } from "./Components/services/API/getData";
 import { useData } from "./Components/services/Contexts/DataContext";
@@ -8,11 +7,11 @@ import { useLoader } from "./Components/services/Contexts/LoaderContext";
 function App() {
   const [{ trendingMovies }, setState] = useData(null);
   const [, setIsLoading] = useLoader();
-  const { path } = useRouteMatch();
-  useEffect(
-    () => getTrendingData(trendingMovies, setState, setIsLoading, path),
-    [trendingMovies, setState, setIsLoading, path]
-  );
+  useEffect(() => getTrendingData(trendingMovies, setState, setIsLoading), [
+    trendingMovies,
+    setState,
+    setIsLoading,
+  ]);
 
   // kak pri zagruzke App.js polu4ti dastup k DataProvider
   // na kazhdoy stranice svoy currentPage kotoriy pishu v glavniyState kak ispravit`
