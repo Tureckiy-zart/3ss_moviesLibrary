@@ -14,6 +14,12 @@ import { StyledNavLink } from "../stylredComponents/Navigation.styled";
 import { getDate } from "../../heplers/heplers";
 import FavoritesBtns from "../../pages/Favorites/FavoritesBtns";
 
+const buttonStyles = {
+  position: "absolute",
+  top: "30px",
+  right: "40px",
+};
+
 function ListItem({ item }) {
   const { location } = useHistory();
   const {
@@ -28,6 +34,7 @@ function ListItem({ item }) {
   } = item;
   // console.log('item :>> ', item);
   const releaseDate = getDate(release_date);
+
   return (
     <StyledGalleryListItem>
       <ImageWrapper>
@@ -49,12 +56,7 @@ function ListItem({ item }) {
           />
         </StyledNavLink>
 
-        <FavoritesBtns
-          position="absolute"
-          top="30px"
-          right="40px"
-          item={item}
-        />
+        <FavoritesBtns styles={buttonStyles} item={item} />
       </ImageWrapper>
 
       <InfoWrapper>

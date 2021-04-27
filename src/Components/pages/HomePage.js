@@ -13,9 +13,8 @@ function HomePage() {
   return (
     <>
       <Banner />
-      {/* {trendingMovies.length > 0 && ( */}
         <>
-          <ComponentWrapper position="relative" top="750px">
+          <ComponentWrapper position="relative" top="650px">
             <Carousel />
             <CategoryeButtons />
             <Gallery dataMovies={trendingMovies} />

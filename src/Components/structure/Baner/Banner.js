@@ -1,13 +1,13 @@
 import BanerTitle from "./BanerTitle";
-import SearchForm from "../Form/Form";
-import { BanerWrapper } from "../stylredComponents/Baner.styled";
+import { BanerFormWrapper } from "../stylredComponents/Baner.styled";
+import { BannerForm } from "../Form/ExportsForm";
 
 const Banner = () => {
   return (
-    <BanerWrapper>
+    <BanerFormWrapper>
       <BanerTitle />
-      <SearchForm queryLocation={"Movie"} />
-    </BanerWrapper>
+      <BannerForm />
+    </BanerFormWrapper>
   );
 };
 

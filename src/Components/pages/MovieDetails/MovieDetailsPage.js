@@ -1,4 +1,5 @@
 import React, { memo, useEffect, useState } from "react";
+import styled from "styled-components";
 import { useParams } from "react-router";
 import SubNavigation from "../../Navigation/SubNavigation";
 import { ButtonsHistoryReturn } from "../../structure/Buttons/ButtonsHistoryReturn";
@@ -13,9 +14,6 @@ import {
   SenondaryText,
 } from "../../structure/stylredComponents/Title.styled";
 import { getDate } from "../../heplers/heplers";
-// import FavoritesBtns from "../../structure/Buttons/FavoritesBtns";
-
-import styled from "styled-components";
 import { getMovieDataByID } from "../../services/API/getData";
 import { useLoader } from "../../services/Contexts/LoaderContext";
 import {
@@ -31,15 +29,31 @@ const StyledDiv = styled.div`
   grid-gap: 2vw;
 `;
 
+const buttonStyles = {
+  position: "absolute",
+  top: "35px",
+  right: "60px",
+};
+
 const MovieDetailsPage = () => {
   let { id } = useParams();
-  const [movieDetails, setMovieDetails] = useState(null);
   const [, setIsLoading] = useLoader();
+  const [movieDetails, setMovieDetails] = useState(null);
+
   useEffect(() => getMovieDataByID(id, setMovieDetails, setIsLoading), [
     id,
     setIsLoading,
   ]);
-
+  // const   {
+  //       title,
+  //       poster_path,
+  //       name,
+  //       overview,
+  //       vote_average,
+  //       vote_count,
+  //       release_date,
+  //       homepage,
+  //     }  = movieDetails;
   return (
     <ComponentWrapper position="relative" top="125px">
       <Container>
@@ -62,12 +76,7 @@ const MovieDetailsPage = () => {
                     }
                     // width="250"
                   />
-                  <FavoritesBtns
-                    item={movieDetails}
-                    position="absolute"
-                    top="35px"
-                    right="60px"
-                  />
+                  <FavoritesBtns styles={buttonStyles} item={movieDetails} />
                 </ImgWrapper>
               </div>
               <div>

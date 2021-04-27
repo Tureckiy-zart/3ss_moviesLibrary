@@ -4,9 +4,12 @@ export const Form = styled.form`
   /* width: ${(props) => props.width || "60%"}; */
   bottom: ${(props) => props.bottom};
   border: none;
+  position: relative;
+  box-shadow: rgba(0, 0, 0, 0.96) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  border-radius: 30px;
+
 `;
 export const Input = styled.input`
-  /* width: 100%; */
   width: 32rem;
   line-height: 46px;
   font-size: 1.5em;
@@ -16,7 +19,6 @@ export const Input = styled.input`
   padding: 10px 20px;
   text-align: center;
   box-sizing: initial;
-  box-shadow: rgba(0, 0, 0, 0.96) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   &:active,
   &:hover,
   &:focus {
@@ -34,12 +36,12 @@ export const FormButton = styled.input`
     rgba(30, 213, 169, 1) 0%,
     rgba(1, 180, 228, 1) 100%
   );
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   border-radius: 30px;
-  right: -40px;
+  right: 0px;
   color: #fff;
   cursor: pointer;
   font-size: 1.5em;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 
   &:active,
   &:hover,

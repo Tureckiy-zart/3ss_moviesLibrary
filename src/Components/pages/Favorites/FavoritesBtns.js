@@ -1,54 +1,44 @@
-import React, { memo, useRef, useState } from "react";
-import {
-  deleteFavorite,
-  getFavoritesFromLocalStorage,
-  isExistInFavorites,
-} from "../../heplers/heplers";
+import React, { memo, useEffect, useState } from "react";
+import { deleteFavorite, isExistInFavorites } from "../../heplers/heplers";
 import { useData } from "../../services/Contexts/DataContext";
-
 import {
   BntGroupe,
   ButtonShrink,
 } from "../../structure/stylredComponents/Button.styled";
 
-const FavoritesBtns = (props) => {
-  const storageValue = useRef(getFavoritesFromLocalStorage()),
-    [isExist, setisExist] = useState(isExistInFavorites(props.item.id));
+const FavoritesBtns = ({ styles, item }) => {
+  const { id } = item;
+  const [{ favorites }, setState] = useData();
+  const [isExist, setisExist] = useState(isExistInFavorites(favorites, id));
 
-  const [, setState] = useData();
   const editLS = () => {
-    if (isExist === false) {
-      localStorage.setItem(
-        "favorites",
-        JSON.stringify([...storageValue.current, props.item])
-      );
-
+    if (isExist !== null && isExist === false) {
       setState((prev) => {
         return {
           ...prev,
-          favorites: [...storageValue.current, props.item],
+          favorites: [...favorites, item],
         };
       });
       setisExist(true);
     }
     if (isExist === true) {
-      localStorage.setItem(
-        "favorites",
-        JSON.stringify(deleteFavorite(props.item.id))
-      );
       setState((prev) => {
         return {
           ...prev,
-          favorites: deleteFavorite(props.item.id),
+          favorites: deleteFavorite(favorites, id),
         };
       });
-
       setisExist(false);
     }
   };
+  useEffect(
+    () => localStorage.setItem("favorites", JSON.stringify(favorites)),
+    [favorites]
+  );
+
   return (
     <>
-      <BntGroupe className="favoritesButtons" {...props}>
+      <BntGroupe className="favoritesButtons" {...styles}>
         <ButtonShrink onClick={editLS}>{isExist ? "-" : "+"}</ButtonShrink>
       </BntGroupe>
     </>

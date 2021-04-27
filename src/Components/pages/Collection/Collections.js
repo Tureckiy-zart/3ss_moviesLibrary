@@ -7,7 +7,7 @@ import {
 } from "../../structure/stylredComponents/stiledComponents";
 import { getCollectionsData } from "../../services/API/getData";
 import { useData } from "../../services/Contexts/DataContext";
-import CollectionsForm from "../../structure/Form/CollectionsForm";
+import {CollectionsForm} from "../../structure/Form/ExportsForm";
 import CollectionsGallery from "./CollectionsGallery";
 import { MovieTittle } from "../../structure/stylredComponents/Title.styled";
 import MostPopular from "../MostPopular";

@@ -1,23 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import { Form, Input } from "../stylredComponents/Form.styled";
+import { Form, FormButton, Input } from "../stylredComponents/Form.styled";
 // const queryString = require("query-string");
 
 const SearchForm = ({ queryLocation }) => {
+  const history = useHistory();
   const { handleSubmit, control, reset } = useForm();
   const [{ searchQuery }, setSearchQuery] = useState("");
-  const history = useHistory();
-  // console.log('history :>> ', history);
-  //   // console.log(location.search);
-  //   //=> '?foo=bar'
 
-  //   const parsed = queryString.parse(history.location.search);
-  // console.log('parsed :>> ', parsed);
+  const onSubmit = (query) => setSearchQuery(query);
 
-  const onSubmit = (query) => {
-    return setSearchQuery(query);
-  };
   useEffect(() => {
     if (!searchQuery) return;
     history.push({
@@ -36,7 +29,7 @@ const SearchForm = ({ queryLocation }) => {
         rules={{ required: true }}
         render={({ field }) => <Input placeholder="Search..." {...field} />}
       />
-      {/* <FormButton type="submit" /> */}
+      <FormButton type="submit" />
     </Form>
   );
 };

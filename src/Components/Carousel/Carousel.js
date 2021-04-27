@@ -40,7 +40,6 @@ export default memo(() => {
   const prevSlide = () => {
     index("subtract");
     const trimedItem = getTrimedItem("subtract");
-    // ;
     setSliderItems([trimedItem, ...sliderItems]);
   };
 
@@ -85,14 +84,6 @@ export default memo(() => {
     </ComponentWrapper>
   );
 });
-
-
-
-
-
-
-
-
 
 // import React, { memo, useEffect, useState } from "react";
 // import { Link } from "react-router-dom";

@@ -4,7 +4,6 @@ import {
   ComponentWrapper,
   Container,
 } from "../../structure/stylredComponents/stiledComponents";
-
 import MostPopular from "../MostPopular";
 import { useData } from "../../services/Contexts/DataContext";
 
@@ -14,7 +13,7 @@ function FavoritesPage() {
     <ComponentWrapper position="relative" top="125px">
       <Container>
         {favorites.length > 0 ? (
-          <List dataMovies={favorites} /> // FIX
+          <List dataMovies={favorites} /> 
         ) : (
           <MostPopular />
         )}
