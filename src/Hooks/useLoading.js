@@ -41,7 +41,7 @@ const useLoading = (apiRequest, options) => {
       document.removeEventListener("scroll", scrollCalculate);
     };
   }, [scrollCalculate]);
-  console.log("currnetPage :>> ", currnetPage);
+  // console.log("currnetPage :>> ", currnetPage);
   return moviesByCategoryeFetched;
 };
 
