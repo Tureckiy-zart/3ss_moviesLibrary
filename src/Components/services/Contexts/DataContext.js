@@ -18,7 +18,6 @@ const initialState = {
 
 export const DataProvider = ({ children }) => {
   const [state, setState] = useState(initialState);
-
   return (
     <DataContext.Provider value={[state, setState]}>
       {children}

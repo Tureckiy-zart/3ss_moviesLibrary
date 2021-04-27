@@ -46,3 +46,8 @@ const FavoritesBtns = ({ styles, item }) => {
 };
 
 export default memo(FavoritesBtns);
+// const idArray = favorites.reduce((acc, item) => {
+//   acc.push(item.id);
+//   return acc;
+// },[]);
+// console.log("idArray :>> ", idArray);
