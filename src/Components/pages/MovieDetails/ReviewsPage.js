@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { getAvatar, getDate } from "../../heplers/heplers";
-import { getReviewsData } from "../../services/API/getData";
+import { doFetch } from "../../services/API/api";
+import { errorHandler,  } from "../../services/API/getData";
+import { useData } from "../../services/Contexts/DataContext";
 import { useLoader } from "../../services/Contexts/LoaderContext";
 import { ButtonsHistoryReturn } from "../../structure/Buttons/ButtonsHistoryReturn";
 import {
@@ -22,10 +24,19 @@ import {
 
 const ReviewsPage = () => {
   let { id } = useParams();
+  const [, setState] = useData();
+  const history = useHistory();
   const [reviews, setReviews] = useState([]);
   const [, setIsLoading] = useLoader();
+  useEffect(() => {
+    if (!id) return;
+    setIsLoading(true); //spiner on
 
-  useEffect(() => getReviewsData(id, setReviews, setIsLoading), [id, setIsLoading]);
+    doFetch("getMovieReview", { id })
+      .then(({ results }) => setReviews(results))
+      .catch((error) => errorHandler(error, setState, history))
+      .finally(setIsLoading(false));
+  }, [id, setIsLoading, setState, history]);
 
   return (
     <ComponentWrapper position="relative" top="125px">

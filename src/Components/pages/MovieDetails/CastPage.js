@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { getCastData } from "../../services/API/getData";
-import { useLoader } from "../../services/Contexts/LoaderContext";
+import { doFetch } from "../../services/API/api";
+import withData from "../../services/hoc/withFetch";
 import { ButtonsHistoryReturn } from "../../structure/Buttons/ButtonsHistoryReturn";
 import {
   Image,
@@ -19,13 +19,23 @@ import {
   MovieTittle,
 } from "../../structure/stylredComponents/Title.styled";
 
-const CastPage = () => {
+const CastPage = ({ setIsLoading, setState, errorHandler, history }) => {
   let { id } = useParams();
-  const [, setIsLoading] = useLoader();
-
   const [cast, setCast] = useState(null);
 
-  useEffect(() => getCastData(id, setCast, setIsLoading), [id, setIsLoading]);
+  useEffect(() => {
+    if (!id) return;
+    setIsLoading(true); //spiner on
+
+    doFetch("getMovieCast", { id })
+      // .then(({ crew }) => setCast(crew))
+      .then(({ cast }) => setCast(cast))
+      .catch((error) => {
+        errorHandler(error, setState, history);
+      })
+      .finally(setIsLoading(false));
+  }, [id, setIsLoading, setState, history, errorHandler]);
+
   return (
     <ComponentWrapper position="relative" top="125px">
       <Container>
@@ -61,4 +71,4 @@ const CastPage = () => {
   );
 };
 
-export default CastPage;
+export default withData(memo(CastPage));

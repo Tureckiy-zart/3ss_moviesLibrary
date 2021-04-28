@@ -1,31 +1,38 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import { useLoader } from "../../services/Contexts/LoaderContext";
 import {
   ComponentWrapper,
   Container,
 } from "../../structure/stylredComponents/stiledComponents";
-import { getCollectionsData } from "../../services/API/getData";
+import { errorHandler } from "../../services/API/getData";
 import { useData } from "../../services/Contexts/DataContext";
-import {CollectionsForm} from "../../structure/Form/ExportsForm";
+import { CollectionsForm } from "../../structure/Form/ExportsForm";
 import CollectionsGallery from "./CollectionsGallery";
 import { MovieTittle } from "../../structure/stylredComponents/Title.styled";
 import MostPopular from "../MostPopular";
 import ScrollUpBtn from "../../structure/Buttons/ScrollUpBtn";
+import { doFetch } from "../../services/API/api";
 
 function Collections() {
   const [, setState] = useData(null);
-  const { search: searchQuery } = useLocation();
-  const [collections, setCollectons] = useState([]);
+  const { search } = useLocation();
   const [, setIsLoading] = useLoader(false);
+  const history = useHistory();
+  const [collections, setCollectons] = useState([]);
 
-  useEffect(
-    () => {
-      getCollectionsData(searchQuery, setIsLoading, setCollectons, setState);
-    },
-    [searchQuery, setIsLoading, setState]
-    // [options]
-  );
+  const searchQuery = search?.slice(1);
+
+  useEffect(() => {
+    if (!searchQuery) return;
+    setIsLoading(true); //spiner on
+
+    doFetch("getCollectionId", { searchQuery })
+      .then(({ results }) => setCollectons(results))
+      .catch((error) => errorHandler(error, setState, history))
+      .finally(setIsLoading(false));
+  }, [searchQuery, setIsLoading, setState, history]);
+
   return (
     <>
       {collections.length > 0 ? (

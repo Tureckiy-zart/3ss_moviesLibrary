@@ -1,6 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import HomePage from "../pages/HomePage";
+import HomePage from "../pages/Home/HomePage";
 import FavoritesPage from "../pages/Favorites/FavoritesPage";
 import ErrorPage from "../pages/ErrorPage";
 import MovieDetailsPage from "../pages/MovieDetails/MovieDetailsPage";
@@ -10,20 +10,21 @@ import SearchMovie from "../pages/SearchMovie";
 import Collections from "../pages/Collection/Collections";
 import CurrnetCollection from "../pages/Collection/CurrnetCollection";
 import MoviesByGenre from "../pages/Genres/MoviesByGenre";
+import routes from "./routesPath";
 
 function Routes() {
   return (
     <Switch>
-      <Route exact path="/" component={HomePage} />
-      <Route path="/searchMovie" component={SearchMovie} />
-      <Route path="/asset/:id/cast" component={CastPage} />
-      <Route path="/asset/:id/reviews" component={ReviewsPage} />
-      <Route path="/asset/:id/" component={MovieDetailsPage} />
-      <Route path="/categoryes" component={MoviesByGenre} />
-      <Route path="/searchCollection/:id" component={CurrnetCollection} />
-      <Route path="/searchCollection" component={Collections} />
-      <Route path="/favorites" component={FavoritesPage} />
-      <Route path="/errorPage" component={ErrorPage} />
+      <Route path={routes.home} exact component={HomePage} />
+      <Route path={routes.searchMovie} component={SearchMovie} />
+      <Route path={routes.cast} component={CastPage} />
+      <Route path={routes.reviews} component={ReviewsPage} />
+      <Route path={routes.asset} component={MovieDetailsPage} />
+      <Route path={routes.categoryes} component={MoviesByGenre} />
+      <Route path={routes.currentCollection} component={CurrnetCollection} />
+      <Route path={routes.searchCollection} component={Collections} />
+      <Route path={routes.favorites} component={FavoritesPage} />
+      <Route path={routes.errorPage} component={ErrorPage} />
       <Route component={ErrorPage} />
     </Switch>
   );

@@ -10,9 +10,9 @@ const initialState = {
   moviesByCategorye: [],
   searchMovies: [],
   favorites: getFavoritesFromLocalStorage(),
-  currentHomePage: 1,
-  currentCategoryePage: 1,
-  currentSearchMoviePage: 1,
+  currentHomePage: 2,
+  currentCategoryePage: 2,
+  currentSearchMoviePage: 2,
   error: null,
 };
 

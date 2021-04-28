@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useState } from "react";
 import styled from "styled-components";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import SubNavigation from "../../Navigation/SubNavigation";
 import { ButtonsHistoryReturn } from "../../structure/Buttons/ButtonsHistoryReturn";
 import {
@@ -14,7 +14,7 @@ import {
   SenondaryText,
 } from "../../structure/stylredComponents/Title.styled";
 import { getDate } from "../../heplers/heplers";
-import { getMovieDataByID } from "../../services/API/getData";
+import { errorHandler } from "../../services/API/getData";
 import { useLoader } from "../../services/Contexts/LoaderContext";
 import {
   ImgWrapper,
@@ -22,6 +22,8 @@ import {
 } from "../../structure/stylredComponents/MovieDetailsPage.styled";
 import FavoritesBtns from "../Favorites/FavoritesBtns";
 import { Image } from "../../structure/stylredComponents/List.styled";
+import { doFetch } from "../../services/API/api";
+import { useData } from "../../services/Contexts/DataContext";
 
 const StyledDiv = styled.div`
   display: grid;
@@ -37,23 +39,22 @@ const buttonStyles = {
 
 const MovieDetailsPage = () => {
   let { id } = useParams();
-  const [, setIsLoading] = useLoader();
   const [movieDetails, setMovieDetails] = useState(null);
 
-  useEffect(() => getMovieDataByID(id, setMovieDetails, setIsLoading), [
-    id,
-    setIsLoading,
-  ]);
-  // const   {
-  //       title,
-  //       poster_path,
-  //       name,
-  //       overview,
-  //       vote_average,
-  //       vote_count,
-  //       release_date,
-  //       homepage,
-  //     }  = movieDetails;
+  const [, setState] = useData(null);
+  const history = useHistory();
+  const [, setIsLoading] = useLoader();
+
+  useEffect(() => {
+    if (!id) return;
+    setIsLoading(true);
+
+    doFetch("getMovieByID", { id })
+      .then((response) => setMovieDetails(response))
+      .catch((error) => errorHandler(error, setState, history))
+      .finally(setIsLoading(false));
+  }, [id, setIsLoading, setState, history]);
+  
   return (
     <ComponentWrapper position="relative" top="125px">
       <Container>
@@ -74,7 +75,6 @@ const MovieDetailsPage = () => {
                         ? movieDetails.title
                         : movieDetails.name
                     }
-                    // width="250"
                   />
                   <FavoritesBtns styles={buttonStyles} item={movieDetails} />
                 </ImgWrapper>

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { useLocation, useRouteMatch } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import useScrollPage from "../../Hooks/useScrollPage";
-import { getSearchData } from "../services/API/getData";
+import { errorHandler } from "../services/API/getData";
 import { useData } from "../services/Contexts/DataContext";
 import { useLoader } from "../services/Contexts/LoaderContext";
 import Gallery from "../structure/Gallery";
@@ -12,19 +12,32 @@ import {
 import { MovieTittle } from "../structure/stylredComponents/Title.styled";
 import MostPopular from "./MostPopular";
 import { BannerForm } from "../structure/Form/ExportsForm";
+import { doFetch } from "../services/API/api";
 
 const SearchMovie = () => {
   const { search: searchQuery } = useLocation();
+  
+  const history = useHistory();
   const [{ searchMovies }, setState] = useData();
-  const { path } = useRouteMatch();
   const [, setIsLoading] = useLoader();
   useScrollPage();
-  useEffect(() => getSearchData(searchQuery, setState, setIsLoading, path), [
-    searchQuery,
-    setState,
-    setIsLoading,
-    path,
-  ]);
+  
+  useEffect(() => {
+    if (!searchQuery) return;
+    setIsLoading(true);
+    doFetch("getMovieByTitle", { searchQuery })
+      .then(({ results }) =>
+        setState((prev) => ({
+          ...prev,
+          searchMovies: results,
+          currentSearchMoviePage: 2,
+        }))
+      )
+      .catch((error) => {
+        errorHandler(error, setState, history);
+      })
+      .finally(setIsLoading(false));
+  }, [searchQuery, setState, setIsLoading, history]);
 
   return (
     <>
