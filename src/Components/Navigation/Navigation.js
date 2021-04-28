@@ -8,10 +8,11 @@ import {
   Logo,
 } from "../structure/stylredComponents/Navigation.styled";
 import { Container } from "../structure/stylredComponents/stiledComponents";
+import routes from "../Routes/routesPath";
 
 function Navigation() {
   return (
-    <NavWrapper >
+    <NavWrapper>
       <Container display="flex">
         <Link to="/">
           <Logo
@@ -19,12 +20,12 @@ function Navigation() {
             alt="logo"
           />
         </Link>
-        <Nav >
-          <ListItem >
+        <Nav>
+          <ListItem>
             <StyledNavigationLink
               activeClassName="NavLinkActive"
               exact
-              to="/"
+              to={routes.home}
             >
               Home
             </StyledNavigationLink>
@@ -32,7 +33,7 @@ function Navigation() {
           <ListItem>
             <StyledNavigationLink
               activeClassName="NavLinkActive"
-              to="/searchCollection"
+              to={routes.searchCollection}
             >
               Collections
             </StyledNavigationLink>
@@ -40,7 +41,7 @@ function Navigation() {
           <ListItem>
             <StyledNavigationLink
               activeClassName="NavLinkActive"
-              to="/favorites"
+              to={routes.favorites}
             >
               Favorites
             </StyledNavigationLink>

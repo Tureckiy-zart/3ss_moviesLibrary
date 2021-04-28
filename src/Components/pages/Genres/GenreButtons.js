@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { getGenres } from "../../services/API/api";
+import { doFetch } from "../../services/API/api";
 import { Button } from "../../structure/stylredComponents/Button.styled";
 import {
   StyledList,
@@ -14,8 +14,10 @@ import {
 const CategoryeButtons = () => {
   const [categoryes, setCategoryes] = useState([]);
   const { location } = useHistory();
-  useEffect(() => getGenres().then((response) => setCategoryes(response)), []); //set categoryes on mount
-  // <BackgroundColorWrapper>
+  useEffect(
+    () => doFetch("getGenres").then(({genres}) => setCategoryes(genres)),
+    []
+  ); //set categoryes on mount
 
   return (
     <ComponentWrapper>
@@ -25,7 +27,6 @@ const CategoryeButtons = () => {
             {categoryes.map(({ id, name }) => (
               <ListItem key={id}>
                 <Link
-                  
                   to={{
                     pathname: `/categoryes/${name}`,
                     categoryeId: Number(`${id}`),

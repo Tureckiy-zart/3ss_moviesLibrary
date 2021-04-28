@@ -1,10 +1,5 @@
 import { useEffect } from "react";
 import { useLocation, useRouteMatch } from "react-router";
-import {
-  getMovieByGenre,
-  getMovieByTitle,
-  getTrendingMovies,
-} from "../Components/services/API/api";
 import { useData } from "../Components/services/Contexts/DataContext";
 import useLoading from "./useLoading";
 
@@ -13,25 +8,25 @@ function currentPageOptions(searchQuery, categoryeId, path) {
     case "/searchMovie":
       return {
         currnentPage: "currentSearchMoviePage",
-        apiRequest: getMovieByTitle,
+        apiRequest: "getMovieByTitle",
         moviesCategory: "searchMovies",
-        params: { searchQuery },
+        options: { searchQuery },
       };
 
     case "/categoryes":
       return {
         currnentPage: "currentCategoryePage",
-        apiRequest: getMovieByGenre,
+        apiRequest: "getMovieByGenre",
         moviesCategory: "moviesByCategorye",
-        params: { genre: categoryeId },
+        options: { genre: categoryeId },
       };
 
     default:
       return {
         currnentPage: "currentHomePage",
-        apiRequest: getTrendingMovies,
+        apiRequest: "getTrendingMovies",
         moviesCategory: "trendingMovies",
-        params: {},
+        options: {},
       };
   }
 }
@@ -39,17 +34,16 @@ function currentPageOptions(searchQuery, categoryeId, path) {
 const useScrollPage = () => {
   const { search: searchQuery, categoryeId } = useLocation(), //get Id & searchQuery from url (slug)
     { path } = useRouteMatch();
-
   const [, setState] = useData();
 
   const {
     currnentPage,
     moviesCategory,
     apiRequest,
-    params,
+    options,
   } = currentPageOptions(searchQuery, categoryeId, path);
 
-  const moviesByCategoryeFetched = useLoading(apiRequest, params); //Uploading data on scrollPage
+  const moviesByCategoryeFetched = useLoading(apiRequest, options); //Uploading data on scrollPage
 
   useEffect(() => {
     if (!moviesByCategoryeFetched.length) return;
@@ -64,12 +58,6 @@ const useScrollPage = () => {
         [currnentPage]: prev[currnentPage] + 1,
       };
     });
-  }, [
-    moviesByCategoryeFetched,
-    currnentPage,
-    moviesCategory,
-    setState,
-  ]);
-  // console.log("state :>> ", state);
+  }, [moviesByCategoryeFetched, currnentPage, moviesCategory, setState]);
 };
 export default useScrollPage;
