@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router";
+import {  useParams } from "react-router";
 import { getAvatar, getDate } from "../../heplers/heplers";
 import { doFetch } from "../../services/API/api";
-import { errorHandler,  } from "../../services/API/getData";
-import { useData } from "../../services/Contexts/DataContext";
-import { useLoader } from "../../services/Contexts/LoaderContext";
+import withData from "../../services/hoc/withFetch";
 import { ButtonsHistoryReturn } from "../../structure/Buttons/ButtonsHistoryReturn";
 import {
   InfoWrapper,
@@ -22,21 +20,18 @@ import {
   SenondaryText,
 } from "../../structure/stylredComponents/Title.styled";
 
-const ReviewsPage = () => {
+const ReviewsPage = ({ setIsLoading, setState, ErrorHandler, history }) => {
   let { id } = useParams();
-  const [, setState] = useData();
-  const history = useHistory();
   const [reviews, setReviews] = useState([]);
-  const [, setIsLoading] = useLoader();
   useEffect(() => {
     if (!id) return;
     setIsLoading(true); //spiner on
 
     doFetch("getMovieReview", { id })
       .then(({ results }) => setReviews(results))
-      .catch((error) => errorHandler(error, setState, history))
+      .catch((error) => ErrorHandler(error, setState, history))
       .finally(setIsLoading(false));
-  }, [id, setIsLoading, setState, history]);
+  }, [id, setIsLoading, setState, history, ErrorHandler]);
 
   return (
     <ComponentWrapper position="relative" top="125px">
@@ -47,6 +42,7 @@ const ReviewsPage = () => {
           <StyledList>
             {reviews.map(
               ({
+                id,
                 url,
                 author,
                 content,
@@ -56,7 +52,7 @@ const ReviewsPage = () => {
                 const date = getDate(updated_at.slice(0, 10));
                 const avatarImg = getAvatar(avatar_path);
                 return (
-                  <InfoWrapper padding="1rem" display="grid">
+                  <InfoWrapper key={id} padding="1rem" display="grid">
                     <InfoWrapper padding="1rem">
                       <ExternalLink
                         href={`https://www.themoviedb.org/u/${author}`}
@@ -86,8 +82,4 @@ const ReviewsPage = () => {
   );
 };
 
-export default ReviewsPage;
-
-// useEffect(() => getMovieReview(id).then((response) => setReviews(response)), [
-//   id,
-// ]);
+export default withData(ReviewsPage);

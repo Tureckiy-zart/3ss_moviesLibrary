@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import { useHistory } from "react-router";
-import { errorHandler } from "../API/getData";
+import { ErrorHandler } from "../API/getData";
 import { useData } from "../Contexts/DataContext";
 import { useLoader } from "../Contexts/LoaderContext";
 
@@ -25,7 +25,7 @@ const withData = (WrappedComponent) => {
         history={history}
         setState={setState}
         setIsLoading={setIsLoading}
-        errorHandler={errorHandler}
+        ErrorHandler={ErrorHandler}
         // extraProp="This prop is from HOC"
       />
     );

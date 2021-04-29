@@ -50,13 +50,13 @@ export const isExistItemInArray = (array, item) => {
 export const deleteItem = (array, item) =>
   array.filter((arrItem) => arrItem.id !== item.id);
 
-export const errorPageRedirect = (props) => {
-  // console.log("window.history :>> ", window.history);
-  // console.log("props :>> ", props);
-  window.location = "/errorPage";
-  // if (!history) window.location = "/errorPage";
-  // window.history.pushState(null, null, "/errorPage");
-};
+// export const errorPageRedirect = (props) => {
+//   // console.log("window.history :>> ", window.history);
+//   // console.log("props :>> ", props);
+//   window.location = "/errorPage";
+//   // if (!history) window.location = "/errorPage";
+//   // window.history.pushState(null, null, "/errorPage");
+// };
 
 // export const scrollFunction = () => {
 //   // left: 37, up: 38, right: 39, down: 40,

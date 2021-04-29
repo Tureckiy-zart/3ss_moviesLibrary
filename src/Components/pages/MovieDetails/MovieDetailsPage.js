@@ -14,7 +14,7 @@ import {
   SenondaryText,
 } from "../../structure/stylredComponents/Title.styled";
 import { getDate } from "../../heplers/heplers";
-import { errorHandler } from "../../services/API/getData";
+import { ErrorHandler } from "../../services/API/getData";
 import { useLoader } from "../../services/Contexts/LoaderContext";
 import {
   ImgWrapper,
@@ -51,7 +51,7 @@ const MovieDetailsPage = () => {
 
     doFetch("getMovieByID", { id })
       .then((response) => setMovieDetails(response))
-      .catch((error) => errorHandler(error, setState, history))
+      .catch((error) => ErrorHandler(error, history))
       .finally(setIsLoading(false));
   }, [id, setIsLoading, setState, history]);
   

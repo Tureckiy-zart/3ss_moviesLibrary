@@ -1,27 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useLocation } from "react-router";
-import { useLoader } from "../../services/Contexts/LoaderContext";
+import { useLocation } from "react-router";
 import {
   ComponentWrapper,
   Container,
 } from "../../structure/stylredComponents/stiledComponents";
-import { errorHandler } from "../../services/API/getData";
-import { useData } from "../../services/Contexts/DataContext";
 import { CollectionsForm } from "../../structure/Form/ExportsForm";
 import CollectionsGallery from "./CollectionsGallery";
 import { MovieTittle } from "../../structure/stylredComponents/Title.styled";
 import MostPopular from "../MostPopular";
 import ScrollUpBtn from "../../structure/Buttons/ScrollUpBtn";
 import { doFetch } from "../../services/API/api";
+import withData from "../../services/hoc/withFetch";
 
-function Collections() {
-  const [, setState] = useData(null);
-  const { search } = useLocation();
-  const [, setIsLoading] = useLoader(false);
-  const history = useHistory();
+function Collections({ setIsLoading, setState, ErrorHandler, history }) {
+  const { search } = useLocation(),
+    searchQuery = search?.slice(1);
   const [collections, setCollectons] = useState([]);
-
-  const searchQuery = search?.slice(1);
 
   useEffect(() => {
     if (!searchQuery) return;
@@ -29,9 +23,9 @@ function Collections() {
 
     doFetch("getCollectionId", { searchQuery })
       .then(({ results }) => setCollectons(results))
-      .catch((error) => errorHandler(error, setState, history))
+      .catch((error) => ErrorHandler(error, setState, history))
       .finally(setIsLoading(false));
-  }, [searchQuery, setIsLoading, setState, history]);
+  }, [searchQuery, setIsLoading, setState, history, ErrorHandler]);
 
   return (
     <>
@@ -56,4 +50,4 @@ function Collections() {
     </>
   );
 }
-export default Collections;
+export default withData(Collections);

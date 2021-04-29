@@ -33,6 +33,17 @@ const SubNavigation = () => {
             <StyledNavLink
               color="black"
               to={{
+                pathname: `${url}/crew`,
+                state: { from: location },
+              }}
+            >
+              <ButtonShrink>Crew</ButtonShrink>
+            </StyledNavLink>
+          </ListItem>
+          <ListItem>
+            <StyledNavLink
+              color="black"
+              to={{
                 pathname: `${url}/reviews`,
                 state: { from: location },
               }}

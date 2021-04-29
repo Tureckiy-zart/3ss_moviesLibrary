@@ -1,21 +1,17 @@
-import React, { memo, useEffect } from "react";
-import { useHistory, useLocation, useRouteMatch } from "react-router";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router";
 import useScrollPage from "../../../Hooks/useScrollPage";
 import { doFetch } from "../../services/API/api";
-import { errorHandler } from "../../services/API/getData";
 import { useData } from "../../services/Contexts/DataContext";
-import { useLoader } from "../../services/Contexts/LoaderContext";
+import withData from "../../services/hoc/withFetch";
 import Gallery from "../../structure/Gallery";
 import { ComponentWrapper } from "../../structure/stylredComponents/stiledComponents";
 import MostPopular from "../MostPopular";
 import CategoryeButtons from "./GenreButtons";
 
-const MoviesByGenre = () => {
-  const history = useHistory();
+const MoviesByGenre = ({ setIsLoading, ErrorHandler, history }) => {
+  const { categoryeId } = useLocation(null); //get Id from url (slug)
 
-  const [, setIsLoading] = useLoader(),
-    { categoryeId } = useLocation(null), //get Id from url (slug)
-    { path } = useRouteMatch();
   const [{ moviesByCategorye }, setState] = useData({});
 
   useEffect(() => {
@@ -30,10 +26,10 @@ const MoviesByGenre = () => {
         }));
       })
       .catch((error) => {
-        errorHandler(error, setState, history);
+        ErrorHandler(error,  history);
       })
       .finally(setIsLoading(false));
-  }, [categoryeId, path, setState, setIsLoading, history]);
+  }, [categoryeId, setState, setIsLoading, history, ErrorHandler]);
 
   useScrollPage();
 
@@ -51,4 +47,4 @@ const MoviesByGenre = () => {
   );
 };
 
-export default memo(MoviesByGenre);
+export default withData(MoviesByGenre);

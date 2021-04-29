@@ -11,6 +11,7 @@ export const NavWrapper = styled.div`
   width: 100%;
   position: fixed;
   z-index: 12;
+  top: 0;
 `;
 export const Nav = styled.nav`
   margin: 0 auto;

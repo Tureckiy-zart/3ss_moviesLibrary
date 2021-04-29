@@ -12,7 +12,7 @@ const fetchUrl = (
     genre = "",
   } = {}
 ) => {
-  console.log(`page`, page);
+  // console.log(`page`, page);
   const url = {
     getTrendingMovies: `/trending/all/week?api_key=${REQUEST_TOKEN}&page=${page}`,
     getMovieByID: `/movie/${id}?api_key=${REQUEST_TOKEN}`,
