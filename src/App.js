@@ -15,7 +15,7 @@ function App() {
   useEffect(() => {
     if (trendingMovies.length > 0) return;
     setIsLoading(true); //spiner on
-    doFetch("getTrendingMovies")
+    doFetch("getTrending")
       .then(({ results }) => {
         setState((prev) => ({
           ...prev,

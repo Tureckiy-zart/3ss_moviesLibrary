@@ -5,8 +5,9 @@ export const ButtonsHistoryReturn = () => {
   const history = useHistory();
   const goHome = () => history.push("/");
   const goBack = () => {
-    if (history.location.state?.from) history.goBack();
-    history.push("/");
+    // if (history.location.state?.from) 
+    history.goBack();
+    // history.push("/");
   };
   return (
     <BntGroupe>

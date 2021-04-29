@@ -1,12 +1,12 @@
 import React, { memo, useEffect, useState } from "react";
-import styled from "styled-components";
 import { useHistory, useParams } from "react-router";
-import SubNavigation from "../../Navigation/SubNavigation";
+import SubNavigation from "./SubNavigation";
 import { ButtonsHistoryReturn } from "../../structure/Buttons/ButtonsHistoryReturn";
 import {
   ComponentWrapper,
   Container,
   ExternalLink,
+  StyledDiv,
 } from "../../structure/stylredComponents/stiledComponents";
 import {
   MovieTittle,
@@ -24,12 +24,6 @@ import FavoritesBtns from "../Favorites/FavoritesBtns";
 import { Image } from "../../structure/stylredComponents/List.styled";
 import { doFetch } from "../../services/API/api";
 import { useData } from "../../services/Contexts/DataContext";
-
-const StyledDiv = styled.div`
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  grid-gap: 2vw;
-`;
 
 const buttonStyles = {
   position: "absolute",
@@ -54,13 +48,14 @@ const MovieDetailsPage = () => {
       .catch((error) => ErrorHandler(error, history))
       .finally(setIsLoading(false));
   }, [id, setIsLoading, setState, history]);
-  
+
   return (
     <ComponentWrapper position="relative" top="125px">
       <Container>
         {movieDetails && (
-          <PageWrapper>
-            <MovieTittle>{movieDetails.title}</MovieTittle>
+          <div>
+            <ButtonsHistoryReturn />
+          
             <StyledDiv>
               <div>
                 <ImgWrapper>
@@ -77,6 +72,7 @@ const MovieDetailsPage = () => {
                     }
                   />
                   <FavoritesBtns styles={buttonStyles} item={movieDetails} />
+                  <MovieTittle marginBottom='0'>{movieDetails.title}</MovieTittle>
                 </ImgWrapper>
               </div>
               <div>
@@ -90,6 +86,9 @@ const MovieDetailsPage = () => {
                 <SenondaryText>
                   Vote count: {movieDetails.vote_count}
                 </SenondaryText>
+                {movieDetails.budget && (
+                  <SenondaryText>Budget: {movieDetails.budget / 1000000 } mln.$</SenondaryText>
+                )}
 
                 {movieDetails.release_date && (
                   <SenondaryText>
@@ -104,8 +103,7 @@ const MovieDetailsPage = () => {
               </div>
             </StyledDiv>
 
-            <ButtonsHistoryReturn />
-          </PageWrapper>
+          </div>
         )}
       </Container>
     </ComponentWrapper>

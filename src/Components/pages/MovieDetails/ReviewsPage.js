@@ -27,7 +27,7 @@ const ReviewsPage = ({ setIsLoading, setState, ErrorHandler, history }) => {
     if (!id) return;
     setIsLoading(true); //spiner on
 
-    doFetch("getMovieReview", { id })
+    doFetch("getReview", { id })
       .then(({ results }) => setReviews(results))
       .catch((error) => ErrorHandler(error, setState, history))
       .finally(setIsLoading(false));

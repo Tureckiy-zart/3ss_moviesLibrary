@@ -5,6 +5,9 @@ import {
   BntGroupe,
   ButtonShrink,
 } from "../../structure/stylredComponents/Button.styled";
+import favorite from '../../../img/favorite-svgrepo-com.svg'
+
+console.log(`fav`, favorite)
 
 const FavoritesBtns = ({ styles, item }) => {
   const { id } = item;
@@ -39,7 +42,8 @@ const FavoritesBtns = ({ styles, item }) => {
   return (
     <>
       <BntGroupe className="favoritesButtons" {...styles}>
-        <ButtonShrink onClick={editLS}>{isExist ? "-" : "+"}</ButtonShrink>
+        <ButtonShrink onClick={editLS}>{isExist ? "-" :  '+'  }</ButtonShrink>
+        {/* <ButtonShrink onClick={editLS}>{isExist ? "-" :  <img alt="NextSlide" src={favorite} />  }</ButtonShrink> */}
       </BntGroupe>
     </>
   );

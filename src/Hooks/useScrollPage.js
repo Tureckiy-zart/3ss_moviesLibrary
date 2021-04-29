@@ -24,7 +24,7 @@ function currentPageOptions(searchQuery, categoryeId, path) {
     default:
       return {
         currnentPage: "currentHomePage",
-        apiRequest: "getTrendingMovies",
+        apiRequest: "getTrending",
         moviesCategory: "trendingMovies",
         options: {},
       };

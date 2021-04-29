@@ -7,7 +7,7 @@ export default class ScrollPage extends Component {
     /* выполнить побочный эффект на этапе монтирования, используя значение MyContext */
   }
   render() {
-    console.log(`props`, this.props);
+    // console.log(`props`, this.props);
     return <div>22</div>;
   }
 }

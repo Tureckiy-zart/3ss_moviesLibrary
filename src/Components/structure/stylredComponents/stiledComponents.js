@@ -34,9 +34,8 @@ const StyledContainer = styled.div`
   width: 1200px;
   display: ${(props) => props.display};
   align-items: center;
-  justify-content:center;
-  flex-direction: ${(props) => props.flexDirection || 'row'};
-
+  justify-content: center;
+  flex-direction: ${(props) => props.flexDirection || "row"};
 `;
 export const Container = (props) => {
   return <StyledContainer {...props} />;
@@ -49,4 +48,12 @@ export const ExternalLink = styled.a`
 export const InnerLink = styled(Link)`
   text-decoration: none;
   color: black;
+`;
+
+export const StyledDiv = styled.div`
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-gap: 2vw;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  padding: 2rem;
 `;

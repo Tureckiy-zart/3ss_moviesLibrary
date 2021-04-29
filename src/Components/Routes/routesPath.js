@@ -3,6 +3,7 @@ export const routes = {
   searchMovie: "/searchMovie",
   cast: "/asset/:id/cast",
   crew: "/asset/:id/crew",
+  person: "/asset/person",
   reviews: "/asset/:id/reviews",
   asset: "/asset/:id/",
   categoryes: "/categoryes",

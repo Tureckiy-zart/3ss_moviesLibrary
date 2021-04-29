@@ -31,6 +31,7 @@ function ListItem({ item }) {
     poster_path = "",
     release_date = "",
     popularity = 0,
+  
   } = item;
   // console.log('item :>> ', item);
   const releaseDate = getDate(release_date);
@@ -62,6 +63,7 @@ function ListItem({ item }) {
       <InfoWrapper>
         <Title color="black">
           <MovieTittle>{original_title ? original_title : name}.</MovieTittle>
+     
           {vote_average && vote_average !== 0 && (
             <AdditionText>Votes: {vote_average}</AdditionText>
           )}
