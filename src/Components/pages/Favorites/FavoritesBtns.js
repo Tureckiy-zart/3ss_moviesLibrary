@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { deleteFavorite, isExistInFavorites } from "../../heplers/heplers";
 import { useData } from "../../services/Contexts/DataContext";
 import {
@@ -35,7 +35,7 @@ const FavoritesBtns = ({ styles, item }) => {
     () => localStorage.setItem("favorites", JSON.stringify(favorites)),
     [favorites]
   );
-
+  
   return (
     <>
       <BntGroupe className="favoritesButtons" {...styles}>
@@ -45,7 +45,7 @@ const FavoritesBtns = ({ styles, item }) => {
   );
 };
 
-export default memo(FavoritesBtns);
+export default FavoritesBtns;
 // const idArray = favorites.reduce((acc, item) => {
 //   acc.push(item.id);
 //   return acc;

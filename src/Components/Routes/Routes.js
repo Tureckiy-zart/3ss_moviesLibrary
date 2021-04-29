@@ -11,6 +11,7 @@ import Collections from "../pages/Collection/Collections";
 import CurrnetCollection from "../pages/Collection/CurrnetCollection";
 import MoviesByGenre from "../pages/Genres/MoviesByGenre";
 import routes from "./routesPath";
+import CrewPage from "../pages/MovieDetails/CrewPage";
 
 function Routes() {
   return (
@@ -18,6 +19,7 @@ function Routes() {
       <Route path={routes.home} exact component={HomePage} />
       <Route path={routes.searchMovie} component={SearchMovie} />
       <Route path={routes.cast} component={CastPage} />
+      <Route path={routes.crew} component={CrewPage} />
       <Route path={routes.reviews} component={ReviewsPage} />
       <Route path={routes.asset} component={MovieDetailsPage} />
       <Route path={routes.categoryes} component={MoviesByGenre} />

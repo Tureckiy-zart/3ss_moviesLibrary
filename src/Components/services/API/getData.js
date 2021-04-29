@@ -1,19 +1,22 @@
-import { errorPageRedirect, defaultFunc } from "../../heplers/heplers";
+import { defaultFunc } from "../../heplers/heplers";
 import { doFetch } from "./api";
 
-export const errorHandler = (
+export const ErrorHandler = (
   error = null,
-  setState = defaultFunc,
+  // setState = defaultFunc,
   history = {}
 ) => {
   console.warn("error :>> ", error);
-  setState((prev) => ({ ...prev, error }));
-  history.push("/errorPage");
+  history.push({
+    pathname: "/errorPage",
+    // state: { from: history.location },
+  });
+  // setState((prev) => ({ ...prev, error }));
 };
 
 export const getDataOnLoad = async ({
   apiRequest = "",
-  options = {}, // id, searchQuery, sortBy, 
+  options = {}, // id, searchQuery, sortBy,
   currnetPage = 1,
   isFetching = false,
   setIsLoading = defaultFunc,
@@ -23,13 +26,16 @@ export const getDataOnLoad = async ({
   if (!isFetching) return;
   setIsLoading(true); //Spiner on
   try {
-    const {results} = await doFetch(apiRequest, {
+    const { results } = await doFetch(apiRequest, {
       ...options,
       page: currnetPage,
     });
     setMoviesByCategoryeFetched(results);
+    setIsLoading(false); //spiner off
+    setisFetching(false);
   } catch (error) {
-    errorPageRedirect(error);
+    ErrorHandler(error);
+    // errorPageRedirect(error);
   } finally {
     setIsLoading(false); //spiner off
     setisFetching(false);

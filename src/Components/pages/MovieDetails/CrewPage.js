@@ -19,31 +19,31 @@ import {
   MovieTittle,
 } from "../../structure/stylredComponents/Title.styled";
 
-const CastPage = ({ setIsLoading, setState, ErrorHandler, history }) => {
+const CrewPage = ({ setIsLoading, setState, ErrorHandler, history }) => {
   let { id } = useParams();
-  const [cast, setCast] = useState([]);
+  const [crew, setCrew] = useState([]);
 
   useEffect(() => {
     if (!id) return;
     setIsLoading(true); //spiner on
 
     doFetch("getMovieCast", { id })
-      // .then(({ crew }) => setCast(crew))
-      .then(({ cast }) => setCast(cast))
+      .then(({ crew }) => setCrew(crew))
       .catch((error) => {
         ErrorHandler(error,  history);
       })
       .finally(setIsLoading(false));
   }, [id, setIsLoading, setState, history, ErrorHandler]);
+  // console.log(`crew`, crew?.length );
 
   return (
     <ComponentWrapper position="relative" top="125px">
       <Container>
-        {cast.length ? (
+        {crew.length > 0 ? (
           <>
             <ButtonsHistoryReturn />
             <StyledGalleryList>
-              {cast.map(({ id, character, profile_path, name, popularity }) => (
+              {crew.map(({ id, profile_path, name, job, popularity }) => (
                 <ListItem key={id}>
                   <ImageWrapper>
                     <Image
@@ -57,7 +57,7 @@ const CastPage = ({ setIsLoading, setState, ErrorHandler, history }) => {
                   </ImageWrapper>
                   <InfoWrapper>
                     <MovieTittle>{name}</MovieTittle>
-                    <AdditionText>Character: {character}</AdditionText>
+                    <AdditionText>Job: {job}</AdditionText>
                     <AdditionText>
                       Popularity: {Number(popularity).toFixed(1)}
                     </AdditionText>
@@ -75,4 +75,4 @@ const CastPage = ({ setIsLoading, setState, ErrorHandler, history }) => {
   );
 };
 
-export default withData(CastPage);
+export default withData(CrewPage);

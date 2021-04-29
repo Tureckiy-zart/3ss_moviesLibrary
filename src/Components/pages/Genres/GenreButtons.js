@@ -15,10 +15,9 @@ const CategoryeButtons = () => {
   const [categoryes, setCategoryes] = useState([]);
   const { location } = useHistory();
   useEffect(
-    () => doFetch("getGenres").then(({genres}) => setCategoryes(genres)),
+    () => doFetch("getGenres").then(({ genres }) => setCategoryes(genres)),
     []
   ); //set categoryes on mount
-
   return (
     <ComponentWrapper>
       <Container>
@@ -33,7 +32,7 @@ const CategoryeButtons = () => {
                     state: { from: location }, // not used yet
                   }}
                 >
-                  <Button margin="0 0.5rem 0.5rem 0">{name}</Button>{" "}
+                  <Button margin="0 0.5rem 0.5rem 0">{name}</Button>
                 </Link>
               </ListItem>
             ))}

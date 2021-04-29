@@ -4,22 +4,25 @@ import {
   CenteredImg,
   ImageWrapper,
 } from "../structure/stylredComponents/List.styled";
-import { Container } from "../structure/stylredComponents/stiledComponents";
+import {
+  ComponentWrapper,
+  Container,
+} from "../structure/stylredComponents/stiledComponents";
 import MostPopular from "./MostPopular";
+import error404 from '../../img/error 404.jpg'
 
 function ErrorPage() {
-  // if (trendingMovies) console.log("object :>> ", trendingMovies);
   return (
-    <Container>
-      <>
+    <ComponentWrapper position="relative" top="150px">
+      <Container>
         <ImageWrapper>
           <GoHomeBtn />
-          <CenteredImg src="https://ic.pics.livejournal.com/v_ellena/58458294/211746/211746_900.jpg" />
+          <CenteredImg src={error404} />
         </ImageWrapper>
 
         <MostPopular />
-      </>
-    </Container>
+      </Container>
+    </ComponentWrapper>
   );
 }
 export default ErrorPage;

@@ -2,6 +2,7 @@ export const routes = {
   home: "/",
   searchMovie: "/searchMovie",
   cast: "/asset/:id/cast",
+  crew: "/asset/:id/crew",
   reviews: "/asset/:id/reviews",
   asset: "/asset/:id/",
   categoryes: "/categoryes",

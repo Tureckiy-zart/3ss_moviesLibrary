@@ -4,14 +4,16 @@ import { BntGroupe, ButtonShrink } from "../stylredComponents/Button.styled";
 export const ButtonsHistoryReturn = () => {
   const history = useHistory();
   const goHome = () => history.push("/");
-  const goBack = () => history.goBack();
+  const goBack = () => {
+    if (history.location.state?.from) history.goBack();
+    history.push("/");
+  };
   return (
     <BntGroupe>
       <ButtonShrink onClick={goBack}>Go Back</ButtonShrink>
       <ButtonShrink onClick={goHome}>Home</ButtonShrink>
     </BntGroupe>
   );
-  // return [goHome, goBack];
 };
 export const GoHomeBtn = () => {
   const history = useHistory();
@@ -21,5 +23,4 @@ export const GoHomeBtn = () => {
       <ButtonShrink onClick={goHome}>Go home</ButtonShrink>
     </BntGroupe>
   );
-  // return [goHome, goBack];
 };

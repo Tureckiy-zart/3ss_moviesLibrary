@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useHistory, useLocation } from "react-router";
 import useScrollPage from "../../Hooks/useScrollPage";
-import { errorHandler } from "../services/API/getData";
+import { ErrorHandler } from "../services/API/getData";
 import { useData } from "../services/Contexts/DataContext";
 import { useLoader } from "../services/Contexts/LoaderContext";
 import Gallery from "../structure/Gallery";
@@ -34,7 +34,7 @@ const SearchMovie = () => {
         }))
       )
       .catch((error) => {
-        errorHandler(error, setState, history);
+        ErrorHandler(error,  history);
       })
       .finally(setIsLoading(false));
   }, [searchQuery, setState, setIsLoading, history]);
