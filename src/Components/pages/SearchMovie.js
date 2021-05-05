@@ -9,7 +9,7 @@ import {
   ComponentWrapper,
   Container,
 } from "../structure/stylredComponents/stiledComponents";
-import { MovieTittle } from "../structure/stylredComponents/Title.styled";
+import { BasicTittle } from "../structure/stylredComponents/Title.styled";
 import MostPopular from "./MostPopular";
 import { BannerForm } from "../structure/Form/ExportsForm";
 import { doFetch } from "../services/API/api";
@@ -52,7 +52,7 @@ const SearchMovie = () => {
         <ComponentWrapper grid="grid" position="relative" top="125px">
           <Container display="flex" marginBottom="2rem" flexDirection="column">
             <BannerForm />
-            <MovieTittle margin="2rem">Nothing found.</MovieTittle>
+            <BasicTittle margin="2rem">Nothing found.</BasicTittle>
           </Container>
           <MostPopular />
         </ComponentWrapper>

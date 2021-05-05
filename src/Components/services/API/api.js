@@ -34,4 +34,3 @@ export const doFetch = async (request, opt) => {
   // console.log(`data API`, data);
   return data;
 };
-

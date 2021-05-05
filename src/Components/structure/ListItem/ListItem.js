@@ -59,7 +59,6 @@ function ListItem({ item }) {
 
         <FavoritesBtns styles={buttonStyles} item={item} />
       </ImageWrapper>
-
       <InfoWrapper>
         <Title color="black">
           <MovieTittle>{original_title ? original_title : name}.</MovieTittle>

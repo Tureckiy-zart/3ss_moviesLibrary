@@ -4,6 +4,7 @@ import { useParams } from "react-router";
 import { doFetch } from "../../services/API/api";
 import withData from "../../services/hoc/withFetch";
 import { ButtonsHistoryReturn } from "../../structure/Buttons/ButtonsHistoryReturn";
+import ProfileImage from "../../structure/ImageComponents/ProfileImage";
 import {
   Image,
   ImageWrapper,
@@ -22,6 +23,7 @@ import {
 } from "../../structure/stylredComponents/Title.styled";
 
 const PageMarkup = ({ currentArray }) => {
+  console.log(`currentArray`, currentArray);
   return (
     <>
       {currentArray ? (
@@ -29,28 +31,31 @@ const PageMarkup = ({ currentArray }) => {
           <ButtonsHistoryReturn />
           <StyledGalleryList>
             {currentArray.map(
-              ({ credit_id, character, profile_path, name, popularity }) => (
-                <StyledNavLink key={nanoid(5)}
+              ({
+                credit_id,
+                job,
+                character,
+                profile_path,
+                name,
+                popularity,
+              }) => (
+                <StyledNavLink
+                  key={nanoid(5)}
                   to={{
                     pathname: `/asset/person/${name}`,
                     search: `${credit_id}`,
                     // state: { from: history.location },
                   }}
                 >
-                  <StyledGalleryListItem >
-                    <ImageWrapper>
-                      <Image
-                        src={
-                          profile_path
-                            ? `https://image.tmdb.org/t/p/w154/${profile_path}`
-                            : "http://ergo.slv.vic.gov.au/sites/default/files/imagecache/download/ms11553box4.jpg"
-                        }
-                        alt={name ? name : "No-name"}
-                      />
-                    </ImageWrapper>
+                  <StyledGalleryListItem>
+                    <ProfileImage profile_path={profile_path} name={name} />
+        
                     <InfoWrapper>
                       <MovieTittle>{name}</MovieTittle>
-                      <AdditionText>Character: {character}</AdditionText>
+                      {job && <AdditionText>Job: {job}</AdditionText>}
+                      {character && (
+                        <AdditionText>Character: {character}</AdditionText>
+                      )}
                       <AdditionText>
                         Popularity: {Number(popularity).toFixed(1)}
                       </AdditionText>

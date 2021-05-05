@@ -1,8 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import {
-  Image,
-  ImageWrapper,
   InfoWrapper,
   StyledGalleryListItem,
 } from "../../structure/stylredComponents/List.styled";
@@ -12,6 +10,7 @@ import {
   MovieTittle,
 } from "../../structure/stylredComponents/Title.styled";
 import { trimmedString } from "../../heplers/heplers";
+import ProfileImage from "../../structure/ImageComponents/ProfileImage";
 
 function CollectionsList({ item }) {
   const { location } = useHistory();
@@ -28,16 +27,7 @@ function CollectionsList({ item }) {
               state: { from: location },
             }}
           >
-            <ImageWrapper>
-              <Image
-                src={
-                  poster_path
-                    ? `https://image.tmdb.org/t/p/w154/${poster_path}`
-                    : "http://ergo.slv.vic.gov.au/sites/default/files/imagecache/download/ms11553box4.jpg"
-                }
-                alt={title ? title : name}
-              />
-            </ImageWrapper>
+            <ProfileImage poster_path={poster_path} name={name} />
 
             <InfoWrapper>
               <MovieTittle>

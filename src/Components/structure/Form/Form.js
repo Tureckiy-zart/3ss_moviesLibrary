@@ -29,7 +29,7 @@ const SearchForm = ({ queryLocation }) => {
         rules={{ required: true }}
         render={({ field }) => <Input placeholder="Search..." {...field} />}
       />
-      <FormButton type="submit" />
+      <FormButton as='input' type="submit" />
     </Form>
   );
 };

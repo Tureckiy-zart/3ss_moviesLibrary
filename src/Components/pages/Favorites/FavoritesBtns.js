@@ -43,15 +43,9 @@ const FavoritesBtns = ({ styles, item }) => {
     <>
       <BntGroupe className="favoritesButtons" {...styles}>
         <ButtonShrink onClick={editLS}>{isExist ? "-" :  '+'  }</ButtonShrink>
-        {/* <ButtonShrink onClick={editLS}>{isExist ? "-" :  <img alt="NextSlide" src={favorite} />  }</ButtonShrink> */}
       </BntGroupe>
     </>
   );
 };
 
 export default FavoritesBtns;
-// const idArray = favorites.reduce((acc, item) => {
-//   acc.push(item.id);
-//   return acc;
-// },[]);
-// console.log("idArray :>> ", idArray);

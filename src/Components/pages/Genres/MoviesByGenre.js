@@ -4,10 +4,9 @@ import useScrollPage from "../../../Hooks/useScrollPage";
 import { doFetch } from "../../services/API/api";
 import { useData } from "../../services/Contexts/DataContext";
 import withData from "../../services/hoc/withFetch";
-import Gallery from "../../structure/Gallery";
 import { ComponentWrapper } from "../../structure/stylredComponents/stiledComponents";
-import MostPopular from "../MostPopular";
-import CategoryeButtons from "./GenreButtons";
+import CategoryeButtons from "./GenreButtons/GenreButtons";
+import GenresGallery from "./GenresGallery";
 
 const MoviesByGenre = ({ setIsLoading, ErrorHandler, history }) => {
   const { categoryeId } = useLocation(null); //get Id from url (slug)
@@ -26,7 +25,7 @@ const MoviesByGenre = ({ setIsLoading, ErrorHandler, history }) => {
         }));
       })
       .catch((error) => {
-        ErrorHandler(error,  history);
+        ErrorHandler(error, history);
       })
       .finally(setIsLoading(false));
   }, [categoryeId, setState, setIsLoading, history, ErrorHandler]);
@@ -36,13 +35,7 @@ const MoviesByGenre = ({ setIsLoading, ErrorHandler, history }) => {
   return (
     <ComponentWrapper position="relative" top="125px">
       <CategoryeButtons />
-      <>
-        {moviesByCategorye.length > 0 ? (
-          <Gallery dataMovies={moviesByCategorye} />
-        ) : (
-          <MostPopular />
-        )}
-      </>
+      <GenresGallery moviesByCategorye={moviesByCategorye}/>
     </ComponentWrapper>
   );
 };

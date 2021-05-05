@@ -54,6 +54,7 @@ export const NavigationLink = styled(NavLink)`
 `;
 
 const activeClassName = "NavLinkActive";
+
 export const StyledNavigationLink = styled(NavigationLink).attrs({
   activeClassName,
 })`

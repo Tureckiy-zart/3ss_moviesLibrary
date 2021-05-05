@@ -10,7 +10,8 @@ import styled, { css } from "styled-components";
 // }
 // const DarkBlue = "227, 227, 227, 1";
 
-export const ComponentWrapper = styled.div`
+// export const ComponentWrapper = styled.div`
+export const ComponentWrapper = styled.section`
   position: ${(props) => props.position || "static"};
   top: ${(props) => props.top};
   /* display: ${(props) => props.display}; */
@@ -42,7 +43,7 @@ export const Container = (props) => {
 };
 
 export const ExternalLink = styled.a`
-  text-decoration: none;
+  /* text-decoration: none; */
   color: black;
 `;
 export const InnerLink = styled(Link)`
