@@ -1,5 +1,6 @@
 import { FormWrapper } from "../stylredComponents/Baner.styled";
 import SearchForm from "./Form";
+// import SearchForm from "./Form_ react-hook-form";
 
 export const CollectionsForm = () => (
   <FormWrapper marginBottom="2rem">

@@ -18,7 +18,6 @@ const InfoBlock = ({
   return (
     <div>
       <AdditionText marginBottom="1rem">{overview}</AdditionText>
-
       <SenondaryText>Rating IMDB: {vote_average}</SenondaryText>
       <SenondaryText>Vote count: {vote_count}</SenondaryText>
       {budget !== 0 && (

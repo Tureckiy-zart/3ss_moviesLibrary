@@ -14,7 +14,7 @@ import ProfileImage from "../../structure/ImageComponents/ProfileImage";
 
 function CollectionsList({ item }) {
   const { location } = useHistory();
-  const { id, title, name, original_title, poster_path, overview } = item;
+  const { id, name, original_title, poster_path, overview } = item;
   const trimmedOverview = trimmedString(overview);
   return (
     <>

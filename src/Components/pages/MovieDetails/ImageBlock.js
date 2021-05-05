@@ -1,7 +1,5 @@
 import React from "react";
 import ProfileImage from "../../structure/ImageComponents/ProfileImage";
-import { Image } from "../../structure/stylredComponents/List.styled";
-import { ImgWrapper } from "../../structure/stylredComponents/MovieDetailsPage.styled";
 import { MovieTittle } from "../../structure/stylredComponents/Title.styled";
 import FavoritesBtns from "../Favorites/FavoritesBtns";
 const buttonStyles = {

@@ -14,15 +14,16 @@ const withData = (WrappedComponent) => {
   //     }
   //   };
 
-  const WithHigherOrderComponent = (props) => {
+  return (props) => {
     const history = useHistory();
-    const [, setState] = useData();
+    const [state, setState] = useData();
     const [, setIsLoading] = useLoader();
 
     return (
       <WrappedComponent
         {...props}
         history={history}
+        state={state}
         setState={setState}
         setIsLoading={setIsLoading}
         ErrorHandler={ErrorHandler}
@@ -30,8 +31,6 @@ const withData = (WrappedComponent) => {
       />
     );
   };
-
-  return WithHigherOrderComponent;
 };
 
 export default withData;

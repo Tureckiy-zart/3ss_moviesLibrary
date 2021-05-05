@@ -1,35 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { Form, FormButton, Input } from "../stylredComponents/Form.styled";
-// const queryString = require("query-string");
 
 const SearchForm = ({ queryLocation }) => {
+  const [inputValue, setInputValue] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const history = useHistory();
-  const { handleSubmit, control, reset } = useForm();
-  const [{ searchQuery }, setSearchQuery] = useState("");
-
-  const onSubmit = (query) => setSearchQuery(query);
+  const location = useLocation();
+  const handleSubmit = (e) => {
+      e.preventDefault();
+      setSearchQuery(inputValue.trim());
+    },
+    onChange = ({ target }) => setInputValue(target.value);
 
   useEffect(() => {
     if (!searchQuery) return;
     history.push({
       pathname: `/search${queryLocation}/`,
       search: `?${searchQuery}`,
-      state: { from: history.location },
+      state: { from: location },
     });
-    return reset;
-  }, [searchQuery, history, reset, queryLocation]);
+    setInputValue("");
+    setSearchQuery("");
+  }, [searchQuery, history, location, queryLocation]);
+
   return (
-    <Form className="searchForm" onSubmit={handleSubmit(onSubmit)}>
-      <Controller
-        name="searchQuery"
-        control={control}
-        defaultValue={searchQuery}
-        rules={{ required: true }}
-        render={({ field }) => <Input placeholder="Search..." {...field} />}
-      />
-      <FormButton as='input' type="submit" />
+    <Form onSubmit={handleSubmit}>
+      <Input placeholder="Search..." value={inputValue} onChange={onChange} />
+      <FormButton as="input" type="submit" />
     </Form>
   );
 };

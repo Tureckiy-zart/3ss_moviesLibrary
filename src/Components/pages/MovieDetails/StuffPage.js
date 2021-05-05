@@ -6,8 +6,6 @@ import withData from "../../services/hoc/withFetch";
 import { ButtonsHistoryReturn } from "../../structure/Buttons/ButtonsHistoryReturn";
 import ProfileImage from "../../structure/ImageComponents/ProfileImage";
 import {
-  Image,
-  ImageWrapper,
   InfoWrapper,
   StyledGalleryList,
   StyledGalleryListItem,
@@ -23,7 +21,6 @@ import {
 } from "../../structure/stylredComponents/Title.styled";
 
 const PageMarkup = ({ currentArray }) => {
-  console.log(`currentArray`, currentArray);
   return (
     <>
       {currentArray ? (
@@ -49,7 +46,7 @@ const PageMarkup = ({ currentArray }) => {
                 >
                   <StyledGalleryListItem>
                     <ProfileImage profile_path={profile_path} name={name} />
-        
+
                     <InfoWrapper>
                       <MovieTittle>{name}</MovieTittle>
                       {job && <AdditionText>Job: {job}</AdditionText>}

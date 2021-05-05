@@ -34,7 +34,6 @@ class PersonPage extends Component {
         this.setState((prev) => {
           return {
             ...prev,
-            // data: data.job,
             data,
           };
         });

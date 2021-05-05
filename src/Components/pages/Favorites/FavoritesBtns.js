@@ -1,13 +1,11 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { deleteFavorite, isExistInFavorites } from "../../heplers/heplers";
 import { useData } from "../../services/Contexts/DataContext";
 import {
   BntGroupe,
   ButtonShrink,
 } from "../../structure/stylredComponents/Button.styled";
-import favorite from '../../../img/favorite-svgrepo-com.svg'
-
-console.log(`fav`, favorite)
+import favorite from "../../../img/favorite-svgrepo-com.svg";
 
 const FavoritesBtns = ({ styles, item }) => {
   const { id } = item;
@@ -38,11 +36,11 @@ const FavoritesBtns = ({ styles, item }) => {
     () => localStorage.setItem("favorites", JSON.stringify(favorites)),
     [favorites]
   );
-  
+
   return (
     <>
       <BntGroupe className="favoritesButtons" {...styles}>
-        <ButtonShrink onClick={editLS}>{isExist ? "-" :  '+'  }</ButtonShrink>
+        <ButtonShrink onClick={editLS}>{isExist ? "-" : "+"}</ButtonShrink>
       </BntGroupe>
     </>
   );

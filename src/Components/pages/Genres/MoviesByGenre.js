@@ -2,16 +2,20 @@ import React, { useEffect } from "react";
 import { useLocation } from "react-router";
 import useScrollPage from "../../../Hooks/useScrollPage";
 import { doFetch } from "../../services/API/api";
-import { useData } from "../../services/Contexts/DataContext";
 import withData from "../../services/hoc/withFetch";
 import { ComponentWrapper } from "../../structure/stylredComponents/stiledComponents";
 import CategoryeButtons from "./GenreButtons/GenreButtons";
 import GenresGallery from "./GenresGallery";
 
-const MoviesByGenre = ({ setIsLoading, ErrorHandler, history }) => {
+const MoviesByGenre = ({
+  state,
+  setState,
+  setIsLoading,
+  ErrorHandler,
+  history,
+}) => {
   const { categoryeId } = useLocation(null); //get Id from url (slug)
-
-  const [{ moviesByCategorye }, setState] = useData({});
+  const { moviesByCategorye } = state;
 
   useEffect(() => {
     if (!categoryeId) return;
@@ -35,7 +39,7 @@ const MoviesByGenre = ({ setIsLoading, ErrorHandler, history }) => {
   return (
     <ComponentWrapper position="relative" top="125px">
       <CategoryeButtons />
-      <GenresGallery moviesByCategorye={moviesByCategorye}/>
+      <GenresGallery moviesByCategorye={moviesByCategorye} />
     </ComponentWrapper>
   );
 };
