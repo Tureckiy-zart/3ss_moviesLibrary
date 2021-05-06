@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useLocation } from "react-router";
 import {
   ComponentWrapper,
@@ -11,29 +11,43 @@ import MostPopular from "../MostPopular";
 import ScrollUpBtn from "../../structure/Buttons/ScrollUpBtn";
 import { doFetch } from "../../services/API/api";
 import withData from "../../services/hoc/withFetch";
+import useScrollPage from "../../../Hooks/useScrollPage";
 
-function Collections({ setIsLoading, setState, ErrorHandler, history }) {
+function Collections({ setIsLoading, state, setState, ErrorHandler, history }) {
   const { search } = useLocation(),
     searchQuery = search?.slice(1);
-  const [collections, setCollectons] = useState([]);
 
   useEffect(() => {
     if (!searchQuery) return;
     setIsLoading(true); //spiner on
 
     doFetch("getCollectionId", { searchQuery })
-      .then(({ results }) => setCollectons(results))
+      .then(({ results }) =>
+        setState((prev) => ({
+          ...prev,
+          searchCollection: results,
+          currentSearchCollection: 2,
+        }))
+      )
       .catch((error) => ErrorHandler(error, setState, history))
       .finally(setIsLoading(false));
   }, [searchQuery, setIsLoading, setState, history, ErrorHandler]);
 
+  //   doFetch("getCollectionId", { searchQuery })
+  //     .then(({ results }) => setCollectons(results))
+  //     .catch((error) => ErrorHandler(error, setState, history))
+  //     .finally(setIsLoading(false));
+  // }, [searchQuery, setIsLoading, setState, history, ErrorHandler]);
+  // console.log(`collections`, collections);
+  useScrollPage();
+  // console.log(`state`, state)
   return (
     <>
-      {collections.length > 0 ? (
+      {state.searchCollection.length > 0 ? (
         <ComponentWrapper grid="grid" position="relative" top="125px">
           <Container display="flex" marginBottom="2rem" flexDirection="column">
             <CollectionsForm />
-            <CollectionsGallery collections={collections} />
+            <CollectionsGallery collections={state.searchCollection} />
             <ScrollUpBtn />
           </Container>
         </ComponentWrapper>

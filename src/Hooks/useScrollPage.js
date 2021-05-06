@@ -1,16 +1,31 @@
 import { useEffect } from "react";
 import { useLocation, useRouteMatch } from "react-router";
+import { doFetch } from "../Components/services/API/api";
+import { ErrorHandler } from "../Components/services/API/getData";
 import { useData } from "../Components/services/Contexts/DataContext";
-import useLoading from "./useLoading";
+import { useLoader } from "../Components/services/Contexts/LoaderContext";
+import { useScrollCalculate } from "./useScrollCalculate";
 
-function currentPageOptions(searchQuery, categoryeId, path) {
+const useCurrentPageOptions = () => {
+  const { search: searchQuery, categoryeId } = useLocation(), //get Id & searchQuery from url (slug)
+    { path } = useRouteMatch();
+  const [
+    {
+      currentCategoryePage,
+      currentSearchMoviePage,
+      currentHomePage,
+      currentSearchCollection,
+    },
+  ] = useData();
+
   switch (path) {
     case "/searchMovie":
       return {
         currnentPage: "currentSearchMoviePage",
         apiRequest: "getMovieByTitle",
         moviesCategory: "searchMovies",
-        options: { searchQuery },
+        searchQuery,
+        page: currentSearchMoviePage,
       };
 
     case "/categoryes":
@@ -18,7 +33,16 @@ function currentPageOptions(searchQuery, categoryeId, path) {
         currnentPage: "currentCategoryePage",
         apiRequest: "getMovieByGenre",
         moviesCategory: "moviesByCategorye",
-        options: { genre: categoryeId },
+        genre: categoryeId,
+        page: currentCategoryePage,
+      };
+    case "/searchCollection":
+      return {
+        currnentPage: "currentSearchCollection",
+        apiRequest: "getCollectionId",
+        moviesCategory: "searchCollection",
+        searchQuery,
+        page: currentSearchCollection,
       };
 
     default:
@@ -26,38 +50,41 @@ function currentPageOptions(searchQuery, categoryeId, path) {
         currnentPage: "currentHomePage",
         apiRequest: "getTrending",
         moviesCategory: "trendingMovies",
-        options: {},
+        page: currentHomePage,
       };
   }
-}
+};
 
 const useScrollPage = () => {
-  const { search: searchQuery, categoryeId } = useLocation(), //get Id & searchQuery from url (slug)
-    { path } = useRouteMatch();
-  const [, setState] = useData();
+  const [isFetching, setisFetching] = useScrollCalculate(),
+    [, setIsLoading] = useLoader(false),
+    [, setState] = useData();
+  const apiRequestOptions = useCurrentPageOptions();
+  const getDataOnLoad = async (apiRequestOptions) => {
+    setIsLoading(true); //Spiner on
+    try {
+      const { results } = await doFetch(null, apiRequestOptions);
+      const { moviesCategory, currnentPage } = apiRequestOptions;
 
-  const {
-    currnentPage,
-    moviesCategory,
-    apiRequest,
-    options,
-  } = currentPageOptions(searchQuery, categoryeId, path);
-
-  const moviesByCategoryeFetched = useLoading(apiRequest, options); //Uploading data on scrollPage
-
+      setState((prev) => {
+        return {
+          ...prev,
+          [moviesCategory]: [...prev[moviesCategory], ...results],
+          [currnentPage]: prev[currnentPage] + 1,
+        };
+      });
+    } catch (error) {
+      ErrorHandler(error);
+    } finally {
+      setIsLoading(false); //spiner off
+      setisFetching(false);
+    }
+  };
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    if (!moviesByCategoryeFetched.length) return;
-
-    setState((prev) => {
-      return {
-        ...prev,
-        [moviesCategory]: [
-          ...prev[moviesCategory],
-          ...moviesByCategoryeFetched,
-        ],
-        [currnentPage]: prev[currnentPage] + 1,
-      };
-    });
-  }, [moviesByCategoryeFetched, currnentPage, moviesCategory, setState]);
+    if (!isFetching) return;
+    getDataOnLoad(apiRequestOptions);
+  }, [isFetching]);
+  /* eslint-enable react-hooks/exhaustive-deps */
 };
 export default useScrollPage;

@@ -22,7 +22,7 @@ const InfoBlock = ({
       <SenondaryText>Vote count: {vote_count}</SenondaryText>
       {budget !== 0 && (
         <SenondaryText>
-          Budget: <strong> {budget / 1000000} mln.$</strong> 
+          Budget: <strong> {(budget / 1000000).toFixed(1)} mln.$</strong> 
         </SenondaryText>
       )}
       {release_date && (

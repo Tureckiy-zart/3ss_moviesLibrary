@@ -9,10 +9,12 @@ const initialState = {
   trendingMovies: [],
   moviesByCategorye: [],
   searchMovies: [],
+  searchCollection: [],
   favorites: getFavoritesFromLocalStorage(),
   currentHomePage: 2,
   currentCategoryePage: 2,
   currentSearchMoviePage: 2,
+  currentSearchCollection: 2,
   error: null,
 };
 
