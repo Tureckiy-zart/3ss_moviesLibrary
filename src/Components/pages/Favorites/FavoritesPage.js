@@ -10,7 +10,7 @@ import { useData } from "../../services/Contexts/DataContext";
 function FavoritesPage() {
   const [{ favorites }] = useData(null);
   return (
-    <ComponentWrapper position="relative" top="125px">
+    <ComponentWrapper as='main' position="relative" top="125px">
       <Container>
         {favorites.length > 0 ? (
           <List dataMovies={favorites} /> 

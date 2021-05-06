@@ -9,7 +9,7 @@ const initialState = {
   trendingMovies: [],
   moviesByCategorye: [],
   searchMovies: [],
-  searchCollection: [],
+  searchCollection: null,
   favorites: getFavoritesFromLocalStorage(),
   currentHomePage: 2,
   currentCategoryePage: 2,

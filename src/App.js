@@ -6,6 +6,7 @@ import Navigation from "./Components/Navigation/Navigation";
 import Routes from "./Components/Routes/Routes";
 import { ErrorHandler } from "./Components/services/API/getData";
 import { doFetch } from "./Components/services/API/api";
+import Loader from "./Components/Loader/Loader";
 
 function App() {
   const history = useHistory();
@@ -31,6 +32,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      {/* <Loader /> */}
       <Navigation />
       <Routes />
     </BrowserRouter>

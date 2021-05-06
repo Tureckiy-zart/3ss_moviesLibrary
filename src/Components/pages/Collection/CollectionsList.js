@@ -11,6 +11,7 @@ import {
 } from "../../structure/stylredComponents/Title.styled";
 import { trimmedString } from "../../heplers/heplers";
 import ProfileImage from "../../structure/ImageComponents/ProfileImage";
+import NotFound from "../../structure/NotFound";
 
 function CollectionsList({ item }) {
   const { location } = useHistory();
@@ -38,8 +39,7 @@ function CollectionsList({ item }) {
           </InnerLink>
         </StyledGalleryListItem>
       ) : (
-        // FIX
-        <MovieTittle marginBottom="2rem">Nothing found.</MovieTittle>
+        <NotFound />
       )}
     </>
   );

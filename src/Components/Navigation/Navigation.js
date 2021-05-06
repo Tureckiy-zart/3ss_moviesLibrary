@@ -6,12 +6,12 @@ import { NavigationMenue } from "./NavigationMenue";
 
 function Navigation() {
   return (
-    <NavWrapper>
-      <Container display="flex">
-        <LogoLink />
-        <NavigationMenue />
-      </Container>
-    </NavWrapper>
+      <NavWrapper as='header'>
+        <Container display="flex">
+          <LogoLink />
+          <NavigationMenue />
+        </Container>
+      </NavWrapper>
   );
 }
 export default Navigation;

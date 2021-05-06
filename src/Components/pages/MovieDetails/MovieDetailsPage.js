@@ -33,15 +33,17 @@ const MovieDetailsPage = () => {
   return (
     <>
       {movieDetails && (
-        <ComponentWrapper position="relative" top="125px">
-          <Container>
-            <ButtonsHistoryReturn />
-            <StyledDiv>
-              <ImageBlock {...movieDetails} />
-              <InfoBlock {...movieDetails} />
-            </StyledDiv>
-          </Container>
-        </ComponentWrapper>
+        <main>
+          <ComponentWrapper position="relative" top="125px">
+            <Container>
+              <ButtonsHistoryReturn />
+              <StyledDiv>
+                <ImageBlock {...movieDetails} />
+                <InfoBlock {...movieDetails} />
+              </StyledDiv>
+            </Container>
+          </ComponentWrapper>
+        </main>
       )}
     </>
   );
