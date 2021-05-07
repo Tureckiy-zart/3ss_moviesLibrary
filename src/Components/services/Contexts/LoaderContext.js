@@ -4,7 +4,7 @@ const LoaderContext = React.createContext();
 export const useLoader = () => useContext(LoaderContext);
 
 export const LoaderProvider = ({ children }) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   return (
     <LoaderContext.Provider value={[isLoading, setIsLoading]}>
       {children}

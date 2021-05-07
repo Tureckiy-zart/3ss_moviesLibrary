@@ -2,6 +2,7 @@ import React from "react";
 import Spiner from "react-loader-spinner";
 import styled from "styled-components";
 import { useLoader } from "../services/Contexts/LoaderContext";
+
 const LoaderWrapper = styled.div`
   display: grid;
   place-items: center;
@@ -10,11 +11,12 @@ const LoaderWrapper = styled.div`
   background-color: rgba(0, 0, 0, 0.9);
   position: fixed;
   top: 0;
-  z-index: 100;
+  z-index: 10000000;
 `;
 
 function Loader() {
   const [isLoading] = useLoader();
+  console.log(`isLoading`, isLoading)
   if (!isLoading) return null;
   return (
     <LoaderWrapper>
@@ -23,7 +25,7 @@ function Loader() {
         color="#00BFFF"
         height={100}
         width={100}
-        timeout={400}
+        // timeout={400}
       />
     </LoaderWrapper>
   );

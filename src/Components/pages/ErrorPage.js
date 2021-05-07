@@ -13,7 +13,7 @@ import error404 from '../../img/error 404.jpg'
 
 function ErrorPage() {
   return (
-    <ComponentWrapper position="relative" top="150px">
+    <ComponentWrapper as='main' position="relative" top="150px">
       <Container>
         <ImageWrapper>
           <GoHomeBtn />

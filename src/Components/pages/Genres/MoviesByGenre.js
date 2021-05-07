@@ -37,7 +37,7 @@ const MoviesByGenre = ({
   useScrollPage();
 
   return (
-    <ComponentWrapper position="relative" top="125px">
+    <ComponentWrapper as='main' position="relative" top="125px">
       <CategoryeButtons />
       <GenresGallery moviesByCategorye={moviesByCategorye} />
     </ComponentWrapper>

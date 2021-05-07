@@ -15,14 +15,14 @@ function HomePage({ state }) {
   return (
     <>
       {trendingMovies && (
-        <>
+        <main>
           <Banner />
           <ComponentWrapper position="relative" top="650px">
             <Carousel />
             <CategoryeButtons />
             <Gallery dataMovies={trendingMovies} />
           </ComponentWrapper>
-        </>
+        </main>
       )}
     </>
   );
