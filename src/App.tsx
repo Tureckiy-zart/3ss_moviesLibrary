@@ -1,24 +1,30 @@
-import React, { useEffect } from "react";
-import { BrowserRouter, useHistory } from "react-router-dom";
+import React, { useEffect, FC } from "react";
+// import { BrowserRouter, useHistory } from "react-router-dom";
 import { useData } from "./Components/services/Contexts/DataContext";
 import { useLoader } from "./Components/services/Contexts/LoaderContext";
 import Navigation from "./Components/Navigation/Navigation";
 import Routes from "./Components/Routes/Routes";
 import { ErrorHandler } from "./Components/services/API/getData";
 import { doFetch } from "./Components/services/API/api";
-import Loader from "./Components/Loader/Loader";
+import { BrowserRouter, useHistory } from "react-router-dom";
 
-function App() {
+// type Props = {
+//   BrowserRouter: any, Navigation: any, Routes: any
+// }
+
+// const App = (): FC<Props> => {
+
+  function App() {
   const history = useHistory();
   const [, setIsLoading] = useLoader();
-  const [{ trendingMovies }, setState] = useData(null);
+  const [{ trendingMovies }, setState] = useData();
 
   useEffect(() => {
     if (trendingMovies.length > 0) return;
     setIsLoading(true); //spiner on
     doFetch("getTrending")
       .then(({ results }) => {
-        setState((prev) => ({
+        setState((prev: any) => ({
           ...prev,
           trendingMovies: results,
         }));
@@ -32,7 +38,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* <Loader /> */}
       <Navigation />
       <Routes />
     </BrowserRouter>

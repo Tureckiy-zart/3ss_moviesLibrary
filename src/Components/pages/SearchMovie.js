@@ -15,7 +15,6 @@ import NotFound from "../structure/NotFound";
 
 const SearchMovie = () => {
   const { search: searchQuery } = useLocation();
-
   const history = useHistory();
   const [{ searchMovies }, setState] = useData();
   const [, setIsLoading] = useLoader();
@@ -38,19 +37,6 @@ const SearchMovie = () => {
         })
         .finally(setIsLoading(false));
     }, 1000);
-
-    // doFetch("getMovieByTitle", { searchQuery })
-    //   .then(({ results }) =>
-    //     setState((prev) => ({
-    //       ...prev,
-    //       searchMovies: results,
-    //       currentSearchMoviePage: 2,
-    //     }))
-    //   )
-    //   .catch((error) => {
-    //     ErrorHandler(error, history);
-    //   })
-    //   .finally(setIsLoading(false));
   }, [searchQuery, setState, setIsLoading, history]);
 
   return (

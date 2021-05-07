@@ -1,4 +1,3 @@
-import React from "react";
 import { Switch, Route } from "react-router-dom";
 import HomePage from "../pages/Home/HomePage";
 import FavoritesPage from "../pages/Favorites/FavoritesPage";
@@ -12,6 +11,7 @@ import CurrnetCollection from "../pages/Collection/CurrnetCollection";
 import MoviesByGenre from "../pages/Genres/MoviesByGenre";
 import routes from "./routesPath";
 import PersonPage from "../pages/MovieDetails/PersonPage";
+import TopRaited from "../pages/TopRaited/TopRaited";
 
 function Routes() {
   return (
@@ -27,6 +27,7 @@ function Routes() {
       <Route path={routes.currentCollection} component={CurrnetCollection} />
       <Route path={routes.searchCollection} component={Collections} />
       <Route path={routes.favorites} component={FavoritesPage} />
+      <Route path={routes.topRated} component={TopRaited} />
       <Route path={routes.errorPage} component={ErrorPage} />
       <Route component={ErrorPage} />
     </Switch>

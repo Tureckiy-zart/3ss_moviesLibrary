@@ -9,14 +9,14 @@ export const StyledList = styled.ul`
 
 export const StyledGalleryList = styled.ul`
   display: grid;
-  /* place-items:center; */
+  place-items:center;
   grid-template-columns: ${(props) =>
     props.gridTemplatCcolumns || "1fr 1fr 1fr 1fr"};
   grid-gap: 2vw;
   /* position: relative; */
   /* background-color: white; */
   /* background-color: rgba(3, 36, 63, 0.6); */
-
+/* width: 100% */
   
 `;
 

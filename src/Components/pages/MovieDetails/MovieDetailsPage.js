@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { ButtonsHistoryReturn } from "../../structure/Buttons/ButtonsHistoryReturn";
 import {
@@ -9,27 +9,35 @@ import {
 import { ErrorHandler } from "../../services/API/getData";
 import { useLoader } from "../../services/Contexts/LoaderContext";
 import { doFetch } from "../../services/API/api";
-import { useData } from "../../services/Contexts/DataContext";
 import InfoBlock from "./InfoBlock";
 import ImageBlock from "./ImageBlock";
+import Carousel from "../../Carousel/Carousel";
 
 const MovieDetailsPage = () => {
   let { id } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
-  const [, setState] = useData(null);
+
   const history = useHistory();
   const [, setIsLoading] = useLoader();
 
   useEffect(() => {
     if (!id) return;
     setIsLoading(true);
-
-    doFetch("getMovieByID", { id })
-      .then((response) => setMovieDetails(response))
+    Promise.all([
+      doFetch("getMovieByID", { id: Number(id) }),
+      doFetch("getVideo", { id: Number(id) }),
+      doFetch("getSimilar", { id: Number(id) }),
+    ])
+      .then((response) => {
+        setMovieDetails({
+          ...response[0],
+          trailers: response[1].results,
+          similarMovies: response[2].results,
+        });
+      })
       .catch((error) => ErrorHandler(error, history))
       .finally(setIsLoading(false));
-  }, [id, setIsLoading, setState, history]);
-
+  }, [id, setIsLoading, history]);
   return (
     <>
       {movieDetails && (
@@ -41,6 +49,10 @@ const MovieDetailsPage = () => {
                 <ImageBlock {...movieDetails} />
                 <InfoBlock {...movieDetails} />
               </StyledDiv>
+              <div>
+<p>Similar Movies</p>
+              <Carousel contentArray={movieDetails.similarMovies} page="home" />
+              </div>
             </Container>
           </ComponentWrapper>
         </main>

@@ -22,6 +22,9 @@ const fetchUrl = (request = "", options = {}) => {
     getMovieByGenre: `/discover/movie?api_key=${REQUEST_TOKEN}&language=en-US&sort_by=${sortBy}&include_video=true&page=${page}&with_genres=${genre}`,
     getCollectionId: `/search/collection?api_key=${REQUEST_TOKEN}&language=en-US&query=${searchQuery}&page=${page}`,
     getCurrnetCollection: `/collection/${id}?api_key=${REQUEST_TOKEN}&language=en-US`,
+    getVideo: `/movie/${id}/videos?api_key=${REQUEST_TOKEN}&language=en-US`,
+    getSimilar: `/movie/${id}/similar?api_key=${REQUEST_TOKEN}&language=en-US`,
+    topRated: `/movie/top_rated?api_key=${REQUEST_TOKEN}&language=en-US`,
   };
   return url[request];
 };
@@ -31,5 +34,33 @@ export const doFetch = async (request = "", options = {}) => {
     url = fetchUrl(apiRequest, options);
 
   const { data } = await axios.get(url);
+  // console.log(`data`, data);
+
   return data;
 };
+export const doFetch2 = async (request = "", options = {}) => {
+  const apiRequest = request || options.apiRequest,
+    url = fetchUrl(apiRequest, options);
+
+  const { data } = await axios.get(
+    `/search/company?api_key=b10df2c9a5aac390aead1b7030414d18&query=wb&page=1`
+  );
+
+  console.log(`data`, data);
+  return data;
+};
+
+doFetch2();
+export const doFetch3 = async (request = "", options = {}) => {
+  const apiRequest = request || options.apiRequest,
+    url = fetchUrl(apiRequest, options);
+
+  const { data } = await axios.get(
+    `/search/company/134020?api_key=b10df2c9a5aac390aead1b7030414d18`
+  );
+
+  console.log(`data`, data);
+  return data;
+};
+
+doFetch3();

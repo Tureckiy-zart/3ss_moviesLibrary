@@ -10,6 +10,7 @@ export const routes = {
   currentCollection: "/searchCollection/:id",
   searchCollection: "/searchCollection",
   favorites: "/favorites",
+  topRated: "/topRated",
   errorPage: "/errorPage",
 };
 export default routes;

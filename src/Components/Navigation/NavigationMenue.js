@@ -11,6 +11,7 @@ export const NavigationMenue = () => (
       route={routes.searchCollection}
       page={pageLabels.searchCollection}
     />
+    <NavigationLink route={routes.topRated} page={pageLabels.topRated} />
     <NavigationLink route={routes.favorites} page={pageLabels.favorites} />
   </Nav>
 );

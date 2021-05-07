@@ -1,4 +1,3 @@
-import React from "react";
 import { Image } from "../stylredComponents/List.styled";
 import { ImgWrapper } from "../stylredComponents/MovieDetailsPage.styled";
 

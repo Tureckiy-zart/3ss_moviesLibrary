@@ -16,7 +16,6 @@ const LoaderWrapper = styled.div`
 
 function Loader() {
   const [isLoading] = useLoader();
-  console.log(`isLoading`, isLoading)
   if (!isLoading) return null;
   return (
     <LoaderWrapper>
