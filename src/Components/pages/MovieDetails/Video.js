@@ -51,48 +51,5 @@ export const MovieDetailsTrailers = ({ trailers = {} }) => {
         </StyledList>
       </StyledGalleryList>
     )
-
-    // <ul>
-    //   {sliderItems.map((trailer) => {
-    //     console.log(`trailer`, sliderItems);
-    //     return (
-    //       <li key={trailer.key}>
-    //         <p>{trailer.name}</p>
-    //         <VideoConmonent
-    //           id="player"
-    //           type="text/html"
-    //           src={`https://www.youtube.com/embed/${trailer.key}`}
-    //           frameBorder="0"
-    //           allowFullScreen
-    //         />
-    //       </li>
-    //     );
-    //   })}
-    // </ul>
   );
 };
-
-// const Video = ({trailers}) => {
-//   console.log(`movieId`, trailers);
-//   //   const [trailers, setTrailers] = useState(null);
-//   //   const history = useHistory();
-//   //   useEffect(() => {
-//   //     // if (!trailers) return;
-//   //     console.log(`22`, 22);
-//   //     doFetch("getVideo", { id: Number(movieId) })
-//   //       .then(({ results }) => setTrailers(results))
-//   //       .catch((error) => ErrorHandler(error, history));
-//   //   }, []);
-
-//   //   console.log(`trailers`, trailers);
-
-//   return (
-//     <>
-//       {trailers && <Carousel contentArray={trailers} page={"movieDetails"} />}
-//       {/* {trailers && <Carousel contentArray={trailers} page={"movieDetails"} />} */}
-//     </>
-//   );
-//   //   return <>{trailers && <Mk trailers={trailers} />}</>;
-// };
-
-// export default (Video);

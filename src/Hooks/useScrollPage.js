@@ -6,20 +6,23 @@ import { useLoader } from "../Components/services/Contexts/LoaderContext";
 import { useCurrentPageOptions } from "./useCurrentPageOptions";
 import { useScrollCalculate } from "./useScrollCalculate";
 
-
 const useScrollPage = () => {
   const [isFetching, setisFetching] = useScrollCalculate(),
     [, setIsLoading] = useLoader(false),
     [state, setState] = useData();
-  const apiRequestOptions = useCurrentPageOptions();
+
+  const apiRequestOptions = useCurrentPageOptions(); //?
 
   const getDataOnLoad = async (apiRequestOptions) => {
-    setIsLoading(true); //Spiner on
     if (
       !state[apiRequestOptions.moviesCategory] ||
       state[apiRequestOptions.moviesCategory].length === 0
     )
       return;
+
+
+    setIsLoading(true); //Spiner on
+    
     try {
       const { results } = await doFetch(null, apiRequestOptions);
       const { moviesCategory, currnentPage } = apiRequestOptions;
@@ -38,11 +41,14 @@ const useScrollPage = () => {
       setisFetching(false);
     }
   };
+
+
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (!isFetching) return;
     getDataOnLoad(apiRequestOptions);
   }, [isFetching]);
   /* eslint-enable react-hooks/exhaustive-deps */
+
 };
 export default useScrollPage;

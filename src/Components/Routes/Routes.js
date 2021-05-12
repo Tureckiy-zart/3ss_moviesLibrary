@@ -16,7 +16,7 @@ import TopRaited from "../pages/TopRaited/TopRaited";
 function Routes() {
   return (
     <Switch>
-      <Route path={routes.home} exact component={HomePage} />
+      <Route exact path={routes.home} component={HomePage} />
       <Route path={routes.searchMovie} component={SearchMovie} />
       <Route path={routes.cast} component={StuffPage} />
       <Route path={routes.crew} component={StuffPage} />

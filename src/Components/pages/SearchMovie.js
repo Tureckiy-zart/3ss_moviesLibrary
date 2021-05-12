@@ -23,21 +23,20 @@ const SearchMovie = () => {
   useEffect(() => {
     if (!searchQuery) return;
     setIsLoading(true);
-    setTimeout(() => {
-      doFetch("getMovieByTitle", { searchQuery })
-        .then(({ results }) =>
+    doFetch("getMovieByTitle", { searchQuery })
+      .then(
+        ({ results }) =>
           setState((prev) => ({
             ...prev,
             searchMovies: results,
-            currentSearchMoviePage: 2,
-          }))
-        )
-        .catch((error) => {
-          ErrorHandler(error, history);
-        })
-        .finally(setIsLoading(false));
-    }, 1000);
-  }, [searchQuery, setState, setIsLoading, history]);
+          })),
+        setIsLoading(false)
+      )
+      .catch((error) => {
+        ErrorHandler(error, history);
+      })
+      .finally(setIsLoading(false));
+  }, [searchQuery, setState, setIsLoading]);
 
   return (
     <>
@@ -46,6 +45,7 @@ const SearchMovie = () => {
           <Container display="flex" marginBottom="2rem">
             <BannerForm />
           </Container>
+          
           <Gallery dataMovies={searchMovies} />
         </ComponentWrapper>
       ) : (

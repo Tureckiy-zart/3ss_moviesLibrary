@@ -30,7 +30,6 @@ class PersonPage extends Component {
 
     doFetch("getPerson", this.option)
       .then((data) => {
-        console.log(`data`, data);
         this.setState((prev) => {
           return {
             ...prev,
@@ -45,12 +44,8 @@ class PersonPage extends Component {
   }
 
   render() {
-    const {
-      profile_path,
-      name,
-      popularity,
-      known_for,
-    } = this.state.data?.person;
+    const { profile_path, name, popularity, known_for } =
+      this.state.data?.person;
     return (
       <>
         {name && (
@@ -80,7 +75,9 @@ class PersonPage extends Component {
                       )}
                   </div>
                   <div>
-                    <AdditionText>Known for:</AdditionText>
+                    <AdditionText marginBottom="1.2rem">
+                      Known for:
+                    </AdditionText>
                     <List dataMovies={known_for} />
                   </div>
                 </StyledDiv>

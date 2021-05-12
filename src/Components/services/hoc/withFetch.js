@@ -5,15 +5,6 @@ import { useData } from "../Contexts/DataContext";
 import { useLoader } from "../Contexts/LoaderContext";
 
 const withData = (WrappedComponent) => {
-  //   return class WithHigherOrderComponent extends Component {
-
-  //     render() {
-  //       return (
-  //         <WrappedComponent {...this.props} extraProp="This prop is from HOC" />
-  //       );
-  //     }
-  //   };
-
   return (props) => {
     const history = useHistory();
     const [state, setState] = useData();

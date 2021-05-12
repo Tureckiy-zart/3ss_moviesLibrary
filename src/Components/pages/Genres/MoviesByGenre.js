@@ -1,4 +1,4 @@
-import  { useEffect } from "react";
+import { useEffect } from "react";
 import { useLocation } from "react-router";
 import useScrollPage from "../../../Hooks/useScrollPage";
 import { doFetch } from "../../services/API/api";
@@ -25,8 +25,8 @@ const MoviesByGenre = ({
         setState((prev) => ({
           ...prev,
           moviesByCategorye: results,
-          currentCategoryePage: 2,
         }));
+        setIsLoading(false);
       })
       .catch((error) => {
         ErrorHandler(error, history);
@@ -37,7 +37,7 @@ const MoviesByGenre = ({
   useScrollPage();
 
   return (
-    <ComponentWrapper as='main' position="relative" top="125px">
+    <ComponentWrapper as="main" position="relative" top="125px">
       <CategoryeButtons />
       <GenresGallery moviesByCategorye={moviesByCategorye} />
     </ComponentWrapper>

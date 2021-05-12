@@ -22,7 +22,7 @@ function TopRaited({ setIsLoading, state, setState, ErrorHandler, history }) {
         ErrorHandler(error, history);
       })
       .finally(setIsLoading(false));
-  }, [setState, ErrorHandler,setIsLoading, ]);
+  }, [setState, ErrorHandler, setIsLoading, history]);
 
   useScrollPage();
 

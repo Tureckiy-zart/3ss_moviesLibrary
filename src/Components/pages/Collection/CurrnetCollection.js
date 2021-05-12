@@ -1,7 +1,6 @@
 import React, { memo, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { doFetch } from "../../services/API/api";
-
 import withData from "../../services/hoc/withFetch";
 import List from "../../structure/List/List";
 import {
@@ -26,11 +25,11 @@ const CurrnetCollection = ({
         setCollecton(response);
         setState((prev) => ({
           ...prev,
-          currentCollectonPage: 2,
         }));
+        setIsLoading(false);
       })
       .catch((error) => {
-        ErrorHandler(error,  history);
+        ErrorHandler(error, history);
       })
       .finally(setIsLoading(false));
   }, [id, setState, setIsLoading, history, ErrorHandler]);

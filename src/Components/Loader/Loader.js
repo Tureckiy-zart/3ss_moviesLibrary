@@ -1,18 +1,8 @@
 import React from "react";
 import Spiner from "react-loader-spinner";
-import styled from "styled-components";
 import { useLoader } from "../services/Contexts/LoaderContext";
+import { LoaderWrapper } from "../structure/stylredComponents/stiledComponents";
 
-const LoaderWrapper = styled.div`
-  display: grid;
-  place-items: center;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.9);
-  position: fixed;
-  top: 0;
-  z-index: 10000000;
-`;
 
 function Loader() {
   const [isLoading] = useLoader();
@@ -24,7 +14,7 @@ function Loader() {
         color="#00BFFF"
         height={100}
         width={100}
-        // timeout={400}
+        timeout={800}
       />
     </LoaderWrapper>
   );

@@ -18,18 +18,17 @@ function Collections({ setIsLoading, state, setState, ErrorHandler, history }) {
     searchQuery = search?.slice(1);
   const { searchCollection } = state;
   useEffect(() => {
-    
     if (!searchQuery) return;
     setIsLoading(true); //spiner on
 
     doFetch("getCollectionId", { searchQuery })
-      .then(({ results }) =>
+      .then(({ results }) => {
         setState((prev) => ({
           ...prev,
           searchCollection: results,
-          currentSearchCollection: 2,
-        }))
-      )
+        }));
+        setIsLoading(false);
+      })
       .catch((error) => ErrorHandler(error, setState, history))
       .finally(setIsLoading(false));
   }, [searchQuery, setIsLoading, setState, history, ErrorHandler]);

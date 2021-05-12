@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import SearchMovie from "../../pages/SearchMovie";
+import SearchMovie from "../../../pages/SearchMovie";
 
 const SearchContext = React.createContext();
 

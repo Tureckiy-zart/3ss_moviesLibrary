@@ -38,29 +38,3 @@ export const doFetch = async (request = "", options = {}) => {
 
   return data;
 };
-export const doFetch2 = async (request = "", options = {}) => {
-  const apiRequest = request || options.apiRequest,
-    url = fetchUrl(apiRequest, options);
-
-  const { data } = await axios.get(
-    `/search/company?api_key=b10df2c9a5aac390aead1b7030414d18&query=wb&page=1`
-  );
-
-  console.log(`data`, data);
-  return data;
-};
-
-doFetch2();
-export const doFetch3 = async (request = "", options = {}) => {
-  const apiRequest = request || options.apiRequest,
-    url = fetchUrl(apiRequest, options);
-
-  const { data } = await axios.get(
-    `/search/company/134020?api_key=b10df2c9a5aac390aead1b7030414d18`
-  );
-
-  console.log(`data`, data);
-  return data;
-};
-
-doFetch3();

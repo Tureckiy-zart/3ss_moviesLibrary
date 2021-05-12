@@ -1,5 +1,4 @@
 import styled from "styled-components";
-// const StyledList = (prpos) => <StyledList {...props} />;
 export const StyledList = styled.ul`
   display: ${(props) => props.display || "flex"};
   flex-wrap: wrap;
@@ -13,11 +12,6 @@ export const StyledGalleryList = styled.ul`
   grid-template-columns: ${(props) =>
     props.gridTemplatCcolumns || "1fr 1fr 1fr 1fr"};
   grid-gap: 2vw;
-  /* position: relative; */
-  /* background-color: white; */
-  /* background-color: rgba(3, 36, 63, 0.6); */
-/* width: 100% */
-  
 `;
 
 export const ListItem = styled.li`
@@ -63,12 +57,6 @@ export const InfoWrapper = styled.div`
 `;
 export const Avatar = styled.img`
   max-width: 8rem;
-  /* width: 16rem; */
-  /* height: 60%; */
-  /* border-radius: 30px 30px 0 0;
-  margin-bottom: 1rem;
-  overflow: hidden;
-  min-height: 24rem; */
 `;
 
 export const CenteredImg = styled.img`

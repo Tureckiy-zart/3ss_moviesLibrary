@@ -12,12 +12,12 @@ const initialState = {
   topRaitred: [],
   searchCollection: null,
   favorites: getFavoritesFromLocalStorage(),
+  
   currentHomePage: 2,
   currentCategoryePage: 2,
   currentSearchMoviePage: 2,
   currentSearchCollection: 2,
   currentTopRaitredPage: 2,
-  error: null,
 };
 
 export const DataProvider = ({ children }) => {
